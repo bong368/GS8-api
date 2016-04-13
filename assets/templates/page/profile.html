@@ -1,0 +1,123 @@
+<div class="container" id="register">
+	<form id='frm-register'>
+		<div class="col-md-offset-1 col-md-10">
+			<div class="row header-register">
+				<div class="col-md-6 option-register">
+					<span class=""><% 'YOUR_PROFILE' | translate %></span>
+				</div>
+			</div>
+			<div class="row content-header">
+				<div class="col-md-6 base-profile">
+					<div class="row">
+						<div>
+							<h3><% 'BASE_PROFILES' | translate %></h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<% 'USERNAME' | translate %>
+						</div>
+						<div class="col-md-6">
+							<div><%currentUser.username%></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							Referal ID
+						</div>
+						<div class="col-md-6">
+							<div>SAFF324</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<% 'EMAIL' | translate %>
+						</div>
+						<div class="col-md-6">
+							<div><%currentUser.email%></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<% 'PHONE' | translate %>
+						</div>
+						<div class="col-md-6 register-phone">
+							<div><%currentUser.phone%></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<% 'MAIN_BALANCE' | translate %>
+						</div>
+						<div class="col-md-6">
+							<div><%currentUser.main_balance + " " + currentUser.currency%></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<% 'BANK_NAME' | translate %>
+						</div>
+						<div class="col-md-6">
+							<div><%currentUser.bank_name%></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<% 'BANK_ACC_NO' | translate %>
+						</div>
+						<div class="col-md-6">
+							<div><%currentUser.bank_account_number%></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							<% 'BANK_ACC_NAME' | translate %>
+						</div>
+						<div class="col-md-6">
+							<div><%currentUser.bank_account_name%></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-offset-1">
+							<h3><% 'CHANGE_UR_PASS' | translate %></h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							<% 'OLD_PASS' | translate %><sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input type="password" ng-model="user.old_password" placeholder="Enter your old password" />
+							<div class="ip-error"><%error.old_password%></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							<% 'NEW_PASS' | translate %><sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input type="password" ng-model="user.password" placeholder="Enter your new password" />
+							<div class="ip-error"><%error.password%></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							<% 'CONFIRM_UR_PASS' | translate %><sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input type="password" ng-model="user.password_confirmation" placeholder="Re-enter password" />
+							<div class="ip-error"><%error.password_confirmation%></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-md-offset-6">
+							<button ng-click="changePassword()" class="btn" type="submit"><% 'SUBMIT' | translate %></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,14 @@
+.ngdialog.custom-width .ngdialog-content {
+    width: 650px !important;
+    max-height: 450px !important;
+    overflow-y: scroll;
+    font-size: 13px !important;
+    color: #333;
+}
+.ngdialog.custom-width .ngdialog-content ol{
+	padding: 20px
+}
+.ngdialog.custom-width .ngdialog-content ol li {
+	list-style: outside decimal;
+	line-height: 24px;
+}

@@ -1,0 +1,84 @@
+footer {
+    background: $black;
+    border-top: 1px solid $border;
+    .title {
+        text-transform: capitalize;
+        color: $color_text;
+        font-weight: 700;
+        font-size: 15px;
+        text-align: left;
+        line-height: 36px;
+        border-bottom: 1px solid $border;
+        width: 90%;
+        padding-left: 20px;
+    }
+    .copyright {
+        > div {}
+        .middle {
+            border: 1px solid $border;
+            border-top: none;
+            border-bottom: none;
+        }
+    }
+    img {
+        width: 100%;
+    }
+    .middle .col-md-12 > div {
+        width: 50%;
+        padding: 10px 0;
+        height: 49px;
+    }
+    .sosial > div {
+        height: auto !important;
+        width: 20% !important;
+        margin-right: 10px;
+    }
+    .footer-contact {
+        img {
+            width: auto !important;
+        }
+        .footer_contact {
+            background: $color_woodsmoke_approx;
+            border: 1px solid $color_rangoon_green_approx;
+            //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+            border-radius: 5px 5px 5px 5px;
+            margin-top: 10px;
+        }
+        .footer_contact_2 {
+            background: $color_woodsmoke_approx;
+            border: 1px solid $color_rangoon_green_approx;
+            //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+            border-radius: 5px 5px 5px 5px;
+            margin-top: 10px;
+            padding: 5px 0;
+        }
+        .footer_contact_detail_2 {
+            color: $color_text;
+            font-weight: 700;
+            font-size: 12px;
+        }
+    }
+    .copyright-content {
+        border-top: 1px solid $border;
+        background: $color_woodsmoke_approx;
+        .containWrap {
+            padding: 5px;
+            a {
+                color: $color_text;
+                padding: 5px 20px;
+                border-right: 1px solid $color_text;
+                &:last-child {
+                    border: none;
+                }
+            }
+            > div:first-child {
+                padding: 5px;
+            }
+            .copyright_txt {
+                color: #d7c5a1;
+                text-align: center;
+                line-height: 43px;
+            }
+        }
+    }
+}

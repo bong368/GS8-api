@@ -1,0 +1,116 @@
+.small-slide > div:last-child {
+    margin-top: 20px;
+}
+
+.small-slider > div {
+    &:first-child {
+        position: absolute;
+        top: 0;
+    }
+    &:last-child {
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+.promoSlide {
+    width: auto;
+    padding: 0;
+    img {
+        width: 100%;
+    }
+}
+
+.mainSlide {
+    padding: 0;
+    margin: 0;
+}
+
+#home_big_banner {
+    width: 100%;
+}
+
+.right-slider {
+    padding: 0;
+}
+
+.bx-wrapper {
+    margin: 0 !important;
+    .bx-viewport {
+        border: 1px solid $border !important;
+    }
+    img {
+        width: 100%;
+        display: block;
+    }
+}
+
+.progressive {
+    background-image: url("/images/banner progresive jackpot-sample.jpg");
+    float: left;
+    background-size: 100% 100%;
+    height: 142px;
+    border: 1px solid $border;
+    width: 100%;
+    position: relative;
+    margin: 10px 0;
+    &.progressive.m-top-10 {
+        position: inherit;
+    }
+    .number {
+        text-align: center;
+        padding: 13px;
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+    .jackpot_gif {
+        position: absolute;
+        background: url("/images/jackpot.gif")no-repeat;
+        width: 450px;
+        background-size: 100% 100%;
+        height: inherit;
+        margin-right: auto;
+        margin-left: auto;
+        right: 0;
+        left: 0;
+        h4 {
+            margin-top: 35px;
+        }
+    }
+}
+.mid-sport {
+    background: url("/images/middle/home_btn_sport.png")no-repeat;
+}
+.mid-casino {
+    background: url("/images/middle/home_btn_casino.png")no-repeat;
+}
+.mid-slot {
+    background: url("/images/middle/home_btn_egames.png")no-repeat;
+}
+.mid-lottery {
+    background: url("/images/middle/home_btn_lottery.png")no-repeat;
+}
+.mid-poker {
+    background: url("/images/middle/home_btn_poker.png")no-repeat;
+}
+.mid-promo {
+    background: url("/images/middle/home_btn_promo.png")no-repeat;
+}
+.middle > div {
+    height: 186px;
+    position: relative;
+    background-size: 100%;
+    > a {
+        text-align: center;
+        color: $white;
+    }
+    p {
+        max-width: 131px;
+        padding: 133px 0 15px 10px;
+        font-weight: bold;
+    }
+}
+.about-us {
+    background: $black;
+    color: $color_text;
+}

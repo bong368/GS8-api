@@ -1,0 +1,20 @@
+{
+	"MEMBER_REGISTRATION": "MEMBER REGISTRATION",
+	"YOUR_ACCOUNT": "YOUR ACCOUNT",
+	"USERNAME": "User name",
+	"EMAIL": "Email Address",
+	"NOTICE_EMAIL": "Correct email address is required for Password retrieval",
+	"PASS": "Password",
+	"NOTICE_PASS": "Password is required at least 1 lowercase letter, 1 uppercase letter, 1 number and between 6 to 12 alphanumeric (A-Z, a-z, 0-9).",
+	"CONFIRM_PASS": "Confirm Password",
+	"PHONE": "Phone Number",
+	"NOTICE_PHONE": "Please fill in the correct phone number ( numeric only format) , in order to make you easier when need to reset password",
+	"CURRENCY": "Currency",
+	"CONTACT_DETAIL": "CONTACT DETAIL",
+	"BANK_NAME": "Bank Name",
+	"BANK_ACC_NO": "Bank Account No",
+	"NOTICE_BANK_ACC_NO": "Please fill in the correct bank account number, in order to be easier when need to do withdrawal",
+	"BANK_ACC_NAME": "Bank Account Name",
+	"CONDITION": "*I am over 18 years of age and have read and accepted Terms & Conditions, Privacy Policy & Betting Rules as published on this site.",
+	"CONTENT_AGREE": "<h4><span>Agreement</span></h4> <ol> <li>Each Player is only allowed to have one account with Hokibet188. Opening of multiple accounts is not permitted. Should we have reasonable suspicions that any of our customers has opened multiple accounts with us, we reserve the right in our absolute discretion to freeze that customer’s account or to close the account immediately and the customer shall forfeit all his winnings. Customers should also note that their original deposits will not be refunded. Customers shall also be liable towards Hokibet188 for damages and costs incurred as a result of the fraud.</li> <li>User is obliged to protect their user name and password privacy security and should not allow any third party in any form, by the user name and password to use this website all the games, otherwise, all the responsibilities to be borne entirely by the user.</li> <li>Hokibet188 accepts no responsibility for internet gambling from residents in jurisdictions where it is illegal.</li> <li>The time of this site is time of Philippine, Hong Kong and Macau.</li> <li>Player has reached the age of 18 or the legal age of majority in his/her jurisdiction, whichever is greater.</li> <li>We reserve the right to refuse to accept any user login or to participate in all games of this site in any improper way.</li> <li>Due to human or system cannot predict the factors leading to mistake; we reserve the final decision.</li> <li>Due to force majeure the invasion of destruction and man-made disaster, caused by the failure or data corruption sites, etc., the final data to the Web site for the final processing of data, so each member should be kept or print data, the site was acceptable with into the complaints. </li> <li>To avoid any controversy, the users participating in the course of the game on this site or at the end of the game, be sure to check the member's account information, report any unusual circumstances, should immediately contact the dealer to check, otherwise the user will be deemed to have agreed and accepted their account of all data or historical data to data in the database on this website subject to the User shall not dissent. </li> <li>We reserve the right to make changes in all the rules, and without prior announcement. </li> <li>Whether in any case, the company has the final decision</li> </ol>"
+}

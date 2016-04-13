@@ -1,0 +1,62 @@
+    @media (min-width: 1200px) {
+    .container {
+        width: 1020px
+    }
+    .navbar-nav li ul li {
+        float: left;
+    }
+    .nav>li,
+    .dropdown,
+    .dropup {
+        position: initial;
+    }
+    .dropdown-menu {
+        width: 1020px
+    }
+    .right-slider img {
+        width: 345px;
+        height: 166px
+    }
+    .navbar-default {
+        height: 32px;
+    }
+}
+
+@media (min-width: 992px) {
+    .big-slide >div:first-child {
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 992px) {
+    .big-slide >div:first-child {
+        margin-bottom: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .navbar-default .container-fluid,
+    .navbar-default #myNavbar {
+        padding: 5px
+    }
+    .navbar-default {
+        height: auto;
+    }
+}
+
+@media (max-width: 460px) {
+    .jackpot_gif {
+        position: initial;
+        width: 100%;
+    }
+    #progressive_jackpot {
+        font-size: 20px
+    }
+    #progressive_jackpot {
+        padding: 25px;
+    }
+    .progressive-en {
+        background-image: none;
+        height: auto
+    }
+}

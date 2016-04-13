@@ -1,0 +1,40 @@
+{
+    "name": "t4l",
+    "authors": [
+        "huquduy <huquduy@gmail.com>"
+    ],
+    "version": "1.0.0",
+    "description": "",
+    "dependencies": {
+        "bootstrap": "~3.3.5",
+        "angular": "angularjs#~1.4.7",
+        "angular-ui-router": "~0.2.15",
+        "angular-bootstrap": "~0.14.2",
+        "angular-animate": "~1.4.7",
+        "oclazyload": "ocLazyLoad#~1.0.6",
+        "font-awesome": "fontawesome#~4.4.0",
+        "angular-touch": "~1.4.7",
+        "a0-angular-storage": "~0.0.6",
+        "satellizer": "*",
+        "angular-jwt": "~0.0.9",
+        "angular-file-upload": "~2.2.0",
+        "angularjs-datepicker": "*",
+        "angular-utils-pagination": "*",
+        "bolster.bxSlider": "*",
+        "ng-socket": "*",
+        "socket.io-client": "*",
+        "angular-translate-loader-static-files": "*",
+        "angular-translate": "*",
+        "angular-sanitize": "1.4.10"
+    },
+    "main": "",
+    "moduleType": [],
+    "license": "MIT",
+    "homepage": "",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "/www/assets/lib"
+    ]
+}

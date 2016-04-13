@@ -1,0 +1,139 @@
+<div class="container" id="register">
+	<form id='frm-register'>
+		<div class="col-md-offset-1 col-md-10">
+			<div class="row header-register">
+				<div class="col-md-6 option-register">
+					<span class="">{{ 'MEMBER_REGISTRATION' | translate }}</span>
+				</div>
+				<!--
+				<div class="col-md-6 option-register text-right">
+					<span class="btn">FAST REGISTER</span>
+				</div>
+				-->
+			</div>
+			<div class="row content-header">
+				<div class="col-md-6">
+					<div class="row">
+						<h3>{{ 'YOUR_ACCOUNT' | translate }}</h3>
+					</div>
+
+					<div class="row">
+						<div class="col-md-5">
+							{{ 'USERNAME' | translate }}<sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input type="text" ng-model='user.username' placeholder='Enter your username' />
+							<div class="ip-error">{{error.username}}</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							{{ 'EMAIL' | translate }}<sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input type="text" ng-model="user.email" placeholder="Email Address" />
+							<div class="ip-notice">
+								{{ 'NOTICE_EMAIL' | translate }}
+							</div>
+							<div class="ip-error">{{error.email}}</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							{{ 'PASS' | translate }}<sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input type="password" ng-model="user.password" placeholder="Enter your password" />
+							<div class="ip-notice">
+								{{ 'NOTICE_PASS' | translate }}
+							</div>
+							<div class="ip-error">{{error.password}}</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							{{ 'CONFIRM_PASS' | translate }}<sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input type="password" ng-model="user.password_confirmation" placeholder="Re-enter password" />
+							<div class="ip-error">{{error.password_confirmation}}</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							{{ 'PHONE' | translate }}<sup class="required">*</sup>
+						</div>
+						<div class="col-md-6 register-phone">
+							<label style="width: 20%">{{user.prefix_phone}}</label>
+							<input style="width: 80%" type="text" ng-model="user.body_phone" placeholder="Your phone" />
+							<div class="ip-notice">
+								{{ 'NOTICE_PHONE' | translate }}
+							</div>
+							<div class="ip-error">{{error.phone}}</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5">
+							{{ 'CURRENCY' | translate }}<sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<select ng-init="user.currency='IDR'" ng-model="user.currency" >
+								<option>IDR</option>
+							</select>
+							<div class="ip-error">{{error.currency}}</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-offset-1">
+							<h3>{{ 'CONTACT_DETAIL' | translate }}</h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							{{ 'BANK_NAME' | translate }}<sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<select ng-model="user.bank_id" ng-options="banking.id as banking.bank_name for banking in bankings">
+							</select>
+							<div class="ip-error">{{error.bank_id}}</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							{{ 'BANK_ACC_NO' | translate }}<sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input type="text" ng-model="user.bank_account_number" placeholder="bank account number" />
+							<div class="ip-notice">
+								{{ 'NOTICE_BANK_ACC_NO' | translate }}
+							</div>
+							<div class="ip-error">{{error.bank_account_number}}</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							{{ 'BANK_ACC_NAME' | translate }}<sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input type="text" ng-model="user.bank_account_name" placeholder="bank account name" />
+							<div class="ip-error">{{error.bank_account_name}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row content-header condition">
+				<div class="col-md-12">
+					<input id="over18" type="checkbox" ng-model='state.condition' />
+					<span ng-click="showCondition()" class="cursor">{{ 'CONDITION' | translate }}</span>
+				</div>
+			</div>
+			<div class="row content-header">
+				<div class="col-md-offset-9 col-md-3 submit">
+					<button ng-click="register()" class="btn" type="submit">{{ 'SUBMIT' | translate }}</button>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>

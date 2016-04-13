@@ -1,0 +1,26 @@
+<div class="row relative big-slide" ng-controller="slideController">
+	<div class="col-md-8 none-pad">
+		<ul class="mainSlide">
+			<li ng-repeat="mainSlide in mainSlides">
+		        <img ng-src="{{mainSlide.src}}" alt="" />
+			</li>
+		</ul>
+	</div>
+	<div class="col-md-4 none-pad small-slide">
+		<div>
+			<ul class="promoSlide" >
+				<li ng-repeat="promoTopSlide in promoTopSlides">
+			        <img ng-src="{{promoTopSlide.src}}" alt="" />
+				</li>
+			</ul>
+		</div>
+		<div>
+			<ul class="promoSlide">
+				<li ng-repeat="promoBottomSlide in promoBottomSlides">
+			        <img ng-src="{{promoBottomSlide.src}}" alt="" />
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+

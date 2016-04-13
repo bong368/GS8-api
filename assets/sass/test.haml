@@ -1,0 +1,487 @@
+
+
+//@extend-elements
+//original selectors
+//input[type="text"], input[type="password"], .form-control
+
+
+//original selectors
+//#register, #deposit
+%extend_3 {
+    background-color: $color_kabul_64_approx;
+    border: 1px solid $border;
+    padding: 30px 0;
+    color: $color_silver_rust_approx;
+    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+    border-radius: 2px;
+    border-bottom: none;
+    margin-bottom: 20px;
+}
+
+//original selectors
+//input[type=text], select
+%extend_4 {
+    line-height: 27px;
+    height: 27px;
+    background-color: $color_kabul_approx;
+    border: 1px solid $border;
+    padding: 0 3px;
+    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+    border-radius: 2px;
+}
+
+//original selectors
+//.wrap ul li, .wrap p
+%extend_5 {
+    margin-bottom: 10px;
+    margin-left: 20px;
+    line-height: 25px;
+    list-style: outside decimal;
+}
+
+//original selectors
+//.navbar-default .navbar-nav >.active >a, .navbar-default .navbar-nav >.active >a:focus, .navbar-default .navbar-nav >.active >a:hover
+%extend_6 {
+    background-image: url(../../img/client/hdr_mn_on.gif);
+    background-repeat: repeat-x;
+    height: 31px;
+    min-height: 31px;
+    background: $color_sundance_approx;
+}
+
+//original selectors
+//.pagination >li >a, .pagination >li >span, .pagination >.active >a, .pagination >.disabled >a, .pagination >.disabled >a:hover, .pagination >.active >a:focus, .pagination >.active >a:hover
+%extend_7 {
+    color: $color_sundance_approx;
+    background-color: transparent;
+    border: none;
+    line-height: 20px;
+    width: 40px;
+}
+
+//original selectors
+//.pagination >li >a:hover, .pagination >.active >a
+%extend_8 {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+}
+
+
+
+
+
+.ico-down {
+    background: url(../../img/client/drop-down-arrow.png) no-repeat;
+    background-position: center center;
+    padding: 4px;
+}
+#login-form {
+    margin-bottom: 3px;
+    input {
+        float: left;
+        //Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+        box-shadow: none !important;
+    }
+}
+
+input[type="file"] {
+    @extend %extend_2;
+}
+
+.light {
+    color: $color_iron_approx;
+    a {
+        color: $color_iron_approx;
+        &:link {
+            color: $color_iron_approx;
+        }
+    }
+}
+
+
+
+#register {
+    @extend %extend_3;
+    input {
+        width: 100%;
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 2px;
+    }
+    select {
+        width: 100%;
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 2px;
+    }
+    .submit button {
+        width: 100%;
+    }
+}
+#deposit {
+    @extend %extend_3;
+}
+.header-register {
+    background-color: $black_70;
+    border: 1px solid $color_santas_gray_approx;
+    padding: 7px 0;
+}
+.option-register {
+    cursor: pointer;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+    font-size: 17px;
+    span {
+        padding: 3px 20px;
+        &.active {
+            background-color: $color_punch_approx;
+            //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+            border-radius: 2px;
+        }
+    }
+}
+input[type=text] {
+    @extend %extend_4;
+}
+select {
+    @extend %extend_4;
+}
+.content-header {
+    padding: 5px 0;
+    .row {
+        padding: 10px 0;
+    }
+    h3 {
+        font-size: 15px;
+        font-weight: bold;
+    }
+}
+
+.condition {
+    padding: 5px 0;
+    input {
+        height: 13px;
+        width: auto !important;
+    }
+}
+#dialog {
+    display: none;
+}
+
+
+.copyright_txt {
+    color: $color_akaroa_approx;
+    text-align: center;
+    line-height: 43px;
+}
+
+#progressive_jackpot {
+    text-align: center;
+    padding: 13px;
+    font-size: 30px;
+    font-size: 20px;
+    padding: 25px;
+}
+
+
+
+
+
+.info-user {
+    padding-bottom: 10px;
+}
+
+
+.register-phone {
+    label {
+        width: 20%;
+        float: left;
+        line-height: 27px;
+        margin: 0;
+        background: $border;
+        padding: 0 4px;
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 2px;
+        font-weight: 100;
+    }
+    input {
+        margin: 0;
+        float: left;
+    }
+}
+#frm-deposit {
+    input[type=text] {
+        width: 100%;
+        margin: 0;
+    }
+    select {
+        width: 100%;
+        margin: 0;
+    }
+    input[type=password] {
+        width: 100%;
+        margin: 0;
+    }
+    .row {
+        padding: 10px 0;
+    }
+    i {
+        //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+        transition: all 0.4s ease 0s;
+        float: right;
+    }
+}
+i {
+    &.error {
+        color: $color_red_orange_62_approx;
+    }
+    &.success {
+        color: $color_java_78_approx;
+    }
+}
+.ngdialog-content {
+    h3 {
+        &.title-success {
+            color: $color_denim_approx;
+            text-align: center;
+            padding: 5px;
+            font-weight: bold;
+            font-family: Tahoma, Geneva, sans-serif, 微软雅黑;
+            margin-top: 0;
+            width: 100%;
+            border-bottom: 1px solid $color_denim_approx;
+        }
+        &.title {
+            color: $color_trinidad_approx;
+            text-align: center;
+            padding: 5px;
+            font-weight: bold;
+            font-family: Tahoma, Geneva, sans-serif, 微软雅黑;
+            margin-top: 0;
+            width: 100%;
+            border-bottom: 1px solid $color_trinidad_approx;
+        }
+    }
+    code {
+        color: $color_hemlock_approx;
+    }
+}
+.credit-user {
+    border: 1px solid $border;
+    padding: 20px;
+    overflow: hidden;
+}
+.game-site {
+    overflow: hidden;
+    padding: 5px;
+    p {
+        &:first-child {
+            float: left;
+        }
+        &:last-child {
+            float: right;
+        }
+    }
+}
+.base-profile {
+    border-right: 1px solid $border;
+    > div > div:last-child {
+        border-bottom: 1px solid $border;
+        padding: 5px;
+    }
+}
+
+.report {
+    .method {
+        margin-top: 20px;
+        [class*=col-md-1] {
+            padding: 0;
+            text-align: right;
+        }
+    }
+    .row {
+        margin: 20px 0;
+    }
+    table {
+        border: 1px solid $color_fuscous_gray_approx;
+    }
+}
+.sub-top-menu {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    z-index: 99;
+    background: $black;
+    border: 1px solid $border;
+    padding: 10px;
+    li {
+        border: none;
+        border-bottom: 1px solid $border;
+        width: 100%;
+        padding: 5px;
+    }
+}
+
+.wrap {
+    border: 1px solid $border;
+    padding: 0;
+    color: $color_coral_reef_approx;
+    border-bottom: none;
+    background: $black_80;
+    img {
+        width: 100%;
+    }
+    ul {
+        padding: 20px;
+        li {
+            @extend %extend_5;
+        }
+    }
+    p {
+        @extend %extend_5;
+    }
+}
+
+.ui-widget-header {
+    background: $color_orange_roughy_approx;
+}
+
+._720kb-datepicker-calendar-days-header {
+    font-family: Tahoma, Geneva, sans-serif, 微软雅黑 !important;
+    background: $color_pesto_approx !important;
+}
+._720kb-datepicker-calendar {
+    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+    border-radius: 0 !important;
+    background: $color_wild_sand_approx !important;
+}
+._720kb-datepicker-calendar-header {
+    font-family: Tahoma, Geneva, sans-serif, 微软雅黑 !important;
+    &:nth-child(odd) {
+        background: $color_sundance_approx !important;
+    }
+}
+._720kb-datepicker-calendar-body {
+    font-family: Tahoma, Geneva, sans-serif, 微软雅黑 !important;
+    a:hover {
+        color: $white !important;
+    }
+}
+.table {
+    > tbody > tr > td {
+        border-top: none;
+        line-height: 2;
+        text-transform: uppercase;
+    }
+    > thead > tr > td {
+        text-transform: uppercase;
+        line-height: 2.5;
+    }
+}
+.pagination {
+    margin: 0;
+    > li {
+        > a {
+            @extend %extend_7;
+            &:hover {
+                @extend %extend_8;
+            }
+        }
+        > span {
+            @extend %extend_7;
+        }
+        &:first-child {
+            > a {
+                //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+                border-radius: 0;
+            }
+            > span {
+                //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+                border-radius: 0;
+            }
+        }
+        &:last-child > a {
+            //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+            border-radius: 0;
+        }
+    }
+    > {
+        .active > a {
+            @extend %extend_7;
+            @extend %extend_8;
+            &:focus {
+                @extend %extend_7;
+            }
+            &:hover {
+                @extend %extend_7;
+            }
+        }
+        .disabled > a {
+            @extend %extend_7;
+            &:hover {
+                @extend %extend_7;
+            }
+        }
+    }
+}
+
+.method li {
+    float: left;
+    padding: 0 9px;
+    border-right: 1px dotted $border;
+    &:last-child {
+        border: none;
+    }
+    a {
+        color: $white;
+    }
+}
+
+
+[ng\:cloak] {
+    display: none !important;
+}
+
+
+.ui-button-icon-only .ui-button-text {
+    padding: 0;
+}
+.ui-button-icons-only .ui-button-text {
+    padding: 0;
+}
+.ngdialog.ngdialog-theme-flat {
+    .ngdialog-content {
+        border: 1px solid $color_sundance_approx;
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 2px;
+        width: 450px;
+        position: absolute;
+        margin: auto;
+        left: 0;
+        right: 0;
+        max-height: 200px;
+        top: 0;
+        bottom: 0;
+        background: $color_concrete_approx;
+        padding-top: 0;
+    }
+    .ngdialog-overlay {
+        background: $black;
+        opacity: .7;
+    }
+    .ngdialog-close:before {
+        width: 1.50em;
+        height: 1.50em;
+        line-height: 0.50em;
+        color: $black;
+        background: none;
+        font-size: 20px;
+    }
+}
+.container input {
+    font-family: Tahoma, Geneva, sans-serif, 微软雅黑 !important;
+    font-size: 13px;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: $color_sand_dune_48_approx;
+}

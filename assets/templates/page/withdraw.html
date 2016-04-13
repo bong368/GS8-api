@@ -1,0 +1,115 @@
+<div class="container" id="deposit">
+	<div class="col-md-offset-1 col-md-10">
+		<div class="row content-header">
+			<div class="col-md-5">
+				<div class="row">
+					<h3 style="margin-bottom: 30px;"><% 'YOUR_ACCOUNT' | translate %></h3>
+					<div class="credit-user">
+						<div class="game-site">
+							<p>Sportsbook</p>
+							<p>500.000.000 IDR</p>
+						</div>
+						<div class="game-site">
+							<p>Gameplay Casino</p>
+							<p>700.000.000 IDR</p>
+						</div>
+						<div class="game-site">
+							<p>Royal Casino</p>
+							<p>500.000.000 IDR</p>
+						</div>
+						<div class="game-site">
+							<p>Lottery</p>
+							<p>900.000.000 IDR</p>
+						</div>
+						<div class="game-site">
+							<p>Slot</p>
+							<p>800.000.000 IDR</p>
+						</div>
+						<div class="game-site">
+							<p>Allbet Casino</p>
+							<p>900.000.000 IDR</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-md-offset-1">
+				<form id='frm-deposit' name="withdraw">
+					<div class="row">
+						<div class="col-md-offset-1">
+							<h3 class="upper"><% 'WITHDRAWN' | translate %></h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							<% 'PAYMENT_METHOD' | translate %><sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<select ng-model="ticket.payment_method" >
+								<option value="Local Transfer">Local Transfer</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							<% 'FROM_BANK' | translate %><sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input disabled type="text" ng-model="ticket.bank_name" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							<% 'BANK_ACC_NAME' | translate %><sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input disabled type="text" ng-model="ticket.bank_account_name" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							<% 'BANK_ACC_NO' | translate %><sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input disabled type="text" ng-model="ticket.bank_account_number" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							<% 'CURRENCY' | translate %><sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input disabled="true" type="text" ng-model="ticket.currency" />
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							<% 'AMOUNT' | translate %><sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input required type="text" name="cash" ng-model="ticket.amount" placeholder="Enter Amount" />
+							<div class="ip-notice">
+								<p>(IDR 1000 = 1 unit)</p>
+								<p>Min : <%limit.withdraw_min + ' ' + limit.currency%> <i ng-class="{error: ticket.amount<limit.withdraw_min && withdraw.cash.$dirty, success: ticket.amount>=limit.withdraw_min && withdraw.cash.$dirty}" class="fa fa-check"></i></p>
+								<p>Max : <%limit.withdraw_max + ' ' + limit.currency%> <i ng-class="{error: ticket.amount>limit.withdraw_max && withdraw.cash.$dirty, success: ticket.amount<=limit.withdraw_max && withdraw.cash.$dirty}" class="fa fa-check"></i></p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-5 col-md-offset-1">
+							<% 'CONFIRM_PASS' | translate %><sup class="required">*</sup>
+						</div>
+						<div class="col-md-6">
+							<input required type="password" ng-model="ticket.password" placeholder="Enter Your Password" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6 col-md-offset-6">
+							<button ng-click="submitTicket()" class="btn" type="submit"><% 'SUBMIT' | translate %></button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

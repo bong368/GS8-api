@@ -1,0 +1,210 @@
+%extend_6 {
+    background-image: url("/images/hdr_mn_on.gif");
+    background-repeat: repeat-x;
+    height: 31px;
+    min-height: 31px;
+    background: $color_sundance_approx;
+}
+
+header {
+    .nav > li {
+        background-position: right top;
+        background-repeat: no-repeat;
+    }
+    li.active {
+        background-image: url("/images/hdr_mn_on.gif");
+        background-repeat: repeat-x;
+        min-height: 31px;
+    }
+    .ico-livechat {
+        background: url("/images/speech-bubble-with-ellipsis.png") no-repeat 0 50%;
+        cursor: pointer;
+        padding: 2px 0 2px 20px;
+    }
+    .header-content {
+        padding-bottom: 10px;
+        .navbar-nav > li > .dropdown-menu {
+            background-color: $black_90;
+            border: 2px solid $border;
+            padding: 15px;
+        }
+        .lang-option {
+            width: 10px !important;
+            height: 50px;
+            min-width: 80px;
+            a {
+                padding: 0 !important;
+            }
+            img {
+                cursor: pointer;
+            }
+        }
+        .ico-dropdown .btn {
+            background-color: transparent !important;
+            background-image: none;
+            border: none;
+            height: 17px;
+            margin: 0;
+            margin-top: -6px;
+            padding: 0;
+            width: 38px;
+        }
+        .input-notice {
+            > span {
+                background: $color_sundance_approx;
+                border: 1px solid $color_watusi_approx;
+                float: left;
+                color: $white;
+                font-weight: bold;
+                height: 22px;
+                line-height: 22px;
+                text-align: center;
+                width: 20%;
+            }
+            > em {
+                background: $color_lisbon_brown_approx;
+                float: left;
+                font-style: normal;
+                height: 22px;
+                line-height: 22px;
+                overflow: hidden;
+                padding: 0 5px;
+                text-align: center;
+                width: 80%;
+            }
+        }
+        .contact ul li {
+            float: left;
+            margin: 5px 0 0;
+            padding-right: 10px;
+            padding-left: 10px;
+            border-left: 1px dotted $border;
+            &:first-child {
+                border: none;
+            }
+            a {
+                color: $color_iron_approx;
+            }
+        }
+        .nav > li > a {
+            font-size: 14px;
+            padding: 7px;
+            color: $white;
+        }
+    }
+    .navbar-default {
+        border: none;
+        background: $color_punch_approx;
+        border: 1px solid $border;
+        font-weight: bold;
+        min-height: 31px;
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 2px;
+        .navbar-header {
+            padding: 4px 0;
+            .navbar-toggle {
+                height: 30px;
+                margin: 0 15px;
+                &:focus {
+                    background: $color_sundance_approx;
+                }
+                &:hover {
+                    background: $color_sundance_approx;
+                }
+                .icon-bar {
+                    background-color: $white;
+                }
+            }
+        }
+        .navbar-nav {
+            .ico-mobile {
+                background-image: url("/images/hdr_mn_icon_mobile_of.png") !important;
+                background-repeat: no-repeat !important;
+                background-position: center center !important;
+                padding: 15px 20px;
+            }
+            .ico-home {
+                background-image: url("/images/hdr_mn_icon_home_of.png") !important;
+                background-repeat: no-repeat !important;
+                background-position: center center !important;
+                padding: 15px 20px;
+                padding: 15px 20px!important;
+            }
+            sup.new {
+                background: $red;
+                font-size: 9px;
+                margin-left: 2px;
+                padding: 1px 3px;
+            }
+            .dropdown-menu {
+                top: 36px !important;
+                background-color: rgba(0, 0, 0, 0.9);
+                border: 1px solid $border;
+                padding: 15px;
+                > li > a {
+                    color: $white;
+                    text-align: center;
+                    border: 2px solid rgba(0, 0, 0, 0);
+                    img {
+                        height: 75px;
+                        margin-bottom: 15px;
+                        margin-top: 10px;
+                    }
+                    &:focus {
+                        border: 2px solid $border;
+                        background: $black_90;
+                    }
+                    &:hover {
+                        border: 2px solid $border;
+                        background: $black_90;
+                    }
+                }
+            }
+            > {
+                .active > a {
+                    @extend %extend_6;
+                    background-color: $color_sundance_approx;
+                    &:focus {
+                        @extend %extend_6;
+                    }
+                    &:hover {
+                        @extend %extend_6;
+                    }
+                }
+                .open > a {
+                    background-color: $color_sundance_approx;
+                    &:focus {
+                        background-color: $color_sundance_approx;
+                    }
+                    &:hover {
+                        background-color: $color_sundance_approx;
+                    }
+                }
+            }
+            > li > a {
+                height: 30px;
+                padding: 7px 15px;
+                color: $white;
+                font-size: 14px;
+                //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+                transition: all 0.2s ease 0s;
+                &:focus {
+                    background-color: $color_sundance_approx;
+                    color: $white !important;
+                }
+                &:hover {
+                    background-color: $color_sundance_approx;
+                    color: $white !important;
+                }
+            }
+        }
+        .navbar-collapse {
+            border: none;
+            background: $black;
+        }
+        .navbar-form {
+            border: none;
+            background: $black;
+        }
+    }
+}
