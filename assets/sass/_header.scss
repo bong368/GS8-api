@@ -85,6 +85,11 @@ header {
             a {
                 color: $color_iron_approx;
             }
+            .ico-down {
+                background: url("/images/drop-down-arrow.png") no-repeat;
+                background-position: center center;
+                padding: 4px;
+            }
         }
         .nav > li > a {
             font-size: 14px;
@@ -137,7 +142,7 @@ header {
                 padding: 1px 3px;
             }
             .dropdown-menu {
-                top: 36px !important;
+                top: 40px;
                 background-color: rgba(0, 0, 0, 0.9);
                 border: 1px solid $border;
                 padding: 15px;
@@ -185,6 +190,7 @@ header {
                 height: 30px;
                 padding: 7px 15px;
                 color: $white;
+                margin: 5px 0;
                 font-size: 14px;
                 //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
                 transition: all 0.2s ease 0s;

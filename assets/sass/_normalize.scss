@@ -2,9 +2,9 @@
     background-color: $color_kabul_approx;
     border: 1px solid $border;
     color: $color_iron_approx;
-    height: 27px !important;
+    height: 30px !important;
     margin: 0 2px;
-    padding: 0 3px;
+    padding: 0 5px;
     width: 120px;
 }
 
@@ -15,25 +15,29 @@
     border: 1px solid $color_colonial_white_approx;
     cursor: pointer;
     font-weight: bold;
-    height: 27px;
+    height: 30px;
 }
+
 %extend_4 {
-    line-height: 27px;
-    height: 27px;
+    line-height: 30px;
+    height: 30px;
     background-color: $color_kabul_approx;
     border: 1px solid $border;
-    padding: 0 3px;
+    padding: 0 5px;
     //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
     border-radius: 2px;
 }
+
 @font-face {
     font-family: my-font;
     src: url(../../font/roboto-light.woff) format('truetype');
     font-weight: normal;
     font-style: normal;
 }
+
 body {
-    background: url(../../images/bg.png) no-repeat 0% 50%;;
+    background: url(../../images/bg.png) no-repeat 0% 50%;
+    ;
     background-position: center top;
     background-position: center top;
     background-repeat: repeat;
@@ -41,18 +45,22 @@ body {
     font-family: Tahoma, Geneva, sans-serif, 微软雅黑;
     font-size: 12px;
 }
+
 .upper {
     text-transform: uppercase;
 }
+
 .cap {
     text-transform: capitalize;
 }
+
 li {
     list-style: none;
     &.dropdown:hover ul {
         display: block;
     }
 }
+
 a {
     &:hover {
         color: $color_gull_gray_approx !important;
@@ -64,48 +72,61 @@ a {
             color: $color_iron_approx;
         }
     }
-    &.dropdown-toggle:hover {
-    }
+    &.dropdown-toggle:hover {}
 }
+
 .left {
     float: left;
 }
+
 .right {
     float: right;
 }
+
 .width-100 {
     width: 100%;
 }
+
 .text-right {
     text-align: right;
 }
+
 .text-left {
     text-align: left;
 }
+
 .pointer {
     cursor: pointer;
 }
+
 input[type="text"] {
     @extend %extend_1;
 }
+
 input[type="password"] {
     @extend %extend_1;
 }
+
 .form-control {
     @extend %extend_1;
 }
+
 input[type="button"] {
     @extend %extend_2;
 }
+
 input[type="submit"] {
     @extend %extend_2;
 }
+
 input[type="reset"] {
     @extend %extend_2;
 }
+
 .white {
     color: $white;
 }
+
 .ip-notice {
     color: $color_shady_lady_approx;
     padding-bottom: 0 !important;
@@ -114,20 +135,27 @@ input[type="reset"] {
         margin: 0;
     }
 }
+
 .ip-error {
     color: $red;
     padding: 5px 0;
+    p {
+        margin-bottom: 5px
+    }
 }
+
 .required {
     color: $red;
     font-size: 15px;
     top: 2px;
     left: 3px;
 }
+
 .btn {
     background-color: $color_lisbon_brown_approx;
     border: 1px solid $color_colonial_white_approx;
     color: $white;
+    height: 30px;
     cursor: pointer;
     font-weight: bold;
     padding: 3px 20px;
@@ -146,12 +174,15 @@ input[type="reset"] {
         background: $color_husk_approx;
     }
 }
+
 .none-pad {
     padding: 0;
 }
+
 .relative {
     position: relative;
 }
+
 .spinner {
     width: 100px;
     height: 80px;
@@ -183,16 +214,14 @@ input[type="reset"] {
         animation-delay: -0.8s;
     }
 }
+
 @-webkit-keyframes sk-stretchdelay {
-    0% {
-    }
-    40% {
-    }
-    100% {
-    }
-    20% {
-    }
+    0% {}
+    40% {}
+    100% {}
+    20% {}
 }
+
 @keyframes sk-stretchdelay {
     0% {
         //Instead of the line below you could use @include transform($scale, $rotate, $transx, $transy, $skewx, $skewy, $originx, $originy)
@@ -211,6 +240,7 @@ input[type="reset"] {
         transform: scaleY(1.0);
     }
 }
+
 #loading {
     z-index: 999999;
     display: none;
@@ -222,21 +252,27 @@ input[type="reset"] {
     left: 0;
     top: 0;
 }
+
 [ng-cloak] {
     display: none !important;
 }
+
 [data-ng-cloak] {
     display: none !important;
 }
+
 [x-ng-cloak] {
     display: none !important;
 }
+
 .ng-cloak {
     display: none !important;
 }
+
 .x-ng-cloak {
     display: none !important;
 }
+
 .title_bold {
     font-weight: bold;
     font-size: 14px;
@@ -245,12 +281,15 @@ input[type="reset"] {
         content: " +";
     }
 }
+
 .cursor {
     cursor: pointer;
 }
+
 .center {
     text-align: center;
 }
+
 .sweet-alert {
     //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
     border-radius: 0;
@@ -262,12 +301,23 @@ input[type="reset"] {
         background-color: $color_gossamer_approx;
     }
 }
+
 .alert-main a {
     color: $color_golden_glow_approx !important;
 }
+
 input[type=text] {
     @extend %extend_4;
 }
+
 select {
     @extend %extend_4;
+}
+
+.sweet-alert .icon.error .line {
+    background-color: $red
+}
+
+.sweet-alert .icon.error {
+    border-color: $red;
 }

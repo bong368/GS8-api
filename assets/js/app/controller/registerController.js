@@ -55,18 +55,9 @@
 
             if ( !$scope.state.condition ) {
 
-                var dialogScope = $scope.$new(true);
-
                 // Config message error
-                dialogScope.error = 'I acknowledge I am at least 18 years old. Please Check!';
-
-                ngDialog.open({ 
-
-                    // Config dialog
-                    template: 'assets/view/dialog/popupTmpl.html', 
-                    className: 'ngdialog-theme-flat ngdialog-theme-custom',
-                    scope: dialogScope
-                });
+                var error = 'I acknowledge I am at least 18 years old. Please Check!';
+                SweetAlert.swal("Error", error, "error");
                 // Do nothing
                 return false;
 
@@ -88,7 +79,9 @@
                     }, function(error) {
 
                         angular.forEach(error.data.data, function(value, key) {
-                            $scope.error[key] = value[0];
+                            angular.forEach(value, function (val, k) {
+                                $scope.error[key] = $scope.error[key] + '<p>* ' + val.message + '</p>';
+                            })
                         })
 
                     // Because we returned the $http.get request in the $auth.login
@@ -128,7 +121,7 @@
             ngDialog.open({ 
 
                 // Config dialog
-                template: 'assets/view/dialog/condition.html', 
+                template: '/templates/dialog/condition.html', 
                 className: 'ngdialog-theme-flat ngdialog-theme-custom custom-width',
                 scope: dialogScope
             });

@@ -45,26 +45,24 @@
         }
     }
     .register-phone {
-        label {
-            width: 20%;
-            float: left;
-            line-height: 27px;
-            margin: 0;
-            background: $border;
-            padding: 0 4px;
-            //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
-            border-radius: 2px;
-            font-weight: 100;
-        }
         input {
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
             margin: 0;
-            float: left;
+            font-size: 12px;
+        }
+        .input-group-addon {
+            background-color: $color_kabul_approx;
+            border-color: $border;
+            color: $color_silver_rust_approx;
+            font-size: 12px;
+            padding: 6px;
         }
     }
     .content-header {
         padding: 5px 0;
         .row {
-            padding: 10px 0;
+            padding: 5px 0;
         }
         h3 {
             font-size: 15px;

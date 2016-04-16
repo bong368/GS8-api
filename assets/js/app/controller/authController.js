@@ -7,7 +7,7 @@
         .controller('AuthController', AuthController);
 
 
-    function AuthController($socket, $auth, $state, $http, $rootScope, $scope, ngDialog, $translate) {
+    function AuthController($socket, $auth, $state, $http, $rootScope, $scope, ngDialog, $translate, SweetAlert) {
 
         $scope.login = function() {
 
@@ -25,14 +25,7 @@
             // Handle errors
             }, function(error) {
 
-                $scope.error = $translate.instant('INVALID_CREDS');
-                ngDialog.open({ 
-
-                    // Config dialog
-                    template: 'assets/view/dialog/popupTmpl.html', 
-                    className: 'ngdialog-theme-flat ngdialog-theme-custom',
-                    scope: $scope
-                });
+                SweetAlert.swal("Sorry!", $translate.instant('INVALID_CREDS'), "error");
 
             // Because we returned the $http.get request in the $auth.login
             // promise, we can chain the next promise to the end here

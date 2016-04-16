@@ -46,9 +46,12 @@ module.exports.routes = {
      *                                                                          *
      ***************************************************************************/
 
-     /***************************************************************************
+    /***************************************************************************
      * Authenticate Area                                                        *
      ***************************************************************************/
     'POST /api/authenticate': 'AuthController.authenticate',
     'POST /api/authenticate/create': 'AuthController.register',
+
+    // Banking Area
+    'GET /api/banking/all': 'BankingController.index',
 };

@@ -65,8 +65,8 @@
 			//$socketProvider.setUrl(nodeUrl + 'member_area');
 
 			// Config api URL
-			$authProvider.loginUrl = '/api/authenticate';
-			$authProvider.signupUrl = '/api/authenticate/create';
+			$authProvider.loginUrl = 'api/authenticate';
+			$authProvider.signupUrl = 'api/authenticate/create';
 			$authProvider.baseUrl = baseUrl;
 
 			// Push the new factory onto the $http interceptor array

@@ -18,23 +18,23 @@ module.exports = {
         var password = req.param('password');
 
         if (!username || !password) {
-            return res.json(401, { err: 'username and password required' });
+            return res.json(401, { error: 'username and password required' });
         }
 
-        User.findOne({
+        Users.findOne({
             username: username
         }).exec(function(err, user) {
             if (!user) {
-                return res.json(401, { err: 'invalid username or password' });
+                return res.json(401, { error: 'invalid username or password' });
             }
 
-            User.validPassword(password, user, function(err, valid) {
+            Users.comparePassword(password, user, function(err, valid) {
                 if (err) {
                     return res.json(403, { err: 'forbidden' });
                 }
 
                 if (!valid) {
-                    return res.json(401, { err: 'invalid username or password' });
+                    return res.json(401, { error: 'invalid username or password' });
                 } else {
                     res.json({ user: user, token: sailsTokenAuth.issueToken({ sid: user.id }) });
                 }
@@ -49,11 +49,7 @@ module.exports = {
      * @return req
      */
     register: function(req, res) {
-        //TODO: Do some validation on the input
-        if (req.body.password !== req.body.password_confirmation) {
-            return res.json(401, { err: 'Password doesn\'t match' });
-        }
-        
+
         var credentials = {
             username: req.body.username,
             password: req.body.password,
@@ -67,8 +63,16 @@ module.exports = {
 
         Users.create(credentials).exec(function(err, user) {
             if (err) {
-                res.json(err.status, { err: err });
-                return;
+                // If these error from validation
+                if (err.code == 'E_VALIDATION') {
+                    return res.json(err.status, {
+                        result: false,
+                        data: err.Errors
+                    });
+                } else {
+                    res.json(err.status, { err: err });
+                    return;
+                }
             }
             if (user) {
                 res.json({ user: user, token: sailsTokenAuth.issueToken({ sid: user.id }) });

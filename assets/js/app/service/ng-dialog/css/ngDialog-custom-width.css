@@ -1,14 +1,26 @@
 .ngdialog.custom-width .ngdialog-content {
-    width: 650px !important;
+    width: 850px !important;
     max-height: 450px !important;
     overflow-y: scroll;
-    font-size: 13px !important;
-    color: #333;
+    font-size: 12px !important;
+    color: #8a6d3b;
+    background: black;
+    border: 1px solid #8a6d3b;
+    padding-top: 0;
 }
-.ngdialog.custom-width .ngdialog-content ol{
-	padding: 20px
+
+.ngdialog.custom-width .ngdialog-content ol {
+    padding: 20px
 }
+
 .ngdialog.custom-width .ngdialog-content ol li {
-	list-style: outside decimal;
-	line-height: 24px;
+    list-style: outside decimal;
+    line-height: 24px;
+}
+.ngdialog.custom-width .ngdialog-content h4 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 1px solid;
+    padding: 7px;
 }

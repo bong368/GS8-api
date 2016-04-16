@@ -16,36 +16,59 @@ module.exports = {
      * Validate user credentials 
      */
     attributes: {
-        
+
         createdAt: {
-            type: 'datetime', columnName: 'created_at'
+            type: 'datetime',
+            columnName: 'created_at'
         },
         updatedAt: {
-            type: 'datetime', columnName: 'updated_at'
+            type: 'datetime',
+            columnName: 'updated_at'
         },
         username: {
-            type: 'string', required: 'true', unique: true, minLength: 3, maxLength: 30
+            type: 'string',
+            required: true,
+            unique: true,
+            alphanumericdashed: true
         },
         email: {
-            type: 'email', required: 'true', unique: true, maxLength: 30
+            type: 'email',
+            required: true,
+            unique: true
         },
         password: {
-            type: 'string', required: 'true', regex: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/', minLength: 6, maxLength: 30
+            type: 'string',
+            required: true,
+            password: true
         },
         phone: {
-            type: 'string', required: 'true', regex: '/^[0-9\-\+]{10,20}$/'
+            type: 'string',
+            required: true,
+            phone: true
         },
         currency: {
-            type: 'string', required: 'true', minLength: 3, maxLength: 3
+            type: 'string',
+            required: true,
+            minLength: 2,
+            maxLength: 3
         },
         bank_id: {
-            type: 'number', required: 'true', minLength: 1, maxLength: 5
+            type: 'string',
+            required: true,
+            minLength: 1,
+            maxLength: 5
         },
         bank_account_number: {
-            type: 'string', required: 'true', minLength: 10, maxLength: 15
+            type: 'string',
+            required: true,
+            minLength: 10,
+            maxLength: 15
         },
         bank_account_name: {
-            type: 'string', required: 'true', minLength: 3, maxLength: 30
+            type: 'string',
+            required: true,
+            minLength: 3,
+            maxLength: 30
         },
 
 
@@ -56,7 +79,14 @@ module.exports = {
             return obj;
         }
     },
-
+    types: {
+        phone: function (value) {
+            return _.isString(value) && value.length >= 6 && value.length < 15 && value.match(/[+]/)  && value.match(/[0-9]/);
+        },
+        password: function(value) {
+            return _.isString(value) && value.length >= 6 && value.match(/[a-z]/i) && value.match(/[0-9]/);
+        }
+    },
     /**
      * Model validation messages definitions
      */
@@ -64,10 +94,31 @@ module.exports = {
         email: {
             required: 'Email is required',
             email: 'Provide valid email address',
-            unique: 'Email address is already taken'
+            unique: 'Email address is already taken',
+            regex: 'Email does not match format'
         },
         username: {
-            required: 'Username is required'
+            alphanumericdashed: 'Username is a string consisting of only letters, numbers, and/or dashes.',
+            unique: 'Username is already taken',
+            required: 'Username is required',
+        },
+        password: {
+            required: 'Password is required',
+            password: 'Password does not match format'
+        },
+        phone: {
+            required: 'Phone is required',
+            phone: 'Phone does not match format'
+        },
+        bank_account_number: {
+            required: 'Bank account number id is required',
+            minLength: 'Bank account number must be at least 10 characters.',
+            maxLength: 'Bank account number may not be greater than 15 characters.'
+        },
+        bank_account_name: {
+            required: 'Bank account name id is required',
+            minLength: 'Bank account number must be at least 3 characters.',
+            maxLength: 'Bank account number may not be greater than 30 characters.'
         }
     },
 
@@ -88,13 +139,14 @@ module.exports = {
     /**
      * Check if match password
      */
-    comparePassword: function(password, user, cb) {
-        bcrypt.compare(password, user.encryptedPassword, function(err, match) {
-            if (err) cb(err);
+    comparePassword: function(password, user, callback) {
+        bcrypt.compare(password, user.password, function(err, match) {
+
+            if (err) callback(err);
             if (match) {
-                cb(null, true);
+                callback(null, true);
             } else {
-                cb(err);
+                callback(err);
             }
         })
     }
