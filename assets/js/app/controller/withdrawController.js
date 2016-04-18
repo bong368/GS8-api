@@ -7,7 +7,7 @@
         .controller('WithdrawController', WithdrawController);
 
 
-    function WithdrawController($auth, $state, $http, $scope, ngDialog, $rootScope, $socket) {
+    function WithdrawController($auth, $state, $http, $scope, ngDialog, $rootScope, $socket, SweetAlert) {
 
         // Run this function at initial
         $scope.ini = function() {
@@ -29,7 +29,7 @@
         // Bind banking
         $scope.bindTransactionLimit = function() {
 
-            $http.get(baseUrl + 'api/transaction/limit/withdraw')
+            $http.get(baseUrl + 'api/transaction/limit')
 
                 .then(function(response) {
                 
@@ -44,7 +44,7 @@
         $scope.submitTicket = function() {
             var req = {
                 method: 'PUT',
-                url: baseUrl + 'api/cashier/withdraw',
+                url: baseUrl + 'api/cashier/withdrawn',
                 data: $scope.ticket
             }
 
@@ -56,28 +56,19 @@
                     // Emit to node server
                     $socket.emit('transaction.withdraw', response.data);
 
-                    $scope.message = 'Thank you! We have received your ticket!';
-                    $scope.reportState = '#/report/withdrawn';
-
-                    ngDialog.open({ 
-
-                        // Config dialog
-                        template: 'assets/view/dialog/popupSuccess.html', 
-                        className: 'ngdialog-theme-flat ngdialog-theme-custom',
-                        closeByNavigation : true,
-                        scope: $scope
-                    });
+                    SweetAlert.swal({
+                            title: "Thank you!",
+                            text: "We have received your ticket!",
+                            type: "success",
+                            allowOutsideClick: true,
+                            confirmButtonText: "View Report"
+                        },
+                        function() {
+                            $state.go('withdrawnReport');
+                        });
 
                 }, function(error) {
-                    $scope.error = error.data.error;
-                    ngDialog.open({ 
-
-                        // Config dialog
-                        template: 'assets/view/dialog/popupTmpl.html', 
-                        className: 'ngdialog-theme-flat ngdialog-theme-custom',
-                        closeByNavigation : true,
-                        scope: $scope
-                    });
+                    SweetAlert.swal("Sorry!", error.data.error, "error");
                 });
         }
 

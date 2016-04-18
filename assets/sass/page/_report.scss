@@ -1,0 +1,115 @@
+%extend_7 {
+    color: $color_sundance_approx;
+    background-color: transparent;
+    border: none;
+    line-height: 20px;
+    width: 40px;
+}
+
+//original selectors
+//.pagination >li >a:hover, .pagination >.active >a
+%extend_8 {
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+}
+
+.report {
+    input {
+        font-size: 13px;
+        font-family: Tahoma, Geneva, sans-serif, 微软雅黑;
+    }
+    .method {
+        margin-top: 20px;
+        [class*=col-md-1] {
+            padding: 0;
+            text-align: right;
+        }
+    }
+    .row {
+        margin: 20px 0;
+    }
+    table {
+        border: 1px solid $color_fuscous_gray_approx;
+    }
+    .table {
+        tbody>tr>td {
+            border-top: none;
+            line-height: 2;
+            text-transform: uppercase;
+        }
+        thead>tr>td {
+            text-transform: uppercase;
+            line-height: 2.5;
+        }
+    }
+    .table-striped>tbody>tr:nth-of-type(odd) {
+        background-color: rgba(127, 116, 95, 0.48);
+    }
+    ._720kb-datepicker-calendar-days-header {
+        font-family: Tahoma, Geneva, sans-serif, 微软雅黑 !important;
+    }
+    ._720kb-datepicker-calendar {
+        //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+        border-radius: 0 !important;
+        background: $color_wild_sand_approx !important;
+    }
+    ._720kb-datepicker-calendar-header {
+        font-family: Tahoma, Geneva, sans-serif, 微软雅黑 !important;
+        &:nth-child(odd) {
+            background: #012146 !important
+        }
+    }
+    ._720kb-datepicker-calendar-body {
+        font-family: Tahoma, Geneva, sans-serif, 微软雅黑 !important;
+        a:hover {
+            color: $white !important;
+        }
+    }
+    .pagination {
+        margin: 0;
+        > li {
+            > a {
+                @extend %extend_7;
+                &:hover {
+                    @extend %extend_8;
+                }
+            }
+            > span {
+                @extend %extend_7;
+            }
+            &:first-child {
+                > a {
+                    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+                    border-radius: 0;
+                }
+                > span {
+                    //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+                    border-radius: 0;
+                }
+            }
+            &:last-child > a {
+                //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
+                border-radius: 0;
+            }
+        }
+        > {
+            .active > a {
+                @extend %extend_7;
+                @extend %extend_8;
+                &:focus {
+                    @extend %extend_7;
+                }
+                &:hover {
+                    @extend %extend_7;
+                }
+            }
+            .disabled > a {
+                @extend %extend_7;
+                &:hover {
+                    @extend %extend_7;
+                }
+            }
+        }
+    }
+}

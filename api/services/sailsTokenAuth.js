@@ -1,4 +1,5 @@
 var jwt = require('jsonwebtoken');
+var Promise = require('bluebird');
 
 // With this method we generate a new token based on payload we want to put on it
 module.exports.issueToken = function(payload) {
@@ -17,3 +18,58 @@ module.exports.verifyToken = function(token, verified) {
         verified // The callback to be call when the verification is done.
     );
 };
+
+module.exports.parseToken = function(req, callback) {
+
+    return new Promise(function(resolve, reject) {
+        var token = getRawToken(req);
+        payload = jwt.decode(token, 'json');
+        cred = false;
+
+        if (payload) {
+            Users.findOne({
+                    id: payload.sid
+                })
+                .then(function(user) {
+                    cred = user;
+                    return Banking.findOne({
+                        id: user.bank_id
+                    })
+                })
+                .then(function(banking) {
+                    cred.bank_name = banking.bank_name;
+                    return resolve(cred);
+                })
+                .catch(function(err) {
+                    return resolve(cred);
+                })
+        } else {
+            return reject('invalid_token');
+        }
+    })
+};
+
+var getRawToken = function(req) {
+    var token;
+
+    if (req.headers && req.headers.authorization) {
+        var parts = req.headers.authorization.split(' ');
+        if (parts.length == 2) {
+            var scheme = parts[0],
+                credentials = parts[1];
+
+            if (/^Bearer$/i.test(scheme)) {
+                token = credentials;
+            }
+        } else {
+            return false;
+        }
+    } else if (req.param('token')) {
+        token = req.param('token');
+        // We delete the token from param to not mess with blueprints
+        delete req.query.token;
+    } else {
+        return false;
+    }
+    return token;
+}

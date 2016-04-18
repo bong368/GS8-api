@@ -53,7 +53,7 @@
 
                 var credentials = {
                     username : $rootScope.currentUser.username, 
-                    session : auth.session
+                    session : localStorage.getItem('satellizer_token')
                 }
 
                 $socket.emit('auth.login', credentials);
@@ -85,6 +85,7 @@
 
                 $scope.username = '';
                 $scope.password = '';
+                $state.go('home');
             });
         }
 

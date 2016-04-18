@@ -78,5 +78,22 @@ module.exports = {
                 res.json({ user: user, token: sailsTokenAuth.issueToken({ sid: user.id }) });
             }
         });
+    },
+
+    /**
+     * Validate token, if true return credentials, false if invalid token
+     *
+     * @param  res
+     * @return req
+     */
+    user: function(req, res) {
+
+        sailsTokenAuth.parseToken(req)
+            .then(function(user) {
+                res.json(200, { user: user });
+            })
+            .catch(function (err) {
+                return res.json(401, { error: 'Invalid token' });
+            })
     }
 };

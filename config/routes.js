@@ -51,7 +51,16 @@ module.exports.routes = {
      ***************************************************************************/
     'POST /api/authenticate': 'AuthController.authenticate',
     'POST /api/authenticate/create': 'AuthController.register',
+    'GET /api/authenticate/user': 'AuthController.user',
 
     // Banking Area
     'GET /api/banking/all': 'BankingController.index',
+    'GET /api/transaction/limit': "LimitTransactionController.index",
+
+    // Transaction Area
+    'PUT /api/cashier/deposit': 'DepositsController.create',
+    'PUT /api/cashier/withdrawn': 'WithdrawnsController.create',
+
+    // Report Area
+    'POST /api/transaction/report/deposit': 'DepositsController.index',
 };

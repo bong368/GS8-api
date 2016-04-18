@@ -8,8 +8,6 @@
 module.exports = {
 
     attributes: {
-        autoCreatedAt: false,
-        autoUpdatedAt: false,
         bank_name: {
         	type: 'string'
         },

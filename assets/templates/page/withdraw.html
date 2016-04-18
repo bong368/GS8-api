@@ -1,9 +1,9 @@
-<div class="container" id="deposit">
+<div class="container main-content">
 	<div class="col-md-offset-1 col-md-10">
-		<div class="row content-header">
+		<div class="row">
 			<div class="col-md-5">
 				<div class="row">
-					<h3 style="margin-bottom: 30px;"><% 'YOUR_ACCOUNT' | translate %></h3>
+					<h3 style="margin-bottom: 30px;">{{ 'YOUR_ACCOUNT' | translate }}</h3>
 					<div class="credit-user">
 						<div class="game-site">
 							<p>Sportsbook</p>
@@ -33,15 +33,15 @@
 				</div>
 			</div>
 			<div class="col-md-6 col-md-offset-1">
-				<form id='frm-deposit' name="withdraw">
+				<form class="frm-trans" name="withdraw">
 					<div class="row">
 						<div class="col-md-offset-1">
-							<h3 class="upper"><% 'WITHDRAWN' | translate %></h3>
+							<h3 class="upper">{{ 'WITHDRAWN' | translate }}</h3>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-5 col-md-offset-1">
-							<% 'PAYMENT_METHOD' | translate %><sup class="required">*</sup>
+							{{ 'PAYMENT_METHOD' | translate }}<sup class="required">*</sup>
 						</div>
 						<div class="col-md-6">
 							<select ng-model="ticket.payment_method" >
@@ -51,7 +51,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-5 col-md-offset-1">
-							<% 'FROM_BANK' | translate %><sup class="required">*</sup>
+							{{ 'FROM_BANK' | translate }}<sup class="required">*</sup>
 						</div>
 						<div class="col-md-6">
 							<input disabled type="text" ng-model="ticket.bank_name" />
@@ -59,7 +59,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-5 col-md-offset-1">
-							<% 'BANK_ACC_NAME' | translate %><sup class="required">*</sup>
+							{{ 'BANK_ACC_NAME' | translate }}<sup class="required">*</sup>
 						</div>
 						<div class="col-md-6">
 							<input disabled type="text" ng-model="ticket.bank_account_name" />
@@ -67,7 +67,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-5 col-md-offset-1">
-							<% 'BANK_ACC_NO' | translate %><sup class="required">*</sup>
+							{{ 'BANK_ACC_NO' | translate }}<sup class="required">*</sup>
 						</div>
 						<div class="col-md-6">
 							<input disabled type="text" ng-model="ticket.bank_account_number" />
@@ -75,7 +75,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-5 col-md-offset-1">
-							<% 'CURRENCY' | translate %><sup class="required">*</sup>
+							{{ 'CURRENCY' | translate }}<sup class="required">*</sup>
 						</div>
 						<div class="col-md-6">
 							<input disabled="true" type="text" ng-model="ticket.currency" />
@@ -84,20 +84,20 @@
 					
 					<div class="row">
 						<div class="col-md-5 col-md-offset-1">
-							<% 'AMOUNT' | translate %><sup class="required">*</sup>
+							{{ 'AMOUNT' | translate }}<sup class="required">*</sup>
 						</div>
 						<div class="col-md-6">
 							<input required type="text" name="cash" ng-model="ticket.amount" placeholder="Enter Amount" />
 							<div class="ip-notice">
 								<p>(IDR 1000 = 1 unit)</p>
-								<p>Min : <%limit.withdraw_min + ' ' + limit.currency%> <i ng-class="{error: ticket.amount<limit.withdraw_min && withdraw.cash.$dirty, success: ticket.amount>=limit.withdraw_min && withdraw.cash.$dirty}" class="fa fa-check"></i></p>
-								<p>Max : <%limit.withdraw_max + ' ' + limit.currency%> <i ng-class="{error: ticket.amount>limit.withdraw_max && withdraw.cash.$dirty, success: ticket.amount<=limit.withdraw_max && withdraw.cash.$dirty}" class="fa fa-check"></i></p>
+								<p>Min : {{limit.withdraw_min + ' ' + limit.currency}} <i ng-class="{error: ticket.amount<limit.withdraw_min && withdraw.cash.$dirty, success: ticket.amount>=limit.withdraw_min && withdraw.cash.$dirty}" class="fa fa-check"></i></p>
+								<p>Max : {{limit.withdraw_max + ' ' + limit.currency}} <i ng-class="{error: ticket.amount>limit.withdraw_max && withdraw.cash.$dirty, success: ticket.amount<=limit.withdraw_max && withdraw.cash.$dirty}" class="fa fa-check"></i></p>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-5 col-md-offset-1">
-							<% 'CONFIRM_PASS' | translate %><sup class="required">*</sup>
+							{{ 'CONFIRM_PASS' | translate }}<sup class="required">*</sup>
 						</div>
 						<div class="col-md-6">
 							<input required type="password" ng-model="ticket.password" placeholder="Enter Your Password" />
@@ -105,7 +105,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6 col-md-offset-6">
-							<button ng-click="submitTicket()" class="btn" type="submit"><% 'SUBMIT' | translate %></button>
+							<button ng-click="submitTicket()" class="btn" type="submit">{{ 'SUBMIT' | translate }}</button>
 						</div>
 					</div>
 				</form>

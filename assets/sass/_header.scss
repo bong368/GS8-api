@@ -96,6 +96,32 @@ header {
             padding: 7px;
             color: $white;
         }
+        .method li {
+            float: left;
+            padding: 0 9px;
+            border-right: 1px dotted $border;
+            &:last-child {
+                border: none;
+            }
+            a {
+                color: $white;
+            }
+            .sub-top-menu {
+                position: absolute;
+                top: 20px;
+                left: 0;
+                z-index: 99;
+                background: $black;
+                border: 1px solid $border;
+                padding: 10px;
+                li {
+                    border: none;
+                    border-bottom: 1px solid $border;
+                    width: 100%;
+                    padding: 5px;
+                }
+            }
+        }
     }
     .navbar-default {
         border: none;

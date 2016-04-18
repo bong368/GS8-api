@@ -17,13 +17,11 @@ module.exports = {
      */
     attributes: {
 
-        createdAt: {
-            type: 'datetime',
-            columnName: 'created_at'
+        created_at: {
+            type: 'datetime'
         },
-        updatedAt: {
-            type: 'datetime',
-            columnName: 'updated_at'
+        updated_at: {
+            type: 'datetime'
         },
         username: {
             type: 'string',
@@ -69,6 +67,9 @@ module.exports = {
             required: true,
             minLength: 3,
             maxLength: 30
+        },
+        main_balance: {
+            type: 'string',
         },
 
 

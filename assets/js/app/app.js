@@ -298,7 +298,7 @@
 						// Emit this credentials to node server
 						var credentials = {
 					    	username : $rootScope.currentUser.username, 
-					    	session : auth.session
+					    	session : localStorage.getItem('satellizer_token')
 					    }
 
 					    $socket.emit('auth.login', credentials);
