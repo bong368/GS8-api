@@ -27,6 +27,9 @@ module.exports.policies = {
     'AuthController': {
         '*': true // We dont need authorization here, allowing public access
     },
+    'BankingController': {
+        'index': true
+    }
 
     'DepositsController': {
     	'create': ['requiredPassword', 'limitDeposit', 'pendingDeposit']
