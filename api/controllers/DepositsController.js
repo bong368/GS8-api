@@ -39,7 +39,7 @@ module.exports = {
     index: function(req, res) {
 
     	var ticket = req.body;
-    	
+        
     	sailsTokenAuth.parseToken(req)
             .then(function(user) {
 

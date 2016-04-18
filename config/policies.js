@@ -29,10 +29,10 @@ module.exports.policies = {
     },
 
     'DepositsController': {
-    	'create': ['requiredPassword', 'limitDeposit']
+    	'create': ['requiredPassword', 'limitDeposit', 'pendingDeposit']
     },
 
     'WithdrawnsController': {
-    	'create': ['requiredPassword', 'limitWithdrawn']
+    	'create': ['requiredPassword', 'limitWithdrawn', 'overAmount']
     }
 };

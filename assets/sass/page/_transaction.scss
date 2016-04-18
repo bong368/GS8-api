@@ -11,6 +11,16 @@
 
 .main-content {
     @extend %extend_3;
+    .title-content {
+        font-weight: bold;
+        line-height: 40px;
+        font-size: 17px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border: 1px solid #a0a4ae;
+        span {
+            padding: 3px 20px;
+        }
+    }
     .credit-user {
         border: 1px solid $border;
         padding: 20px;

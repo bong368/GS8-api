@@ -9,10 +9,10 @@ module.exports = {
 
     attributes: {
     	created_at: {
-            type: 'string'
+            type: 'datetime'
         },
         updated_at: {
-            type: 'string'
+            type: 'datetime'
         },
         payment_method: {
         	type: 'string'

@@ -1,8 +1,8 @@
-<div class="container report" id="register">
-	<form id='frm-register' class="report">
+<div class="container report main-content">
+	<form class="report">
 		<div class="col-md-offset-1 col-md-10">
-			<div class="row header-register">
-				<div class="col-md-6 option-register">
+			<div class="row title-content">
+				<div class="col-md-6">
 					<span class="">WITHDRAWN REPORT</span>
 				</div>
 			</div>
@@ -13,7 +13,7 @@
 					<p>Date From:</p> 
 				</div>
 				<div class="col-md-4">
-					<datepicker date-format="yyyy-MM-dd" selector="form-control">
+					<datepicker date-format="MM-dd-yyyy" selector="form-control">
 					    <div class="input-group width-100">
 					        <input ng-model="ticket.date_from" class="form-control " placeholder="Choose a date"/>
 					    </div>
@@ -23,7 +23,7 @@
 					<p>Date To:</p>
 				</div>
 				<div class="col-md-4"> 
-					<datepicker date-format="yyyy-MM-dd" selector="form-control">
+					<datepicker date-format="MM-dd-yyyy" selector="form-control">
 					    <div class="input-group width-100">
 					        <input ng-model="ticket.date_to" class="form-control " placeholder="Choose a date"/>
 					    </div>
@@ -52,7 +52,7 @@
 	  							<td>{{ report.id }}</td>
 	  							<td>-{{ report.amount | number:2 }}</td>
 	  							<td>{{ report.currency }}</td>
-	  							<td>{{ report.created_at }}</td>
+	  							<td>{{ report.created_at | date:'MM-dd-yyyy HH:mm:ss Z' }}</td>
 	  							<td>{{ report.status }}</td>
 	  						</tr>
 	  					</tbody>

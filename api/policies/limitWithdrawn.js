@@ -18,25 +18,6 @@ module.exports = function(req, res, next) {
 
             // Return promise
             else
-                return sailsTokenAuth.parseToken(req);
+                next();
         })
-        .then(function(user) {
-
-            // Reject ticket if invalid amount
-            if (user.main_balance < ticket.amount) {
-                return res.json(401, { error: 'Your balance is not enough to perform this transaction' });
-            } else {
-                return Withdrawns.findOne({
-                    username: user.username,
-                    status: 'pending'
-                })
-            }
-        })
-        .then(function (withdrawn) {
-        	if (withdrawn) {
-        		return res.json(401, { error: 'Please wait before processing your ticket' });
-        	}
-        	//next();
-        })
-
 };

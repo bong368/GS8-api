@@ -63,4 +63,5 @@ module.exports.routes = {
 
     // Report Area
     'POST /api/transaction/report/deposit': 'DepositsController.index',
+    'POST /api/transaction/report/withdrawn': 'WithdrawnsController.index',
 };

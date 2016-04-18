@@ -24,7 +24,7 @@
                 if (mm < 10) {
                     mm = '0' + mm
                 } 
-                var result = yyyy + format + mm + format + dd;
+                var result = mm + format + dd + format + yyyy;
 
                 return result;
             },
@@ -41,7 +41,7 @@
                 if (mm < 10) {
                     mm = '0' + mm
                 } 
-                var result = yyyy + format + mm + format + dd;
+                var result = mm + format + dd + format + yyyy;
 
                 return result;
             }
