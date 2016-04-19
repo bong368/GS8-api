@@ -1,5 +1,7 @@
 {
-  "generators": {
-    "modules": {}
-  }
+   	"hooks": {
+        "session": false,
+        // also useful when building an API
+        "grunt": false
+   	}
 }

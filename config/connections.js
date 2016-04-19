@@ -45,12 +45,23 @@ module.exports.connections = {
         host: 'localhost',
         port: 3306,
         user: 'root',
-        password: 'Betapp!@#$188',
+        password: '',
         database: 'hokibet188',
         charset: 'utf8',
         collation: 'utf8_unicode_ci'
     },
 
+    // Database for product
+    mysql_production: {
+        adapter: 'sails-mysql',
+        host: 'localhost',
+        port: 3306,
+        user: 'root',
+        password: 'Betapp!@#$188',
+        database: 'hokibet188',
+        charset: 'utf8',
+        collation: 'utf8_unicode_ci'
+    },
     /***************************************************************************
      *                                                                          *
      * MongoDB is the leading NoSQL database.                                   *
