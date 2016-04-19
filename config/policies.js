@@ -28,7 +28,7 @@ module.exports.policies = {
         '*': true // We dont need authorization here, allowing public access
     },
     'BankingController': {
-        'index': true
+        '*': true
     },
 
     'DepositsController': {
