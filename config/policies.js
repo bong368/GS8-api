@@ -29,7 +29,7 @@ module.exports.policies = {
     },
     'BankingController': {
         'index': true
-    }
+    },
 
     'DepositsController': {
     	'create': ['requiredPassword', 'limitDeposit', 'pendingDeposit']
