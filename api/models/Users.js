@@ -137,6 +137,17 @@ module.exports = {
         })
     },
 
+    beforeUpdate: function(values, next) {
+        bcrypt.genSalt(10, function(err, salt) {
+            if (err) return next(err);
+            bcrypt.hash(values.password, salt, function(err, hash) {
+                if (err) return next(err);
+                values.password = hash;
+                next();
+            })
+        })
+    },
+
     /**
      * Check if match password
      */

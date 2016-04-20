@@ -7,13 +7,13 @@
         .controller('ProfileController', ProfileController);
 
 
-    function ProfileController($socket, $auth, $state, $http, $rootScope, $scope, ngDialog) {
+    function ProfileController($socket, $auth, $state, $http, $rootScope, $scope, SweetAlert) {
 
         // Run this function at initial
         $scope.ini = function() {
 
             $scope.user = {
-                old_password : '',
+                new_password : '',
                 password    : '',
                 password_confirmation : '',
             }
@@ -41,18 +41,11 @@
 
             $http(req)
                 .then(function(response) {
-                    $scope.message = response.data.result;
-                    ngDialog.open({ 
-
-                        // Config dialog
-                        template: 'assets/view/dialog/popupSuccess.html', 
-                        className: 'ngdialog-theme-flat ngdialog-theme-custom',
-                        scope: $scope
-                    });
+                    SweetAlert.swal("Thanks You!", "Change Password Success!", "success");
 
                 }, function(error) {
                     angular.forEach(error.data.data, function(value, key) {
-                        $scope.error[key] = value[0];
+                        $scope.error[key] = value;
                     })
                 });
         }

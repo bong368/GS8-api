@@ -1,0 +1,10 @@
+.base-profile {
+	border-right: 1px solid #7f745f;
+	text-transform: capitalize;
+    >div {
+        >div:last-child {
+            border-bottom: 1px solid #7f745f;
+            padding: 5px;
+        }
+    }
+}

@@ -92,8 +92,55 @@ module.exports = {
             .then(function(user) {
                 res.json(200, { user: user });
             })
-            .catch(function (err) {
+            .catch(function(err) {
                 return res.json(401, { error: 'Invalid token' });
             })
+    },
+
+    /**
+     * Change Password
+     *
+     * @param  res
+     * @return req
+     */
+    changePassword: function(req, res) {
+        var ticket = req.body;
+
+        if (ticket.new_password != ticket.password_confirmation) {
+            return res.json(401, {
+                data: {
+                    'password_confirmation': 'Password confirmation not match'
+                }
+            });
+        } else if (ticket.new_password == ticket.password) {
+            return res.json(401, {
+                data: {
+                    'password': 'Invalid new password, try another'
+                }
+            });
+        } else if (!this.validatePassword(ticket.password)) {
+            return res.json(401, {
+                data: {
+                    'password': 'New password not match with format, try another'
+                }
+            });
+        }
+
+        sailsTokenAuth.parseToken(req)
+            .then(function(user) {
+
+                return Users.update({
+                    username: user.username
+                }, {
+                    password: ticket.new_password
+                })
+            })
+            .then(function(user) {
+                res.json(200, { "result": "Change Password Success!" });
+            })
+    },
+
+    validatePassword: function(value) {
+        return _.isString(value) && value.length >= 6 && value.match(/[a-z]/i) && value.match(/[0-9]/);
     }
 };
