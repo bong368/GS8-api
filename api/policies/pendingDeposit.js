@@ -1,6 +1,6 @@
 module.exports = function(req, res, next) {
 
-    sailsTokenAuth.parseToken(req)
+    tokenService.parse(req)
         .then(function(user) {
             return Deposits.findOne({
                 username: user.username,

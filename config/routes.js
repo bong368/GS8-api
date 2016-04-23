@@ -11,13 +11,6 @@
  *
  * Finally, if those don't match either, the default 404 handler is triggered.
  * See `api/responses/notFound.js` to adjust your app's 404 logic.
- *
- * Note: Sails doesn't ACTUALLY serve stuff from `assets`-- the default Gruntfile in Sails copies
- * flat files from `assets` to `.tmp/public`.  This allows you to do things like compile LESS or
- * CoffeeScript for the front-end.
- *
- * For more information on configuring custom routes, check out:
- * http://sailsjs.org/#!/documentation/concepts/Routes/RouteTargetSyntax.html
  */
 
 module.exports.routes = {
@@ -27,28 +20,13 @@ module.exports.routes = {
      * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
      * etc. depending on your default view engine) your home page.              *
      *                                                                          *
-     * (Alternatively, remove this and add an `index.html` file in your         *
-     * `assets` directory)                                                      *
-     *                                                                          *
      ***************************************************************************/
 
     '/': {
         view: 'main'
     },
 
-    /***************************************************************************
-     *                                                                          *
-     * Custom routes here...                                                    *
-     *                                                                          *
-     * If a request to a URL doesn't match any of the custom routes above, it   *
-     * is matched against Sails route blueprints. See `config/blueprints.js`    *
-     * for configuration options and examples.                                  *
-     *                                                                          *
-     ***************************************************************************/
-
-    /***************************************************************************
-     * Authenticate Area                                                        *
-     ***************************************************************************/
+    // Authenticate Area 
     'POST /api/authenticate': 'AuthController.authenticate',
     'POST /api/authenticate/create': 'AuthController.register',
     'GET /api/authenticate/user': 'AuthController.user',
@@ -65,4 +43,7 @@ module.exports.routes = {
     // Report Area
     'POST /api/transaction/report/deposit': 'DepositsController.index',
     'POST /api/transaction/report/withdrawn': 'WithdrawnsController.index',
+
+    // Test Api Area
+    'GET /api/test': 'TestController.test'
 };

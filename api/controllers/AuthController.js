@@ -14,30 +14,29 @@ module.exports = {
      * @return req
      */
     authenticate: function(req, res) {
-        var username = req.param('username');
-        var password = req.param('password');
 
-        if (!username || !password) {
+        var ticket = req.body;
+
+        if (!ticket.username || !ticket.password) {
             return res.json(401, { error: 'username and password required' });
         }
 
         Users.findOne({
-            username: username
+            username: ticket.username
         }).exec(function(err, user) {
+
             if (!user) {
                 return res.json(401, { error: 'invalid username or password' });
             }
 
-            Users.comparePassword(password, user, function(err, valid) {
-                if (err) {
-                    return res.json(403, { err: 'forbidden' });
-                }
+            Users.comparePassword(ticket.password, user, function(err, valid) {
 
                 if (!valid) {
                     return res.json(401, { error: 'invalid username or password' });
                 } else {
-                    res.json({ user: user, token: sailsTokenAuth.issueToken({ sid: user.id }) });
+                    res.json({ token: tokenService.generate({ sid: user.id }) });
                 }
+
             });
         });
     },
@@ -70,12 +69,14 @@ module.exports = {
                         data: err.Errors
                     });
                 } else {
-                    res.json(err.status, { err: err });
+                    console.log(err.code);
                     return;
                 }
             }
             if (user) {
-                res.json({ user: user, token: sailsTokenAuth.issueToken({ sid: user.id }) });
+                res.json({
+                    token: tokenService.generate({ sid: user.id })
+                });
             }
         });
     },
@@ -88,12 +89,12 @@ module.exports = {
      */
     user: function(req, res) {
 
-        sailsTokenAuth.parseToken(req)
+        tokenService.parse(req)
             .then(function(user) {
                 res.json(200, { user: user });
             })
             .catch(function(err) {
-                return res.json(401, { error: 'Invalid token' });
+                return res.json(401, { error: 'token_invalid' });
             })
     },
 
@@ -104,43 +105,27 @@ module.exports = {
      * @return req
      */
     changePassword: function(req, res) {
+
         var ticket = req.body;
-
-        if (ticket.new_password != ticket.password_confirmation) {
-            return res.json(401, {
-                data: {
-                    'password_confirmation': 'Password confirmation not match'
-                }
-            });
-        } else if (ticket.new_password == ticket.password) {
-            return res.json(401, {
-                data: {
-                    'password': 'Invalid new password, try another'
-                }
-            });
-        } else if (!this.validatePassword(ticket.password)) {
-            return res.json(401, {
-                data: {
-                    'password': 'New password not match with format, try another'
-                }
-            });
-        }
-
-        sailsTokenAuth.parseToken(req)
+        cred = undefined;
+        tokenService.parse(req)
             .then(function(user) {
 
+                cred = user;
+                return Users.hashPassword(ticket.new_password);
+
+            })
+            .then(function (password) {
+
                 return Users.update({
-                    username: user.username
+                    username: cred.username
                 }, {
-                    password: ticket.new_password
+                    password: password
                 })
+                
             })
             .then(function(user) {
                 res.json(200, { "result": "Change Password Success!" });
             })
     },
-
-    validatePassword: function(value) {
-        return _.isString(value) && value.length >= 6 && value.match(/[a-z]/i) && value.match(/[0-9]/);
-    }
 };

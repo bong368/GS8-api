@@ -17,7 +17,7 @@ module.exports = {
         var ticket = req.body;
         ticket.extra_bonus = true ? 1 : 0;
 
-        sailsTokenAuth.parseToken(req)
+        tokenService.parse(req)
             .then(function(user) {
                 ticket.username = user.username;
        			return Deposits.create(ticket);
@@ -40,7 +40,7 @@ module.exports = {
 
     	var ticket = req.body;
         
-    	sailsTokenAuth.parseToken(req)
+    	tokenService.parse(req)
             .then(function(user) {
 
        			return Deposits.find({

@@ -2,7 +2,7 @@ module.exports = function(req, res, next) {
 
     var ticket = req.body;
 
-    sailsTokenAuth.parseToken(req)
+    tokenService.parse(req)
         .then(function(user) {
 
             // Reject ticket if invalid amount

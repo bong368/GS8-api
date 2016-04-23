@@ -7,7 +7,7 @@
 
 // We don't want to store password with out encryption
 var bcrypt = require('bcryptjs');
-
+var Promise = require('bluebird');
 module.exports = {
 
     schema: true,
@@ -137,13 +137,13 @@ module.exports = {
         })
     },
 
-    beforeUpdate: function(values, next) {
-        bcrypt.genSalt(10, function(err, salt) {
-            if (err) return next(err);
-            bcrypt.hash(values.password, salt, function(err, hash) {
-                if (err) return next(err);
-                values.password = hash;
-                next();
+    hashPassword: function (password) {
+        return new Promise(function(resolve, reject) {
+            bcrypt.genSalt(10, function(err, salt) {
+                bcrypt.hash(password, salt, function(err, hash) {
+                    if (err) return false;
+                    return resolve(hash);
+                })
             })
         })
     },
@@ -161,5 +161,12 @@ module.exports = {
                 callback(err);
             }
         })
+    },
+
+    /**
+     * Validated password format
+     */
+    validatePassword: function(value) {
+        return _.isString(value) && value.length >= 6 && value.match(/[a-z]/i) && value.match(/[0-9]/);
     }
 };

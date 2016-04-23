@@ -17,17 +17,14 @@ module.exports = {
         var ticket = req.body;
             cred = undefined;
 
-        sailsTokenAuth.parseToken(req)
+        tokenService.parse(req)
             .then(function(user) {
                 cred = user;
                 ticket.username = user.username;
        			return Withdrawns.create(ticket);
             })
-            .catch(function (err) {
-                return res.json(401, { error: 'Invalid token' });
-            })
             .then(function (withdrawn) {
-            	//
+
                 return Users.update({
                     username: cred.username
                 },{
@@ -49,7 +46,7 @@ module.exports = {
 
     	var ticket = req.body;
     	
-    	sailsTokenAuth.parseToken(req)
+    	tokenService.parse(req)
             .then(function(user) {
 
        			return Withdrawns.find({

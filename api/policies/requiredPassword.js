@@ -1,5 +1,5 @@
 module.exports = function(req, res, next) {
-    sailsTokenAuth.parseToken(req)
+    tokenService.parse(req)
     .then(function(user) {
             Users.comparePassword(req.param('password'), user, function(err, valid) {
                 if (err) {
@@ -15,6 +15,6 @@ module.exports = function(req, res, next) {
 
         })
         .catch(function(err) {
-            return res.json(401, { error: 'Invalid token' });
+            return res.json(401, { error: 'token_invalid' });
         })
 };

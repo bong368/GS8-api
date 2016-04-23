@@ -26,7 +26,7 @@ module.exports.policies = {
 
     'AuthController': {
         '*': true, // We dont need authorization here, allowing public access
-        'changePassword': ['requiredPassword']
+        'changePassword': ['changePasswordPolicy']
     },
     'BankingController': {
         '*': true
@@ -38,5 +38,9 @@ module.exports.policies = {
 
     'WithdrawnsController': {
     	'create': ['requiredPassword', 'limitWithdrawn', 'overAmount']
+    },
+
+    'TestController': {
+        '*': true
     }
 };
