@@ -54,7 +54,7 @@ module.exports.connections = {
     // Database for product
     mysql_production: {
         adapter: 'sails-mysql',
-        host: 'localhost',
+        host: '128.199.142.237',
         port: 3306,
         user: 'root',
         password: 'Betapp!@#$188',
