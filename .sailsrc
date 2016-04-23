@@ -1,7 +1,7 @@
 {
    	"hooks": {
-        "session": false
+        "session": false,
         // also useful when building an API
-        //"grunt": false
+        "grunt": false
    	}
 }
