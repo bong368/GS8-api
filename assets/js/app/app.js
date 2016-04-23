@@ -77,7 +77,7 @@
 					responseError: function(rejection) {
 
 						var $state = $injector.get('$state');
-						rejectionReasons = ['token_not_provided', 'token_expired', 'token_absent', 'token_invalid'];
+						var rejectionReasons = ['token_not_provided', 'token_expired', 'token_absent', 'token_invalid'];
 
 						angular.forEach(rejectionReasons, function(value, key) {
 
