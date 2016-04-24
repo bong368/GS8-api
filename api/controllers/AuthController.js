@@ -26,7 +26,7 @@ module.exports = {
         }).exec(function(err, user) {
 
             if (!user) {
-                return res.json(401, { error: 'invalid username or password' });
+                return res.json(401, { error: 'invalid username, cannot find ' + ticket.username });
             }
 
             Users.comparePassword(ticket.password, user, function(err, valid) {

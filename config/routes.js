@@ -44,6 +44,9 @@ module.exports.routes = {
     'POST /api/transaction/report/deposit': 'DepositsController.index',
     'POST /api/transaction/report/withdrawn': 'WithdrawnsController.index',
 
+    // Gamesite Area (WFT Sporkbook)
+    'GET /api/wft/signin': 'WftController.signin',
+
     // Test Api Area
     'GET /api/test': 'TestController.test'
 };

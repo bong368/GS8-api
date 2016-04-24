@@ -7,8 +7,12 @@
 
 module.exports = {
 	test: function (req, res) {
-		sportsbookWftService.getBalance(req, res, 'tester');
-		return res.json(401, { result: 'view on console' });
+		wftService.register(req, res, 'tester')
+		.then(function (result) {
+			console.log(result);
+			return res.json(401, result);
+		})
+		
 	}
 };
 
