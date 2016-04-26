@@ -9,7 +9,7 @@
 var bcrypt = require('bcryptjs');
 var Promise = require('bluebird');
 module.exports = {
-
+ 
     schema: true,
 
     /**
