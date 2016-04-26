@@ -17,7 +17,7 @@
 
             $http(req)
                 .then(function(response) {
-                    $scope.srcIframe = response.data.data;
+                    $scope.srcIframe = response.data.data.data;
                     console.log($scope.trustSrc($scope.srcIframe));
                 }, function(error) {
                     SweetAlert.swal("Sorry!", error.data.error, "error");

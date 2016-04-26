@@ -62,7 +62,7 @@
 		.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, $socketProvider) {
 
 			// Config Node server Url
-			//$socketProvider.setUrl(nodeUrl + 'member_area');
+			$socketProvider.setUrl('ag.hokibet188.com:1888/' + 'member_area');
 
 			// Config api URL
 			$authProvider.loginUrl = 'api/authenticate';
