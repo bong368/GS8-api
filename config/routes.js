@@ -48,5 +48,5 @@ module.exports.routes = {
     'GET /api/wft/signin': 'WftController.signin',
 
     // Test Api Area
-    'GET /api/test': 'TestController.test'
+    'GET /api/test': 'EmailController.sendEmail',
 };

@@ -42,5 +42,8 @@ module.exports.policies = {
 
     'TestController': {
         '*': true
+    },
+    'EmailController': {
+        '*': true
     }
 };

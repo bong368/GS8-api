@@ -10,7 +10,7 @@ module.exports = {
     signin: function(req, res) {
         tokenService.parse(req)
             .then(function(user) {
-                return wftService.signin(req, res, user.username)
+                return wftService.signin(user.username)
             })
 	        .then(function(result) {
 	            return res.json(200, {data : result});

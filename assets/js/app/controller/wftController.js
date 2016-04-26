@@ -7,7 +7,7 @@
         .controller('WftController', WftController);
 
 
-    function WftController($auth, $state, $http, $rootScope, $scope, $sce) {
+    function WftController($auth, $state, $http, $rootScope, $scope, $sce, SweetAlert) {
         // Run this function at initial
         $scope.ini = function() {
             var req = {

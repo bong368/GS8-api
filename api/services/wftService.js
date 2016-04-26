@@ -15,101 +15,86 @@ var Curl = require('node-libcurl').Curl;
 
 module.exports = {
 
-    // Create one new account for WFT
-    signup: function(req, res, username) {
+    // Create new account WFT
+    signup: function(user) {
 
-        return new promise(function(resolve, reject) {
-            var curl = new Curl();
-                parser = new xml2js.Parser({explicitArray: false});
-                query = {
-                    secret: apiWft.secret,
-                    agent: apiWft.agent,
-                    username: username,
-                    action: 'create',
-                    currency: 'IDR'
-                }
-                query = '?' + queryString.stringify(query);
-                
-            curl.setOpt('URL', apiWft.url + query);
-
-            curl.on('end', function(statusCode, xml, headers) {
-
-                // Xml to string
-                parser.parseString(xml, function(err, result) {
-                    return resolve(result);
-                });
-                this.close();
-            });
-
-            curl.on('error', curl.close.bind(curl));
-            curl.perform();
-        })
+        var parameter = {
+            username: user.username,
+            action: 'create',
+            currency: user.currency
+        }
+        return execWftApi(parameter);
     },
 
     // Signin to WFT, API return a link to assign to iframe
-    signin: function(req, res, username) {
+    signin: function(username) {
 
-        return new promise(function(resolve, reject) {
-            var curl = new Curl();
-                parser = new xml2js.Parser({explicitArray: false});
-                query = {
-                    secret: apiWft.secret,
-                    agent: apiWft.agent,
-                    username: username,
-                    action: 'login',
-                    host: 'sport2.eg.1sgames.com',
-                    lang: 'EN-US'
-                }
-                query = '?' + queryString.stringify(query);
-                
-            curl.setOpt('URL', apiWft.url + query);
-
-            curl.on('end', function(statusCode, body, headers) {
-                
-                var xml = body.replace(/&/g, "&amp;");
-
-                parser.parseString(xml, function(err, result) {
-                    
-                    if (result.response.errcode == 0)
-                        return resolve(result.response.result);
-                    else
-                        return reject(result.response.errtext)
-
-                });
-                this.close();
-            });
-
-            curl.on('error', curl.close.bind(curl));
-            curl.perform();
-        })
+        var parameter = {
+            username: username,
+            action: 'login',
+            host: 'sport2.eg.1sgames.com',
+            lang: 'EN-US'
+        }
+        return execWftApi(parameter);
     },
 
     // Get credit user from WFT
-    getBalance: function (req, res, username) {
-        
-        return new promise(function(resolve, reject) {
-            var curl = new Curl();
-                parser = new xml2js.Parser();
-                query = {
-                    secret: apiWft.secret,
-                    agent: apiWft.agent,
-                    username: username,
-                    action: 'balance'
-                }
-                query = '?' + queryString.stringify(query);
-                
-            curl.setOpt('URL', apiWft.url + query);
+    getBalance: function(username) {
 
-            curl.on('end', function(statusCode, xml, headers) {
+        var parameter = {
+            username: username,
+            action: 'balance'
+        }
+        return execWftApi(parameter);
+    },
 
-                parser.parseString(xml, function(err, result) {
-                    return resolve(result);
-                });
-                this.close();
-            });
+    deposit: function(username) {
 
-            curl.on('error', curl.close.bind(curl));
-            curl.perform();
-        })
-    }
+        var parameter = {
+            username: username,
+            action: 'deposit',
+            amount: 999999,
+            serial: 0001
+        }
+        return execWftApi(parameter);
+    },
 };
+
+var execWftApi = function(parameter) {
+    return new promise(function(resolve, reject) {
+
+        var curl = new Curl();
+            parser = new xml2js.Parser({ explicitArray: false });
+            credential = {
+                secret: apiWft.secret,
+                agent: apiWft.agent,
+            }
+            parameter = _.merge(parameter, credential);
+            query = '?' + queryString.stringify(parameter);
+
+        curl.setOpt('URL', apiWft.url + query);
+
+        curl.on('end', function(statusCode, body, headers) {
+
+            var xml = body.replace(/&/g, "&amp;");
+
+            parser.parseString(xml, function(err, result) {
+                if (result.response.errcode == 0)
+                    return resolve({
+                        result: true,
+                        data: result.response.result
+                    });
+                else
+                    return resolve({
+                        result: false,
+                        error: result.response.errtext
+                    });
+
+            });
+            this.close();
+        });
+
+        curl.on('error', curl.close.bind(curl));
+        curl.perform();
+    })
+}

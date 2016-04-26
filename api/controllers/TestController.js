@@ -7,7 +7,7 @@
 
 module.exports = {
 	test: function (req, res) {
-		wftService.register(req, res, 'tester')
+		wftService.deposit(req, res, 'tester')
 		.then(function (result) {
 			console.log(result);
 			return res.json(401, result);

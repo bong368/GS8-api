@@ -49,16 +49,7 @@ module.exports = {
      */
     register: function(req, res) {
 
-        var credentials = {
-            username: req.body.username,
-            password: req.body.password,
-            email: req.body.email,
-            phone: req.body.phone,
-            currency: req.body.currency,
-            bank_id: req.body.bank_id,
-            bank_account_number: req.body.bank_account_number,
-            bank_account_name: req.body.bank_account_name
-        }
+        var credentials = requestService.only(['username', 'password', 'email', 'phone', 'currency', 'bank_id', 'bank_account_number', 'bank_account_name'], req);
 
         Users.create(credentials).exec(function(err, user) {
             if (err) {
@@ -66,14 +57,36 @@ module.exports = {
                 if (err.code == 'E_VALIDATION') {
                     return res.json(err.status, {
                         result: false,
-                        data: err.Errors
+                        data: err.Errors || {email: err.invalidAttributes.users_email_unique }
                     });
-                } else {
-                    console.log(err.code);
-                    return;
                 }
+                console.log(err);
+                return;
             }
             if (user) {
+                async.parallel({
+                        sendWelcomeMail: function(callback) {
+                            mailService.sendWelcomeEmail(user)
+                                .then(function (response) {
+                                    callback(null, response);
+                                })
+                                .catch(function (error) {
+                                    callback(null, error);
+                                })
+                        },
+                        syncAccount: function(callback) {
+                            grossApiGameService.syncAccount(user)
+                                .then(function (response) {
+                                    callback(null, response);
+                                })
+                                .catch(function (error) {
+                                    callback(null, error);
+                                })
+                        }
+                    },
+                    function(err, results) {
+                        console.log(JSON.stringify(results, null, 4));
+                    });
                 res.json({
                     token: tokenService.generate({ sid: user.id })
                 });
@@ -115,14 +128,14 @@ module.exports = {
                 return Users.hashPassword(ticket.new_password);
 
             })
-            .then(function (password) {
+            .then(function(password) {
 
                 return Users.update({
                     username: cred.username
                 }, {
                     password: password
                 })
-                
+
             })
             .then(function(user) {
                 res.json(200, { "result": "Change Password Success!" });
