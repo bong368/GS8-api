@@ -62,7 +62,7 @@
 		.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, $socketProvider) {
 
 			// Config Node server Url
-			$socketProvider.setUrl('ag.hokibet188.com:1888/' + 'member_area');
+			$socketProvider.setUrl('realtime.hokibet188.com:1888/' + 'member_area');
 
 			// Config api URL
 			$authProvider.loginUrl = 'api/authenticate';
@@ -180,6 +180,21 @@
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 '/js/app/controller/withdrawController.js'
+                            ])
+                        }]
+                    }
+				})
+
+				// Transfer routing
+				.state('transfer', {
+					url: '/transfer',
+					templateUrl: '/templates/page/transactions/transfer.html',
+					controller: 'TransferController',
+					authorization: true,
+					resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                '/js/app/controller/transferController.js'
                             ])
                         }]
                     }

@@ -9,7 +9,7 @@ module.exports = function(req, res, next) {
         })
         .then(function(deposit) {
             if (deposit) {
-                return res.json(401, { error: 'Please wait before processing your ticket' });
+                return res.json(401, { error: 'Pending transaction exists' });
             }
             next();
         })

@@ -16,6 +16,7 @@ module.exports = {
 
         var ticket = req.body;
             cred = undefined;
+            response = undefined;
 
         tokenService.parse(req)
             .then(function(user) {
@@ -25,6 +26,7 @@ module.exports = {
             })
             .then(function (withdrawn) {
 
+                response = withdrawn;
                 return Users.update({
                     username: cred.username
                 },{
@@ -32,7 +34,8 @@ module.exports = {
                 })
             })
             .then(function (user) {
-                res.json(200, { result: true });
+                response = _.merge(response, {created_at: new Date().toLocaleString()});
+                res.json(200, response);
             })
     },
 

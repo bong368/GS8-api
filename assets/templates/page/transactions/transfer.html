@@ -1,0 +1,24 @@
+<div class="container main-content">
+    <div class="col-md-offset-1 col-md-10">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="row">
+                    <creditinfo></creditinfo>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-1">
+                <div class="row">
+                    <div class="col-md-offset-1">
+                        <h3>{{ 'TRANSFER' | translate }}</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="changeToTab(tab)" class="col-md-6">
+                        <label>{{tab.title}}</label>
+                    </div>
+                </div>
+                <div ng-include="currentTab"></div>
+            </div>
+        </div>
+    </div>
+</div>
