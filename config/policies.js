@@ -43,6 +43,11 @@ module.exports.policies = {
     'TestController': {
         '*': true
     },
+
+    'WftController': {
+        'signin': true
+    },
+    
     'EmailController': {
         '*': true
     }
