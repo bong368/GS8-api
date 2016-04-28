@@ -10,7 +10,12 @@ var Curl = require('node-libcurl').Curl;
     apiWft = {
         url: 'http://hapi.bm.1sgames.com/api.aspx',
         agent: 'p@yq',
-        secret: '9tkf9kdkdf'
+        secret: '9tkf9kdkdf',
+        signinHost: 'sport2.eg.1sgames.com',
+        anonymousMode: {
+            username: 'anonymous',
+            signinHost: 'odds.sn.1sgames.com'
+        }
     }
 
 module.exports = {
@@ -32,7 +37,18 @@ module.exports = {
         var parameter = {
             username: username,
             action: 'login',
-            host: 'sport2.eg.1sgames.com',
+            host: apiWft.signinHost,
+            lang: 'EN-US'
+        }
+        return execWftApi(parameter);
+    },
+
+    // Signin with default account (anonymous)
+    anonymousMode: function () {
+        var parameter = {
+            username: apiWft.anonymousMode.username,
+            action: 'login',
+            host: apiWft.anonymousMode.signinHost,
             lang: 'EN-US'
         }
         return execWftApi(parameter);
@@ -75,7 +91,7 @@ var execWftApi = function(parameter) {
         curl.setOpt('URL', apiWft.url + query);
 
         curl.on('end', function(statusCode, body, headers) {
-
+            //console.log(body);
             var xml = body.replace(/&/g, "&amp;");
 
             parser.parseString(xml, function(err, result) {

@@ -12,17 +12,17 @@
         $scope.ini = function() {
 
             $scope.tabs = [{
-                title: 'Transfer from main balance to game',
-                url: '/templates/components/transfer/mainToGame.html'
+                title: 'Main balance to game',
+                url: '/templates/page/transactions/transferMainToGame.html'
             }, {
-                title: 'Transfer from game to main balance',
-                url: '/templates/components/transfer/GameToMain.html'
+                title: 'Game to main balance',
+                url: '/templates/page/transactions/transferGameToMain.html'
             }];
 
-            $scope.currentTab = '/templates/components/transfer/mainToGame.html';
+            $scope.currentTab = '/templates/page/transactions/transferMainToGame.html';
 
             $scope.changeToTab = function(tab) {
-                $scope.currentTab = tab.url;
+                $scope.currentTab = tab;
             }
         }
 

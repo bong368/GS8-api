@@ -50,47 +50,24 @@ module.exports = {
     register: function(req, res) {
 
         var credentials = requestService.only(['username', 'password', 'email', 'phone', 'currency', 'bank_id', 'bank_account_number', 'bank_account_name'], req);
-
+        self = this;
         Users.create(credentials).exec(function(err, user) {
             if (err) {
                 // If these error from validation
                 if (err.code == 'E_VALIDATION') {
-                    return res.json(err.status, {
+                    res.json(err.status, {
                         result: false,
-                        data: err.Errors || {email: err.invalidAttributes.users_email_unique }
+                        data: err.Errors || { email: err.invalidAttributes.users_email_unique }
                     });
                 }
-                console.log(err);
-                return;
             }
             if (user) {
-                async.parallel({
-                        sendWelcomeMail: function(callback) {
-                            mailService.sendWelcomeEmail(user)
-                                .then(function (response) {
-                                    callback(null, response);
-                                })
-                                .catch(function (error) {
-                                    callback(null, error);
-                                })
-                        },
-                        syncAccount: function(callback) {
-                            grossApiGameService.syncAccount(user)
-                                .then(function (response) {
-                                    callback(null, response);
-                                })
-                                .catch(function (error) {
-                                    callback(null, error);
-                                })
-                        }
-                    },
-                    function(err, results) {
-                        console.log(JSON.stringify(results, null, 4));
-                    });
+                seft.syncAccount(user);
                 res.json({
                     token: tokenService.generate({ sid: user.id })
                 });
             }
+            res.json(401, {result: false});
         });
     },
 
@@ -141,4 +118,38 @@ module.exports = {
                 res.json(200, { "result": "Change Password Success!" });
             })
     },
+
+    /**
+     * Sync Account and send welcome mail after signup
+     *
+     * @param  user
+     * @return console
+     */
+    syncAccount: function(user) {
+        async.parallel({
+                // Send welcome mail first
+                sendWelcomeMail: function(callback) {
+                    mailService.sendWelcomeEmail(user)
+                        .then(function(response) {
+                            callback(null, response);
+                        })
+                        .catch(function(error) {
+                            callback(null, error);
+                        })
+                },
+                // Sync Accoount
+                syncAccount: function(callback) {
+                    grossApiGameService.syncAccount(user)
+                        .then(function(response) {
+                            callback(null, response);
+                        })
+                        .catch(function(error) {
+                            callback(null, error);
+                        })
+                }
+            },
+            function(err, results) {
+                console.log(JSON.stringify(results, null, 4));
+            });
+    }
 };

@@ -25,10 +25,10 @@ module.exports = {
                         return resolve(cred);
                     })
                     .catch(function(err) {
-                        return resolve(cred);
+                        return reject(new Error({error: 'invalid_token'}));
                     })
             } else {
-                return reject('invalid_token');
+                return reject(new Error({error: 'invalid_token'}));
             }
         })
     },

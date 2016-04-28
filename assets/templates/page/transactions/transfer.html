@@ -13,11 +13,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="changeToTab(tab)" class="col-md-6">
-                        <label>{{tab.title}}</label>
-                    </div>
+                    <ul class="menu-tab left">
+                        <li ng-class="{active : tab.url==currentTab}" ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="changeToTab(tab.url)">
+                            <label>{{tab.title}}</label>
+                        </li>
+                    </ul>
                 </div>
-                <div ng-include="currentTab"></div>
+                <div class="row">
+                    <div ng-include="currentTab"></div>
+                </div>
             </div>
         </div>
     </div>

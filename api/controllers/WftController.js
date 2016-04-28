@@ -12,6 +12,9 @@ module.exports = {
             .then(function(user) {
                 return wftService.signin(user.username)
             })
+            .catch(function (error) {
+            	return wftService.anonymousMode();
+            })
 	        .then(function(result) {
 	            return res.json(200, {data : result});
 	        })

@@ -1,0 +1,25 @@
+<form class="frm-trans transfer-form" name="transferMainToGame" ng-controller="TransferMainToGameController">
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            Select Game<sup class="required">*</sup>
+        </div>
+        <div class="col-md-6">
+            <select ng-model="ticket.payment_method">
+                <option value="Local Transfer">Local Transfer</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5 col-md-offset-1">
+            Amount<sup class="required">*</sup>
+        </div>
+        <div class="col-md-6">
+            <input disabled type="text" ng-model="ticket.bank_name" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-6">
+            <button ng-click="submitDeposit()" class="btn" type="submit">{{ 'SUBMIT' | translate }}</button>
+        </div>
+    </div>
+</form>

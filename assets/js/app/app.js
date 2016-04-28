@@ -62,7 +62,7 @@
 		.config(function($stateProvider, $urlRouterProvider, $authProvider, $httpProvider, $provide, $socketProvider) {
 
 			// Config Node server Url
-			$socketProvider.setUrl('realtime.hokibet188.com:1888/' + 'member_area');
+			//$socketProvider.setUrl('realtime.hokibet188.com:1888/' + 'member_area');
 
 			// Config api URL
 			$authProvider.loginUrl = 'api/authenticate';
@@ -119,8 +119,6 @@
 				    }
 			    }
 			})
-
-			
 
 			$urlRouterProvider.otherwise('/home');
 			
@@ -194,7 +192,8 @@
 					resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                '/js/app/controller/transferController.js'
+                                '/js/app/controller/transferController.js',
+                                '/js/app/controller/transferMainToGameController.js'
                             ])
                         }]
                     }
@@ -278,7 +277,6 @@
 					url: '/game/sportsbook/wtf',
 					templateUrl: '/templates/page/game/sportsbook/WFT.html',
 					controller: 'WftController',
-					authorization: true,
 					resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([

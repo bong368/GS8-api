@@ -46,7 +46,8 @@ module.exports.routes = {
 
     // Gamesite Area (WFT Sporkbook)
     'GET /api/wft/signin': 'WftController.signin',
+    'GET /api/game/all/title': 'GameController.getTitle',
 
     // Test Api Area
-    'GET /api/test': 'EmailController.sendEmail',
+    'GET /api/test': 'TestController.test',
 };

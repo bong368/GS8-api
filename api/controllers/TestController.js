@@ -7,10 +7,10 @@
 
 module.exports = {
 	test: function (req, res) {
-		wftService.deposit(req, res, 'tester')
+		wftService.signup({username: 'anonymouus', currency: 'IDR'})
 		.then(function (result) {
-			console.log(result);
-			return res.json(401, result);
+			res.json(result);
+			
 		})
 		
 	}
