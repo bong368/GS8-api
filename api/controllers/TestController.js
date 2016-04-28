@@ -7,7 +7,7 @@
 
 module.exports = {
 	test: function (req, res) {
-		wftService.signup({username: 'anonymouus', currency: 'IDR'})
+		wftService.signup({username: 'anonymous', currency: 'IDR'})
 		.then(function (result) {
 			res.json(result);
 			

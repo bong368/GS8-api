@@ -84,6 +84,7 @@
 							if(rejection.data.error === value) {
 								
 								localStorage.removeItem('user');
+								localStorage.removeItem('satellizer_token');
 								$rootScope.authenticated = false;
 				                $rootScope.currentUser = null;
 								$state.go('home');
@@ -320,6 +321,7 @@
 
 	                    // Remove the authenticated user from local storage
 		                localStorage.removeItem('user');
+		                localStorage.removeItem('satellizer_token');
 
 		                // Flip authenticated to false so that we no longer
 		                // show UI elements dependant on the user being logged in

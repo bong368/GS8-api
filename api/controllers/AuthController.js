@@ -51,23 +51,34 @@ module.exports = {
 
         var credentials = requestService.only(['username', 'password', 'email', 'phone', 'currency', 'bank_id', 'bank_account_number', 'bank_account_name'], req);
         self = this;
+
         Users.create(credentials).exec(function(err, user) {
             if (err) {
                 // If these error from validation
                 if (err.code == 'E_VALIDATION') {
-                    res.json(err.status, {
+                    return res.json(err.status, {
                         result: false,
                         data: err.Errors || { email: err.invalidAttributes.users_email_unique }
                     });
                 }
             }
             if (user) {
-                seft.syncAccount(user);
-                res.json({
-                    token: tokenService.generate({ sid: user.id })
-                });
+                RoleUser.create({ user_id: user.id, role_id: 5 })
+                    .then(function(role) {
+                        
+                        if (role) {
+
+                            self.syncAccount(user);
+                            return res.json({
+                                token: tokenService.generate({ sid: user.id })
+                            });
+
+                        } else {
+                            return res.json(401, {result: false});
+                        }
+
+                    })
             }
-            res.json(401, {result: false});
         });
     },
 
@@ -81,7 +92,7 @@ module.exports = {
 
         tokenService.parse(req)
             .then(function(user) {
-                res.json(200, { user: user });
+                return res.json(200, { user: user });
             })
             .catch(function(err) {
                 return res.json(401, { error: 'token_invalid' });
