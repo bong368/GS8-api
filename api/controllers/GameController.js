@@ -6,6 +6,8 @@
  */
 
 module.exports = {
-	
+	getTitle: function (req, res) {
+		res.json(200, grossApiGameService.getTitle());
+	}
 };
 

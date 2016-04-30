@@ -97,4 +97,11 @@
         border: 1px solid $border;
         padding: 15px;
     }
+    .input-group-addon {
+        background-color: $color_kabul_approx;
+        border-color: $border;
+        color: $color_silver_rust_approx;
+        font-size: 12px;
+        padding: 6px;
+    }
 }

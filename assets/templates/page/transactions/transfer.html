@@ -9,18 +9,46 @@
             <div class="col-md-6 col-md-offset-1">
                 <div class="row">
                     <div class="col-md-offset-1">
-                        <h3>{{ 'TRANSFER' | translate }}</h3>
+                        <h3>{{ 'BALANCE_TRANSFER' | translate }}</h3>
                     </div>
                 </div>
                 <div class="row">
-                    <ul class="menu-tab left">
-                        <li ng-class="{active : tab.url==currentTab}" ng-repeat="tab in tabs" ng-class="{active:isActiveTab(tab.url)}" ng-click="changeToTab(tab.url)">
-                            <label>{{tab.title}}</label>
-                        </li>
-                    </ul>
-                </div>
-                <div class="row">
-                    <div ng-include="currentTab"></div>
+                    <form class="frm-trans transfer-form" name="transferMainToGame">
+                        <div class="row">
+                            <div class="col-md-5 col-md-offset-1">
+                                Transfer From: <sup class="required">*</sup>
+                            </div>
+                            <div class="col-md-6">
+                                <select ng-change="changeTransferFrom(ticket.origin)" ng-model="ticket.origin" ng-options="transferFrom as transferFrom for transferFrom in transferFroms">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 col-md-offset-1">
+                                Transfer To: <sup class="required">*</sup>
+                            </div>
+                            <div class="col-md-6">
+                                <select ng-model="ticket.target" ng-options="transferTo as transferTo for transferTo in transferTos">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 col-md-offset-1">
+                                Amount<sup class="required">*</sup>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group col-md-12">
+                                    <span class="input-group-addon">{{currentUser.currency}}</span>
+                                    <input class="form-control" type="text" ng-model="ticket.amount" placeholder="Amount">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-6">
+                                <button ng-click="submitTransfer()" class="btn" type="submit">{{ 'SUBMIT' | translate }}</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

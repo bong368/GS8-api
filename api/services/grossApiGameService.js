@@ -9,10 +9,10 @@ module.exports = {
 
     // Create new account WFT
     syncAccount: function(user) {
-        var gameSites = [wftService];
+        var games = this.initializationGames();
         var asyncTasks = [];
         // Loop through some Game Sites
-        gameSites.forEach(function(game) {
+        games.forEach(function(game) {
             // Push closure to tasks
             asyncTasks.push(function(callback) {
 
@@ -28,7 +28,7 @@ module.exports = {
 
         return new promise(function(resolve, reject) {
             async.parallel(asyncTasks, function(err, results) {
-                if (err) 
+                if (err)
                     return resolve({
                         result: true,
                         data: err
@@ -43,5 +43,33 @@ module.exports = {
         })
     },
 
+    // Get title all game
+    getTitle: function() {
+        var games = this.initializationGames();
+        var result = [];
+        // Loop through some Game Sites
+        games.forEach(function(game) {
+            result.push(game.getTitle());
+        })
+        return result;
+    },
 
+    getServiceFromName: function(title) {
+        var services = this.initializationGames();
+            apiService = undefined;
+
+        services.push(mainWalletService);
+        _.forEach(services, function(service, key) {
+            if (service.getTitle() == title) {
+                apiService = service;
+                return false
+            }
+        });
+        return apiService;
+    },
+
+    // Get all game
+    initializationGames: function() {
+        return [wftService];
+    }
 };

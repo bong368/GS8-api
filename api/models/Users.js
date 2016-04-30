@@ -69,7 +69,7 @@ module.exports = {
             maxLength: 30
         },
         main_balance: {
-            type: 'string',
+            type: 'float',
         },
 
 

@@ -126,7 +126,7 @@ module.exports = {
 
             })
             .then(function(user) {
-                res.json(200, { "result": "Change Password Success!" });
+                return res.json(200, { "result": "Change Password Success!" });
             })
     },
 

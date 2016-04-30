@@ -8,6 +8,7 @@ var Curl = require('node-libcurl').Curl;
     queryString = require('query-string');
     promise = require('bluebird');
     apiWft = {
+        title: 'WFT Sportsbook',
         url: 'http://hapi.bm.1sgames.com/api.aspx',
         agent: 'p@yq',
         secret: '9tkf9kdkdf',
@@ -64,16 +65,34 @@ module.exports = {
         return execWftApi(parameter);
     },
 
-    deposit: function(username) {
+    // Deposit to WFT
+    deposit: function(ticket) {
 
         var parameter = {
-            username: username,
+            username: ticket.username,
             action: 'deposit',
-            amount: 999999,
-            serial: 0001
+            amount: ticket.amount,
+            serial: ticket.id
         }
         return execWftApi(parameter);
     },
+
+    // Withdrawn to WFT
+    withdrawn: function(ticket) {
+
+        var parameter = {
+            username: ticket.username,
+            action: 'withdraw',
+            amount: ticket.amount,
+            serial: ticket.id
+        }
+        return execWftApi(parameter);
+    },
+
+    // Return title of game
+    getTitle: function () {
+        return apiWft.title;
+    }
 };
 
 var execWftApi = function(parameter) {

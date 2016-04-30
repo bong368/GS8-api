@@ -39,6 +39,7 @@ module.exports.routes = {
     // Transaction Area
     'PUT /api/cashier/deposit': 'DepositsController.create',
     'PUT /api/cashier/withdrawn': 'WithdrawnsController.create',
+    'PUT /api/cashier/transfer': 'TransfersController.create',
 
     // Report Area
     'POST /api/transaction/report/deposit': 'DepositsController.index',
@@ -46,7 +47,7 @@ module.exports.routes = {
 
     // Gamesite Area (WFT Sporkbook)
     'GET /api/wft/signin': 'WftController.signin',
-    //'GET /api/game/all/title': 'GameController.getTitle',
+    'GET /api/game/all/title': 'GameController.getTitle',
 
     // Test Api Area
     'GET /api/test': 'TestController.test',

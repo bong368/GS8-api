@@ -37,8 +37,10 @@
         .controller('slideController', function($scope) {
 
             $scope.mainSlides = [
-                {src: '/images/slide/slide1_extra bonus.jpg'},
-                {src: '/images/slide/slide 2-sportsbook.jpg'}
+                {src: '/images/slide/slide1-extrabonus-indo.jpg'},
+                {src: '/images/slide/slide2-sportsbook-indo.jpg'},
+                {src: '/images/slide/slide3-live casino-indo.jpg'},
+                {src: '/images/slide/slide4-slotgames-indo.jpg'}
             ];
 
             $scope.promoTopSlides = [

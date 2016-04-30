@@ -193,8 +193,7 @@
 					resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                '/js/app/controller/transferController.js',
-                                '/js/app/controller/transferMainToGameController.js'
+                                '/js/app/controller/transaction/transferController.js',
                             ])
                         }]
                     }
