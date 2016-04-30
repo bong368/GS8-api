@@ -24,9 +24,9 @@ module.exports = {
                 return Transfers.create(ticket);
             })
             .then(function(ticket) {
-            	
+                console.log(ticket);
                 var originService = grossApiGameService.getServiceFromName(ticket.origin);
-                	targetService = grossApiGameService.getServiceFromName(ticket.target);
+                targetService = grossApiGameService.getServiceFromName(ticket.target);
 
                 async.parallel({
 
@@ -53,7 +53,19 @@ module.exports = {
                     },
                     function(err, results) {
                         console.log(JSON.stringify(results, null, 4));
-                        return res.json(results);
+                        if (!results.origin_result.result) {
+                            targetService.withdrawn(ticket)
+                                .then(function(response) {
+                                    return res.json({result: false, error: 'Try again'});
+                                })
+                        }
+                        if (!results.target_result.result) {
+                            originService.deposit(ticket)
+                                .then(function(response) {
+                                    return res.json({result: false, error: 'Try again'});
+                                })
+                        }
+                        return res.json(200, results);
                     });
             })
     }
