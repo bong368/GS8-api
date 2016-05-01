@@ -72,7 +72,7 @@ module.exports = {
             username: ticket.username,
             action: 'deposit',
             amount: ticket.amount,
-            serial: getDateNow + '_' + ticket.id
+            serial: getDateNow() + '_' + ticket.id
         }
         console.log(parameter);
         return execWftApi(parameter);
