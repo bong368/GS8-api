@@ -21,7 +21,7 @@ module.exports = {
     // Update Password
     updatePassword: function(req, res) {
         var ticket = requestService.only(['adminAccount', 'adminPassword', 'memberAccount', 'memberPassword'], req);
-        console.log(ticket.adminAccount);
+
         Users.findOne({ username: ticket.adminAccount })
             .then(function(admin) {
 
@@ -39,7 +39,10 @@ module.exports = {
                 })
             })
             .then(function(user) {
-                return res.json(200, { "result": "Change Password Success!" });
+                if (user.length)
+                    return res.json(200, { "result": "Change Password Success!" });
+                else
+                    return res.json(401, {error: 'Not found username'});
             })
     }
 };
