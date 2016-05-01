@@ -57,12 +57,12 @@ module.exports = {
                         if (!results.origin_result.result) {
                             targetService.withdrawn(ticket)
                                 .then(function(response) {
-                                    return res.json({result: false, error: 'Please, Try again!'});
+                                    return res.json(401, {error: 'Please, Try again!'});
                                 })
                         } else if (!results.target_result.result) {
                             originService.deposit(ticket)
                                 .then(function(response) {
-                                    return res.json({result: false, error: 'Please, Try again!'});
+                                    return res.json(401, {error: 'Please, Try again!'});
                                 })
                         } else
                         	return res.json(200, results);
