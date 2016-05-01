@@ -52,7 +52,7 @@ module.exports = {
                         }
                     },
                     function(err, results) {
-
+                    	console.log(results);
                     	// Rollback if one thread become fail
                         if (!results.origin_result.result) {
                             targetService.withdrawn(ticket)
