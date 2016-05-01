@@ -4,20 +4,20 @@
  * @description :: Server-side logic for managing WFT API
  */
 var Curl = require('node-libcurl').Curl;
-    xml2js = require('xml2js');
-    queryString = require('query-string');
-    promise = require('bluebird');
-    apiWft = {
-        title: 'WFT Sportsbook',
-        url: 'http://hapi.bm.1sgames.com/api.aspx',
-        agent: 'p@yq',
-        secret: '9tkf9kdkdf',
-        signinHost: 'sport2.eg.1sgames.com',
-        anonymousMode: {
-            username: 'anonymous',
-            signinHost: 'odds.sn.1sgames.com'
-        }
+xml2js = require('xml2js');
+queryString = require('query-string');
+promise = require('bluebird');
+apiWft = {
+    title: 'WFT Sportsbook',
+    url: 'http://hapi.bm.1sgames.com/api.aspx',
+    agent: 'p@yq',
+    secret: '9tkf9kdkdf',
+    signinHost: 'sport2.eg.1sgames.com',
+    anonymousMode: {
+        username: 'anonymous',
+        signinHost: 'odds.sn.1sgames.com'
     }
+}
 
 module.exports = {
 
@@ -45,7 +45,7 @@ module.exports = {
     },
 
     // Signin with default account (anonymous)
-    anonymousMode: function () {
+    anonymousMode: function() {
         var parameter = {
             username: apiWft.anonymousMode.username,
             action: 'login',
@@ -72,7 +72,7 @@ module.exports = {
             username: ticket.username,
             action: 'deposit',
             amount: ticket.amount,
-            serial: ticket.id
+            serial: getDateNow + '_' + ticket.id
         }
         return execWftApi(parameter);
     },
@@ -90,7 +90,7 @@ module.exports = {
     },
 
     // Return title of game
-    getTitle: function () {
+    getTitle: function() {
         return apiWft.title;
     }
 };
@@ -99,13 +99,13 @@ var execWftApi = function(parameter) {
     return new promise(function(resolve, reject) {
 
         var curl = new Curl();
-            parser = new xml2js.Parser({ explicitArray: false });
-            credential = {
-                secret: apiWft.secret,
-                agent: apiWft.agent,
-            }
-            parameter = _.merge(parameter, credential);
-            query = '?' + queryString.stringify(parameter);
+        parser = new xml2js.Parser({ explicitArray: false });
+        credential = {
+            secret: apiWft.secret,
+            agent: apiWft.agent,
+        }
+        parameter = _.merge(parameter, credential);
+        query = '?' + queryString.stringify(parameter);
 
         curl.setOpt('URL', apiWft.url + query);
 
@@ -134,4 +134,20 @@ var execWftApi = function(parameter) {
         curl.on('error', curl.close.bind(curl));
         curl.perform();
     })
+}
+
+var getDateNow() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+
+    today = mm + dd ;
 }

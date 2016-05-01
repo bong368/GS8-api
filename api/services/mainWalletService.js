@@ -64,7 +64,7 @@ module.exports = {
         return new promise(function(resolve, reject) {
             Users.findOne({ username: username })
                 .then(function(cred) {
-                    console.log(cred);
+                    
                     return resolve({
                         result: true,
                         title: mainWallet.title,
