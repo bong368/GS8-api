@@ -150,5 +150,5 @@ var getDateNow = function() {
         mm = '0' + mm
     }
 
-    today = mm + dd ;
+    return today = mm + dd ;
 }
