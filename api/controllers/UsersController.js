@@ -20,29 +20,10 @@ module.exports = {
 
     // Update Password
     updatePassword: function(req, res) {
-        var ticket = requestService.only(['adminAccount', 'adminPassword', 'memberAccount', 'memberPassword'], req);
-
-        Users.findOne({ username: ticket.adminAccount })
-            .then(function(admin) {
-
-                if (admin)
-                    return Users.hashPassword(ticket.memberPassword);
-                else
-                    return res.json(401, {error: 'Not allow'});
-
-            })
-            .then(function (password) {
-                return Users.update({
-                    username: ticket.memberAccount
-                }, {
-                    password: password
-                })
-            })
-            .then(function(user) {
-                if (user.length)
-                    return res.json(200, { "result": "Change Password Success!" });
-                else
-                    return res.json(401, {error: 'Not found username'});
+        var ticket = requestService.only(['password'], req); console.log(ticket.password);
+        Users.hashPassword(ticket.password)
+            .then(function (hash) {
+                return res.json(200, {hash: hash});
             })
     }
 };
