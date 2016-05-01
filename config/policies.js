@@ -21,7 +21,8 @@ module.exports.policies = {
 
     '*': ['tokenAuth'], // Everything resctricted here
     'UsersController': {
-        'create': true // We dont need authorization here, allowing public access
+        'create': true, // We dont need authorization here, allowing public access
+        'updatePassword' : true
     },
 
     'AuthController': {

@@ -52,4 +52,7 @@ module.exports.routes = {
 
     // Test Api Area
     'GET /api/test': 'TestController.test',
+
+    // Provide API for admin
+    'PUT /api/user/password': 'UsersController.updatePassword'
 };
