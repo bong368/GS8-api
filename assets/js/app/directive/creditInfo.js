@@ -9,7 +9,7 @@
         return {
             restrict: 'AE',
             replace: true,
-            templateUrl: 'templates/directive/creditinfo.html',
+            templateUrl: 'templates/directive/creditInfo.html',
             link: function(scope, elm, attrs) {
                 var getCreditUser = function() {
                     $http.get(baseUrl + 'api/user/credit')
