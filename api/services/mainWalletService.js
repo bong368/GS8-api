@@ -58,12 +58,13 @@ module.exports = {
         return mainWallet.title;
     },
 
-    // Get credit user from WFT
+    // Get credit user from main wallet
     getBalance: function(username) {
 
         return new promise(function(resolve, reject) {
             Users.findOne({ username: username })
                 .then(function(cred) {
+                    console.log(red);
                     return resolve({
                         result: true,
                         title: mainWallet.title,
