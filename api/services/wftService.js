@@ -74,6 +74,7 @@ module.exports = {
             amount: ticket.amount,
             serial: getDateNow + '_' + ticket.id
         }
+        console.log(parameter);
         return execWftApi(parameter);
     },
 
