@@ -72,7 +72,7 @@ module.exports = {
             username: ticket.username,
             action: 'deposit',
             amount: ticket.amount,
-            serial: getDateNow() + '_' + ticket.id
+            serial: datetimeService.getmmdd() + 'DP' + ticket.id
         }
         console.log(parameter);
         return execWftApi(parameter);
@@ -85,7 +85,7 @@ module.exports = {
             username: ticket.username,
             action: 'withdraw',
             amount: ticket.amount,
-            serial: ticket.id
+            serial: datetimeService.getmmdd() + 'WD' + ticket.id
         }
         return execWftApi(parameter);
     },
@@ -137,18 +137,3 @@ var execWftApi = function(parameter) {
     })
 }
 
-var getDateNow = function() {
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-
-    if (dd < 10) {
-        dd = '0' + dd
-    }
-
-    if (mm < 10) {
-        mm = '0' + mm
-    }
-
-    return today = mm + dd ;
-}
