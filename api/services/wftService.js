@@ -117,11 +117,13 @@ var execWftApi = function(parameter) {
                 if (result.response.errcode == 0)
                     return resolve({
                         result: true,
+                        title: apiWft.title,
                         data: result.response.result
                     });
                 else
                     return resolve({
                         result: false,
+                        title: apiWft.title,
                         error: result.response.errtext
                     });
 

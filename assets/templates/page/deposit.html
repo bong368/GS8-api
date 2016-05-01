@@ -115,7 +115,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" ng-if="deposit.bonus_info == null || deposit.bonus_info == ''">
+                    <div class="row" ng-if="currentUser.bonus_info == null || currentUser.bonus_info == ''">
                         <div class="col-md-11 col-md-offset-1">
                             <input type="checkbox" ng-model="deposit.extra_bonus">
                             <span>{{ 'EXTRA' | translate }}</span>

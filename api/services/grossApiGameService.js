@@ -54,9 +54,46 @@ module.exports = {
         return result;
     },
 
+    // Get balance
+    getBalance: function(username) {
+        var games = this.initializationGames();
+        games.push(mainWalletService);
+        var asyncTasks = [];
+        // Loop through some Game Sites
+        games.forEach(function(game) {
+            // Push closure to tasks
+            asyncTasks.push(function(callback) {
+
+                game.getBalance(username)
+                    .then(function(response) {
+                        callback(null, response);
+                    })
+                    .catch(function(error) {
+                        callback(null, error);
+                    })
+            });
+        });
+
+        return new promise(function(resolve, reject) {
+            async.parallel(asyncTasks, function(err, results) {
+                if (err)
+                    return resolve({
+                        result: true,
+                        data: err
+                    });
+                else
+                    return resolve({
+                        result: true,
+                        data: results
+                    });
+            });
+
+        })
+    },
+
     getServiceFromName: function(title) {
         var services = this.initializationGames();
-            apiService = undefined;
+        apiService = undefined;
 
         services.push(mainWalletService);
         _.forEach(services, function(service, key) {

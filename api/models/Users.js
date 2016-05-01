@@ -71,6 +71,9 @@ module.exports = {
         main_balance: {
             type: 'float',
         },
+        bonus_info: {
+            type: 'string',
+        },
 
 
         // We don't wan't to send back encrypted password either

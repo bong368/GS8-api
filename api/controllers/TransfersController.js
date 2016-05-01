@@ -52,20 +52,20 @@ module.exports = {
                         }
                     },
                     function(err, results) {
-                        console.log(JSON.stringify(results, null, 4));
+
+                    	// Rollback if one thread become fail
                         if (!results.origin_result.result) {
                             targetService.withdrawn(ticket)
                                 .then(function(response) {
-                                    return res.json({result: false, error: 'Try again'});
+                                    return res.json({result: false, error: 'Please, Try again!'});
                                 })
-                        }
-                        if (!results.target_result.result) {
+                        } else if (!results.target_result.result) {
                             originService.deposit(ticket)
                                 .then(function(response) {
-                                    return res.json({result: false, error: 'Try again'});
+                                    return res.json({result: false, error: 'Please, Try again!'});
                                 })
-                        }
-                        return res.json(200, results);
+                        } else
+                        	return res.json(200, results);
                     });
             })
     }

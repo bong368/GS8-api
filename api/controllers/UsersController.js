@@ -6,19 +6,15 @@
  */
 
 module.exports = {
-    create: function(req, res) {
-        if (req.body.password !== req.body.confirmPassword) {
-            return res.json(401, { err: 'Password doesn\'t match, What a shame!' });
-        }
-        Users.create(req.body).exec(function(err, users) {
-            if (err) {
-                return res.json(err.status, { err: err });
-            }
-            // If user created successfuly we return user and token as response
-            if (users) {
-                // NOTE: payload is { id: user.id}
-                res.json(200, { user: users, token: jwtokenService.issue({ id: users.id }) });
-            }
-        });
+    getCreditUserInfo: function(req, res) {
+        var ticket = req.body;
+
+        tokenService.parse(req)
+            .then(function(user) {
+                return grossApiGameService.getBalance(user.username)
+            })
+            .then(function (results) {
+                return res.json(results);
+            })
     }
 };

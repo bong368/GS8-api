@@ -56,7 +56,9 @@
 
             $http(req)
                 .then(function(response) {
-                    
+                    SweetAlert.swal("Thanks You!", 'Your ticket has been processed', "success");
+                    $rootScope.$broadcast('creditUserInfo:update');
+                    $rootScope.$broadcast('credit:update');
                     
                 }, function(error) {
                     SweetAlert.swal("Sorry!", error.data.error, "error");

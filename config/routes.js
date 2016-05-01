@@ -31,6 +31,7 @@ module.exports.routes = {
     'POST /api/authenticate/create': 'AuthController.register',
     'GET /api/authenticate/user': 'AuthController.user',
     'PUT /api/authenticate/password/reset': 'AuthController.changePassword',
+    'GET /api/user/credit': 'UsersController.getCreditUserInfo',
 
     // Banking Area
     'GET /api/banking/all': 'BankingController.index',

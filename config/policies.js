@@ -33,11 +33,15 @@ module.exports.policies = {
     },
 
     'DepositsController': {
-    	'create': ['requiredPassword', 'limitDeposit', 'pendingDeposit']
+    	'create': ['requiredPassword', 'limitDeposit', 'pendingDeposit', 'extraBonus', 'isIntAmount']
     },
 
     'WithdrawnsController': {
-    	'create': ['requiredPassword', 'limitWithdrawn', 'overAmount']
+    	'create': ['requiredPassword', 'limitWithdrawn', 'overAmount', 'isIntAmount']
+    },
+
+    'TransfersController': {
+        'create': ['isIntAmount', 'overApiAmount']
     },
 
     'TestController': {

@@ -16,7 +16,7 @@
         line-height: 40px;
         font-size: 17px;
         background-color: rgba(0, 0, 0, 0.7);
-        border: 1px solid #a0a4ae;
+        border: 1px solid $border;
         span {
             padding: 3px 20px;
         }
@@ -103,5 +103,15 @@
         color: $color_silver_rust_approx;
         font-size: 12px;
         padding: 6px;
+    }
+    .credit-user-info{
+        width: 100%;
+        border: 1px solid $border;
+        tr{
+            line-height: 50px;
+            td, th{
+                padding: 0 15px;
+            }
+        }
     }
 }

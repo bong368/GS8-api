@@ -1,0 +1,19 @@
+<div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Current Balance</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="credit-user-info">
+                <tbody>
+                    <tr ng-repeat="wallet in wallets">
+                        <td>{{wallet.title}}</td>
+                        <td class="text-right">{{wallet.data | currency:' ' }}<sup> IDR</sup></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

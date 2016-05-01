@@ -21,7 +21,7 @@ module.exports = {
                         main_balance: parseFloat(cred.main_balance) + parseFloat(ticket.amount)
                     })
                 })
-                .then(function (deposit) {
+                .then(function(deposit) {
                     return resolve({
                         result: true,
                         data: deposit
@@ -42,7 +42,7 @@ module.exports = {
                         main_balance: parseFloat(cred.main_balance) - parseFloat(ticket.amount)
                     })
                 })
-                .then(function (withdrawn) {
+                .then(function(withdrawn) {
                     return resolve({
                         result: true,
                         data: withdrawn
@@ -59,12 +59,18 @@ module.exports = {
     },
 
     // Get credit user from WFT
-        getBalance: function(username) {
+    getBalance: function(username) {
 
-        var parameter = {
-            username: username,
-            action: 'balance'
-        }
-        return execWftApi(parameter);
+        return new promise(function(resolve, reject) {
+            Users.findOne({ username: username })
+                .then(function(cred) {
+                    return resolve({
+                        result: true,
+                        title: mainWallet.title,
+                        data: cred.main_balance
+                    })
+                })
+
+        })
     },
 };
