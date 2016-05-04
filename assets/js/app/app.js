@@ -151,13 +151,14 @@
             // Deposit routing
             .state('deposit', {
                 url: '/deposit',
-                templateUrl: '/templates/page/deposit.html',
+                templateUrl: '/templates/page/transactions/deposit.html',
                 controller: 'DepositController',
                 authorization: true,
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
-                            '/js/app/controller/depositController.js'
+                            '/js/app/controller/depositController.js',
+                            '/js/app/directive/creditInfo.js'
                         ])
                     }]
                 }
@@ -166,13 +167,14 @@
             // Withdraw routing
             .state('withdraw', {
                 url: '/withdraw',
-                templateUrl: '/templates/page/withdraw.html',
+                templateUrl: '/templates/page/transactions/withdraw.html',
                 controller: 'WithdrawController',
                 authorization: true,
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
-                            '/js/app/controller/withdrawController.js'
+                            '/js/app/controller/withdrawController.js',
+                            '/js/app/directive/creditInfo.js'
                         ])
                     }]
                 }
@@ -188,7 +190,7 @@
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
                             '/js/app/controller/transaction/transferController.js',
-                            '/js/app/directive/creditInfo.js',
+                            '/js/app/directive/creditInfo.js'
                         ])
                     }]
                 }

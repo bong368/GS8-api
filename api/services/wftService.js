@@ -74,7 +74,6 @@ module.exports = {
             amount: ticket.amount,
             serial: datetimeService.getmmdd() + 'DP' + ticket.id
         }
-        console.log(parameter);
         return execWftApi(parameter);
     },
 

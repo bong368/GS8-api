@@ -11,6 +11,7 @@
         // Run this function at initial
         $scope.ini = function() {
             $scope.getAllGame();
+            $scope.getBonus();
             $scope.mainWallet = 'Main Wallet';
         }
 
@@ -32,6 +33,20 @@
                         target: $scope.transferTos[0]
                     }
                     
+                }, function(error) {
+                    SweetAlert.swal("Sorry!", error.data.error, "error");
+                });
+        }
+
+        $scope.getBonus = function () {
+            var req = {
+                method: 'GET',
+                url: baseUrl + 'api/transfer/bonus'
+            }
+
+            $http(req)
+                .then(function(response) {
+                    $scope.bonus = response.data.data.bonus;
                 }, function(error) {
                     SweetAlert.swal("Sorry!", error.data.error, "error");
                 });

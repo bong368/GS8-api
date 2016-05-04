@@ -22,6 +22,12 @@ module.exports = {
         },
         target: {
             type: 'string'
+        },
+        origin_result: {
+            type: 'string'
+        },
+        target_result: {
+            type: 'string'
         }
     }
 };

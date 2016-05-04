@@ -8,8 +8,9 @@
 // We don't want to store password with out encryption
 var bcrypt = require('bcryptjs');
 var Promise = require('bluebird');
+var uniqueEmail = false;
 module.exports = {
- 
+
     schema: true,
 
     /**
@@ -20,59 +21,41 @@ module.exports = {
         created_at: {
             type: 'datetime'
         },
-        updated_at: {
+        updated_at: { 
             type: 'datetime'
         },
-        username: {
-            type: 'string',
-            required: true,
-            unique: true,
-            alphanumericdashed: true
+        username: { 
+            type: 'string', required: true, unique: true, alphanumericdashed: true
         },
         email: {
-            type: 'email',
-            required: true,
-            unique: true
+            type: 'email', required: true, uniqueEmail: true
         },
         password: {
-            type: 'string',
-            required: true,
-            password: true
+            type: 'string', required: true, password: true
         },
         phone: {
-            type: 'string',
-            required: true,
-            phone: true
+            type: 'string', required: true, phone: true, unique: true
         },
         currency: {
-            type: 'string',
-            required: true,
-            minLength: 2,
-            maxLength: 3
+            type: 'string', required: true, minLength: 2, maxLength: 3
         },
         bank_id: {
-            type: 'string',
-            required: true,
-            minLength: 1,
-            maxLength: 5
+            type: 'string', required: true, minLength: 1, maxLength: 5
         },
         bank_account_number: {
-            type: 'string',
-            required: true,
-            minLength: 10,
-            maxLength: 15
+            type: 'string', required: true, minLength: 10, maxLength: 15, unique: true
         },
         bank_account_name: {
-            type: 'string',
-            required: true,
-            minLength: 3,
-            maxLength: 30
+            type: 'string', required: true, minLength: 3, maxLength: 30
         },
         main_balance: {
-            type: 'float',
+            type: 'float'
         },
-        bonus_info: {
-            type: 'string',
+        user_bonus_id: {
+            type: 'integer'
+        },
+        welcome_bonus_yet: {
+            type: 'integer'
         },
 
 
@@ -84,11 +67,14 @@ module.exports = {
         }
     },
     types: {
-        phone: function (value) {
-            return _.isString(value) && value.length >= 6 && value.length < 15 && value.match(/[+]/)  && value.match(/[0-9]/);
+        phone: function(value) {
+            return _.isString(value) && value.length >= 6 && value.length < 15 && value.match(/[+]/) && value.match(/[0-9]/);
         },
         password: function(value) {
             return _.isString(value) && value.length >= 6 && value.match(/[a-z]/i) && value.match(/[0-9]/);
+        },
+        uniqueEmail: function(value) {
+            return uniqueEmail;
         }
     },
     /**
@@ -98,7 +84,7 @@ module.exports = {
         email: {
             required: 'Email is required',
             email: 'Provide valid email address',
-            unique: 'Email address is already taken',
+            uniqueEmail: 'Email address is already taken',
             regex: 'Email does not match format'
         },
         username: {
@@ -112,18 +98,28 @@ module.exports = {
         },
         phone: {
             required: 'Phone is required',
-            phone: 'Phone does not match format'
+            phone: 'Phone does not match format',
+            unique: 'Phone number is already taken',
         },
         bank_account_number: {
             required: 'Bank account number id is required',
             minLength: 'Bank account number must be at least 10 characters.',
-            maxLength: 'Bank account number may not be greater than 15 characters.'
+            maxLength: 'Bank account number may not be greater than 15 characters.',
+            unique: 'Account number is already taken',
         },
         bank_account_name: {
             required: 'Bank account name id is required',
             minLength: 'Bank account number must be at least 3 characters.',
             maxLength: 'Bank account number may not be greater than 30 characters.'
         }
+    },
+
+    beforeValidate: function(values, next) {
+        Users.findOne({ email: values.email })
+            .then(function (user) {
+                uniqueEmail = !user;
+                next();
+            })
     },
 
     /**
@@ -140,7 +136,7 @@ module.exports = {
         })
     },
 
-    hashPassword: function (password) {
+    hashPassword: function(password) {
         return new Promise(function(resolve, reject) {
             bcrypt.genSalt(10, function(err, salt) {
                 bcrypt.hash(password, salt, function(err, hash) {

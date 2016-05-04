@@ -41,6 +41,7 @@ module.exports.routes = {
     'PUT /api/cashier/deposit': 'DepositsController.create',
     'PUT /api/cashier/withdrawn': 'WithdrawnsController.create',
     'PUT /api/cashier/transfer': 'TransfersController.create',
+    'GET /api/transfer/bonus': 'BonusController.getTransferBonus',
 
     // Report Area
     'POST /api/transaction/report/deposit': 'DepositsController.index',
@@ -51,7 +52,7 @@ module.exports.routes = {
     'GET /api/game/all/title': 'GameController.getTitle',
 
     // Test Api Area
-    'GET /api/test': 'TestController.test',
+    'POST /api/test': 'TestController.test',
 
     // Provide API for admin
     'PUT /api/user/password': 'UsersController.updatePassword'

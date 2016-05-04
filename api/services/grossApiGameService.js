@@ -57,7 +57,7 @@ module.exports = {
     // Get balance
     getBalance: function(username) {
         var games = this.initializationGames();
-        games.push(mainWalletService);
+        games.unshift(mainWalletService);
         var asyncTasks = [];
         // Loop through some Game Sites
         games.forEach(function(game) {

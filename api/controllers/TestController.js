@@ -7,11 +7,10 @@
 
 module.exports = {
 	test: function (req, res) {
-		wftService.signup({username: 'anonymous', currency: 'IDR'})
-		.then(function (result) {
-			res.json(result);
-			
-		})
+		bonusService.getTransferBonus(req.body.username)
+			.then(function (bonus) {
+				return res.json({bonus: bonus});
+			})
 		
 	}
 };

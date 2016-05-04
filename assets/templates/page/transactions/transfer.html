@@ -41,6 +41,15 @@
                                 </div>
                             </div>
                         </div>
+                        <div ng-if="bonus" class="row">
+                            <div class="col-md-11 col-md-offset-1">
+                                <input type="checkbox" ng-model="ticket.bonus">
+                                <span class="upper">{{ bonus.title}} {{bonus.percentage * 100 + '%'}} Tranfer any time</span>
+                                <div class="ip-notice">
+                                    * I want to claim bonus with term and conditions. Rollover {{bonus.rolling_time}} Times
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6 col-md-offset-6">
                                 <button ng-click="submitTransfer()" class="btn" type="submit">{{ 'SUBMIT' | translate }}</button>

@@ -6,10 +6,14 @@
  */
 
 module.exports = {
+
+    // Get all wallet
     getCreditUserInfo: function(req, res) {
+        
         var ticket = req.body;
 
         tokenService.parse(req)
+
             .then(function(user) {
                 return grossApiGameService.getBalance(user.username)
             })
@@ -18,9 +22,11 @@ module.exports = {
             })
     },
 
-    // Update Password
+    // Update Password (only use for admin)
     updatePassword: function(req, res) {
-        var ticket = requestService.only(['password'], req); console.log(ticket.password);
+
+        var ticket = requestService.only(['password'], req);
+
         Users.hashPassword(ticket.password)
             .then(function (hash) {
                 return res.json(200, {hash: hash});
