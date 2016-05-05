@@ -7,7 +7,7 @@
 
 module.exports = {
 	test: function (req, res) {
-		bonusService.getTransferBonus(req.body.username)
+		grossApiGameService.getTurnOver('tester')
 			.then(function (bonus) {
 				return res.json({bonus: bonus});
 			})

@@ -92,6 +92,16 @@ module.exports = {
     // Return title of game
     getTitle: function() {
         return apiWft.title;
+    },
+
+    // Get turnover
+    getTurnOver: function(username) {
+        var parameter = {
+            username: username,
+            action: 'fetch',
+            method: 'getTurnOver'
+        }
+        return execWftApi(parameter);
     }
 };
 
@@ -118,7 +128,7 @@ var execWftApi = function(parameter) {
                     return resolve({
                         result: true,
                         title: apiWft.title,
-                        data: result.response.result
+                        data: adapterCurlResult(result.response.result, parameter.method)
                     });
                 else
                     return resolve({
@@ -136,3 +146,23 @@ var execWftApi = function(parameter) {
     })
 }
 
+var adapterCurlResult = function(result, method) {
+    if (method == 'getTurnOver') {
+        return getTurnOver(result.ticket);
+    } else
+        return result;
+}
+
+// Calculate Turn Over
+var getTurnOver = function(ticket) {
+    var exceptResults = ['P', 'D'];
+    var turnOver = 0;
+
+    _.forEach(ticket, function(value, key) {
+        if (exceptResults.indexOf(value.res) == -1) {
+            turnOver += parseInt(value.b);
+        }
+    });
+
+    return turnOver;
+}

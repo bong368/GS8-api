@@ -16,6 +16,8 @@ module.exports = {
 
         var self = this;
         ticket = requestService.only(['origin', 'target', 'amount', 'bonus'], req);
+        if (ticket.target == 'Main Wallet')
+            ticket.bonus = false;
 
         tokenService.parse(req)
             .then(function(user) {
@@ -38,11 +40,11 @@ module.exports = {
                 // Resolved bonus before transfer exec
                 if (ticket.bonus) {
                     bonusService.getTransferBonus(ticket.username)
-                        .then(function (bonus) {
+                        .then(function(bonus) {
                             ticket.bonus = bonus.bonus;
                             return self.asyncTransfer(originService, targetService, ticket, req, res);
                         })
-                } else 
+                } else
                     return self.asyncTransfer(originService, targetService, ticket, req, res);
             })
     },
@@ -82,7 +84,7 @@ module.exports = {
                 }
             },
             function(err, results) {
-                
+
                 self.logResultTransfer(err, results, ticket);
 
                 // Rollback if one thread become fail
@@ -100,11 +102,9 @@ module.exports = {
                             return res.json(401, { error: 'Please, Try again!' });
                         })
 
-                } else {
-
-                    self.updateBonusType(ticket);
-                    return res.json(200, results);
-                }
+                    // Transfer success, update bonus type
+                } else if (results.origin_result.result && results.target_result.result)
+                    return self.updateBonusType(ticket, res);
             });
     },
 
@@ -113,32 +113,51 @@ module.exports = {
 
         if (results) {
             Transfers.update({
-                id: ticket.id
-            }, {
-                origin_result: JSON.stringify(results.origin_result),
-                target_result: JSON.stringify(results.target_result)
-            })
-            .then(function (result) {
-                console.log(result);
-            })
+                    id: ticket.id
+                }, {
+                    origin_result: JSON.stringify(results.origin_result),
+                    target_result: JSON.stringify(results.target_result)
+                })
+                .then(function(result) {
+                    console.log(result);
+                })
         }
     },
 
     // Update bonus status
-    updateBonusType: function (ticket) {
+    updateBonusType: function(ticket, res) {
+
+        // If member claim bonus
         if (ticket.bonus) {
             var bonusAmount = parseInt(ticket.amount) + (ticket.amount * ticket.bonus.percentage);
-            var rollingAmount = ticket.bonus.rolling_time * (parseInt(ticket.amount) + bonusAmount);
-            var bonusLog = {
-                bonus_id: ticket.bonus.id,
-                turnover: 1,
-                bonus_amount: bonusAmount,
-                rolling_amount: rollingAmount
-            };
-            UserBonus.create(bonusLog)
-                .then(function (log) {
-                    console.log(log);
+            rollingAmount = ticket.bonus.rolling_time * (parseInt(ticket.amount) + bonusAmount);
+
+            grossApiGameService.getTurnOver(ticket.username)
+                .then(function(turnOvers) {
+
+                    var bonusLog = {
+                        bonus_id: ticket.bonus.id,
+                        turnover: turnOvers.data,
+                        bonus_amount: bonusAmount,
+                        rolling_amount: rollingAmount
+                    };
+                    return UserBonus.create(bonusLog);
                 })
-        }
+                .then(function(log) {
+
+                    var dataUpdateUser = { user_bonus_id: log.id };
+
+                    if (ticket.bonus.title = 'welcome')
+                        dataUpdateUser.welcome_bonus_yet = 1;
+
+                    return Users.update({
+                        username: ticket.username
+                    }, dataUpdateUser);
+                })
+                .then(function(user) {
+                    return res.json({ result: true });
+                })
+        } else
+            return res.json({ result: true });
     }
 };

@@ -42,7 +42,7 @@ module.exports.policies = {
     },
 
     'TransfersController': {
-        'create': ['isIntAmount', 'overApiAmount']
+        'create': ['isIntAmount', 'overApiAmount', 'meetTurnOverTransfer']
     },
 
     'TestController': {

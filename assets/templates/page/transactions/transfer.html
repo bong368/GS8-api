@@ -26,7 +26,7 @@
                                 Transfer To: <sup class="required">*</sup>
                             </div>
                             <div class="col-md-6">
-                                <select ng-model="ticket.target" ng-options="transferTo as transferTo for transferTo in transferTos">
+                                <select ng-change="changeTransferTarget(ticket.target)" ng-model="ticket.target" ng-options="transferTo as transferTo for transferTo in transferTos">
                                 </select>
                             </div>
                         </div>

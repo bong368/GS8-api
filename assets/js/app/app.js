@@ -376,6 +376,7 @@
 
             // Fire event transaction deposit accept
             $socket.on('transaction.deposit.accept', function(data) {
+                $rootScope.$broadcast('creditUserInfo:update');
                 updatedCurrentUser();
                 SweetAlert.swal("Thanks You!", "Your deposit ticket at " + data.created_at + " with " + data.amount + " " + data.currency + " has been approved", "success");
             })
@@ -387,12 +388,13 @@
 
             // Fire event transaction withdrawn accept
             $socket.on('transaction.withdrawn.accept', function(data) {
-                updatedCurrentUser();
                 SweetAlert.swal("Thanks You!", "Your withdrawn ticket at " + data.created_at + " with " + data.amount + " " + data.currency + " has been approved", "success");
             })
 
             // Fire event transaction withdrawn reject
             $socket.on('transaction.withdrawn.reject', function(data) {
+                $rootScope.$broadcast('creditUserInfo:update');
+                updatedCurrentUser();
                 SweetAlert.swal("Sorry!", "Your withdrawn ticket at " + data.created_at + " with " + data.amount + " " + data.currency + " has been rejected,  please contact admin for more details !", "error");
             })
         });
