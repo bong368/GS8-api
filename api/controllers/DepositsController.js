@@ -26,7 +26,8 @@ module.exports = {
                 return res.json(401, { error: 'Invalid token' });
             })
             .then(function (deposit) {
-                deposit = _.merge(deposit, {created_at: new Date().toLocaleString()});
+                var options = { hour12: false };
+                deposit = _.merge(deposit, {created_at: new Date().toLocaleString(options)});
             	res.json(200, deposit);
             })
     },

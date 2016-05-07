@@ -151,13 +151,13 @@
             // Deposit routing
             .state('deposit', {
                 url: '/deposit',
-                templateUrl: '/templates/page/transactions/deposit.html',
+                templateUrl: '/templates/page/transaction/deposit.html',
                 controller: 'DepositController',
                 authorization: true,
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
-                            '/js/app/controller/depositController.js',
+                            '/js/app/controller/transaction/depositController.js',
                             '/js/app/directive/creditInfo.js'
                         ])
                     }]
@@ -167,13 +167,13 @@
             // Withdraw routing
             .state('withdraw', {
                 url: '/withdraw',
-                templateUrl: '/templates/page/transactions/withdraw.html',
+                templateUrl: '/templates/page/transaction/withdraw.html',
                 controller: 'WithdrawController',
                 authorization: true,
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
-                            '/js/app/controller/withdrawController.js',
+                            '/js/app/controller/transaction/withdrawController.js',
                             '/js/app/directive/creditInfo.js'
                         ])
                     }]
@@ -220,7 +220,7 @@
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
-                            '/js/app/controller/depositReportController.js',
+                            '/js/app/controller/report/depositReportController.js',
                             '/bower_components/angularjs-datepicker/src/js/angular-datepicker.js',
                             '/bower_components/angularjs-datepicker/src/css/angular-datepicker.css',
                             '/js/app/service/DateTimeModule.js',
@@ -240,7 +240,7 @@
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
-                            '/js/app/controller/withdrawnReportController.js',
+                            '/js/app/controller/report/withdrawnReportController.js',
                             '/bower_components/angularjs-datepicker/src/js/angular-datepicker.js',
                             '/bower_components/angularjs-datepicker/src/css/angular-datepicker.css',
                             '/js/app/service/DateTimeModule.js',
