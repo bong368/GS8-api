@@ -82,7 +82,6 @@
                 .then(function(response) {
 
                     // Emit to node server
-                    $rootScope.$broadcast('credit:update');
                     response.data.extra_bonus = $scope.deposit.extra_bonus;
                     $socket.emit('transaction.deposit', response.data);
 

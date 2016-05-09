@@ -155,13 +155,10 @@ var adapterCurlResult = function(result, method) {
 
 // Calculate Turn Over
 var getTurnOver = function(ticket) {
-    var exceptResults = ['P', 'D'];
     var turnOver = 0;
 
     _.forEach(ticket, function(value, key) {
-        if (exceptResults.indexOf(value.res) == -1) {
-            turnOver += parseInt(value.b);
-        }
+        turnOver += parseInt(value.a);
     });
 
     return turnOver;
