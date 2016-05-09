@@ -183,7 +183,7 @@
             // Transfer routing
             .state('transfer', {
                 url: '/transfer',
-                templateUrl: '/templates/page/transactions/transfer.html',
+                templateUrl: '/templates/page/transaction/transfer.html',
                 controller: 'TransferController',
                 authorization: true,
                 resolve: {
