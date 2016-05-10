@@ -43,6 +43,9 @@ module.exports = {
         },
         status: {
             type: 'string'
+        },
+        bonus_amount: {
+            type: 'float'
         }
     }
 };

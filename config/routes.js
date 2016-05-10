@@ -42,6 +42,7 @@ module.exports.routes = {
     'PUT /api/cashier/withdrawn': 'WithdrawnsController.create',
     'PUT /api/cashier/transfer': 'TransfersController.create',
     'GET /api/transfer/bonus': 'BonusController.getTransferBonus',
+    'GET /api/deposit/bonus': 'BonusController.getDepositBonus',
 
     // Report Area
     'POST /api/transaction/report/deposit': 'DepositsController.index',

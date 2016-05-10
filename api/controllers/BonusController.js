@@ -15,6 +15,16 @@ module.exports = {
 			.then(function (bonus) {
 				return res.json({data: bonus});
 			})
+	},
+
+	getDepositBonus: function (req, res) {
+		tokenService.parse(req)
+			.then(function (user) {
+				return bonusService.getDepositBonus(user.username);
+			})
+			.then(function (bonus) {
+				return res.json({data: bonus});
+			})
 	}
 };
 

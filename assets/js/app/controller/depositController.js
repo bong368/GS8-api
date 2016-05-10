@@ -26,6 +26,8 @@
             $scope.bindTransactionLimit();
 
             $scope.bindBanking();
+
+            $scope.getBonus();
         }
 
 
@@ -49,6 +51,14 @@
                         account_number: value.account_number
                     }
                 }
+            });
+        }
+
+        $scope.getBonus = function () {
+            $http.get(baseUrl + 'api/deposit/bonus')
+
+            .then(function(response) {
+                $scope.bonus = response.data.data;
             });
         }
 

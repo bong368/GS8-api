@@ -12,16 +12,35 @@ module.exports = {
             Users.findOne({ username: username })
                 .then(function(user) {
 
-                    if (user.user_bonus_id)
+                    if (user.user_bonus_id || user.welcome_bonus_yet)
                     	return resolve({bonus: false});
 
-                    else if (user.welcome_bonus_yet) {
-                        Bonus.findOne({ title: 'loyalty' })
+                    // else if (user.welcome_bonus_yet) {
+                    //     Bonus.findOne({ title: 'loyalty' })
+                    //         .then(function(bonus) {
+                    //             return resolve({bonus: bonus});
+                    //         })
+                    else {
+                        Bonus.findOne({ title: 'welcome' })
                             .then(function(bonus) {
                                 return resolve({bonus: bonus});
                             })
-                    } else {
-                        Bonus.findOne({ title: 'welcome' })
+                    }
+                })
+        })
+    }, 
+
+    getDepositBonus: function (username) {
+        return new promise(function(resolve, reject) {
+
+            Deposits.findOne({ username: username })
+                .then(function(deposit) {
+
+                    if (deposit)
+                        return resolve({bonus: false});
+
+                    else {
+                        Bonus.findOne({ title: 'extra' })
                             .then(function(bonus) {
                                 return resolve({bonus: bonus});
                             })
