@@ -25,9 +25,25 @@
 
             $scope.bindTransactionLimit();
 
-            $scope.bindBanking();
+            $scope.bindBanking(); 
+
+            $scope.getBonus();
         }
 
+        // Get bonus type for client
+        $scope.getBonus = function() {
+            var req = {
+                method: 'GET',
+                url: baseUrl + 'api/deposit/bonus'
+            }
+
+            $http(req)
+                .then(function(response) {
+                    $scope.bonus = response.data.data.bonus;
+                }, function(error) {
+                    SweetAlert.swal("Sorry!", error.data.error, "error");
+                });
+        }
 
         // Bind banking
         $scope.bindBanking = function() {
