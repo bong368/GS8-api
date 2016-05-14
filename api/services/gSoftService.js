@@ -7,12 +7,12 @@ var Curl = require('node-libcurl').Curl;
 xml2js = require('xml2js');
 queryString = require('query-string');
 promise = require('bluebird');
-apiWft = {
-    title: 'WFT Sportsbook',
-    url: 'http://hapi.bm.1sgames.com/api.aspx',
+apiGSoft = {
+    title: 'GSoft Playtech',
+    url: 'http://api.pt.gsoft88.net/VMSWservices.aspx',
     agent: 'p@yq',
     secret: '9tkf9kdkdf',
-    signinHost: 'sport2.eg.1sgames.com',
+    signinHost: 'login.pt.gsoft88.net',
     anonymousMode: {
         username: 'anonymous',
         signinHost: 'odds.sn.1sgames.com'
@@ -25,9 +25,9 @@ module.exports = {
     signup: function(user) {
 
         var parameter = {
-            username: user.username,
-            action: 'create',
-            currency: user.currency
+            PlayerName: user.username,
+            PlayerPass: user.password,
+            Function: 'CreatePlayer'
         }
         return execWftApi(parameter);
     },
@@ -38,7 +38,7 @@ module.exports = {
         var parameter = {
             username: username,
             action: 'login',
-            host: apiWft.signinHost,
+            host: apiGSoft.signinHost,
             lang: 'EN-US'
         }
         return execWftApi(parameter);
@@ -57,9 +57,9 @@ module.exports = {
     // Signin with default account (anonymous)
     anonymousMode: function() {
         var parameter = {
-            username: apiWft.anonymousMode.username,
+            username: apiGSoft.anonymousMode.username,
             action: 'login',
-            host: apiWft.anonymousMode.signinHost,
+            host: apiGSoft.anonymousMode.signinHost,
             lang: 'EN-US'
         }
         return execWftApi(parameter);
@@ -101,7 +101,7 @@ module.exports = {
 
     // Return title of game
     getTitle: function() {
-        return apiWft.title;
+        return apiGSoft.title;
     },
 
     // Get turnover
@@ -121,29 +121,29 @@ var execWftApi = function(parameter) {
         var curl = new Curl();
         parser = new xml2js.Parser({ explicitArray: false });
         credential = {
-            secret: apiWft.secret,
-            agent: apiWft.agent,
+            LoginPass: apiGSoft.secret,
+            LoginID: apiGSoft.agent,
         }
         parameter = _.merge(parameter, credential);
         query = '?' + queryString.stringify(parameter);
 
-        curl.setOpt('URL', apiWft.url + query);
+        curl.setOpt('URL', apiGSoft.url + query);
 
         curl.on('end', function(statusCode, body, headers) {
-            //console.log(body);
+
             var xml = body.replace(/&/g, "&amp;");
 
             parser.parseString(xml, function(err, result) {
                 if (result.response.errcode == 0)
                     return resolve({
                         result: true,
-                        title: apiWft.title,
+                        title: apiGSoft.title,
                         data: adapterCurlResult(result.response.result, parameter.method)
                     });
                 else
                     return resolve({
                         result: false,
-                        title: apiWft.title,
+                        title: apiGSoft.title,
                         error: result.response.errtext
                     });
 

@@ -129,7 +129,7 @@ module.exports = {
 
         // If member claim bonus
         if (ticket.bonus) {
-            var bonusAmount = parseInt(ticket.amount) + (ticket.amount * ticket.bonus.percentage);
+            var bonusAmount = parseInt(ticket.amount) * ticket.bonus.percentage;
             rollingAmount = ticket.bonus.rolling_time * (parseInt(ticket.amount) + bonusAmount);
 
             grossApiGameService.getTurnOver(ticket.username)

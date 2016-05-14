@@ -53,7 +53,7 @@ module.exports.routes = {
     'GET /api/game/all/title': 'GameController.getTitle',
 
     // Test Api Area
-    'POST /api/test': 'TestController.test',
+    'POST /api/test': 'TestController.signUpGSoft',
 
     // Provide API for admin
     'PUT /api/user/password': 'UsersController.updatePassword'
