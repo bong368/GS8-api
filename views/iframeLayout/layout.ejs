@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+    <!--HEAD-->
+    <head>
+        <%- partial ('partials/head.ejs') %>
+    </head>
+    <!--HEAD END-->
+
+    <body ng-cloak>
+        <div class="container-fluid">
+
+            <div id="main" class="row">
+                <%- body %>
+            </div>
+
+            <footer class="row">
+                <!--FOOTER-->
+                <%- partial ('partials/footer.ejs') %>
+                <!--FOOTER END-->
+            </footer>
+
+        </div>
+    </body>
+</html>

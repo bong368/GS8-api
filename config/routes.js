@@ -26,6 +26,8 @@ module.exports.routes = {
         view: 'main'
     },
 
+    '/play-game': 'ViewController.playGame',
+
     // Authenticate Area 
     'POST /api/authenticate': 'AuthController.authenticate',
     'POST /api/authenticate/create': 'AuthController.register',
@@ -51,6 +53,8 @@ module.exports.routes = {
     // Gamesite Area (WFT Sporkbook)
     'GET /api/wft/signin': 'WftController.signin',
     'GET /api/game/all/title': 'GameController.getTitle',
+    'GET /api/slot/playtech': 'GSoftController.getAllGame',
+    'POST /api/playtech/signin': 'GSoftController.signin',
 
     // Test Api Area
     'POST /api/test': 'TestController.signUpGSoft',

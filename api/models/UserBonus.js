@@ -20,6 +20,18 @@ module.exports = {
         },
         rolling_amount: {
         	type: 'float'
+        },
+        username: {
+            type: 'string'
+        },
+        transaction_id: {
+            type: 'string'
+        },
+        status: {
+            type: 'string'
+        },
+        process_by: {
+            type: 'string'
         }
     }
 };

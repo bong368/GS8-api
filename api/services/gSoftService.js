@@ -4,14 +4,15 @@
  * @description :: Server-side logic for managing WFT API
  */
 var Curl = require('node-libcurl').Curl;
+md5 = require('md5');
 xml2js = require('xml2js');
 queryString = require('query-string');
 promise = require('bluebird');
 apiGSoft = {
     title: 'GSoft Playtech',
     url: 'http://api.pt.gsoft88.net/VMSWservices.aspx',
-    agent: 'p@yq',
-    secret: '9tkf9kdkdf',
+    agent: 'hokibet188idr',
+    secret: 'f3d627a92b9c',
     signinHost: 'login.pt.gsoft88.net',
     anonymousMode: {
         username: 'anonymous',
@@ -26,22 +27,34 @@ module.exports = {
 
         var parameter = {
             PlayerName: user.username,
-            PlayerPass: user.password,
+            PlayerPass: md5(user.password),
             Function: 'CreatePlayer'
         }
         return execWftApi(parameter);
     },
 
-    // Signin to WFT, API return a link to assign to iframe
-    signin: function(username) {
+    // Create new account WFT
+    updatePassword: function(user) {
 
         var parameter = {
-            username: username,
-            action: 'login',
-            host: apiGSoft.signinHost,
-            lang: 'EN-US'
+            PlayerName: user.username,
+            PlayerPass: md5(user.password),
+            Function: 'UpdatePlayerPassword'
         }
         return execWftApi(parameter);
+    },
+
+    // Signin to WFT, API return a link to assign to iframe
+    signin: function(username, password, gameCode) {
+        var parameter = {
+            username: 'tester' + '@HOKI',
+            password: md5(password),
+            gamecode: 'jb10p',
+            langcode: 'en',
+        }
+        apiGSoft.url= 'http://login.pt.gsoft88.net/createurl.aspx';
+        return execWftApi(parameter);
+
     },
 
     // Signout to WFT
@@ -70,7 +83,7 @@ module.exports = {
 
         var parameter = {
             username: username,
-            action: 'balance'
+            Function: 'CheckBalance'
         }
         return execWftApi(parameter);
     },
@@ -124,30 +137,38 @@ var execWftApi = function(parameter) {
             LoginPass: apiGSoft.secret,
             LoginID: apiGSoft.agent,
         }
-        parameter = _.merge(parameter, credential);
+        if (parameter.Function)
+            parameter = _.merge(parameter, credential);
+
         query = '?' + queryString.stringify(parameter);
+
+        console.log(apiGSoft.url + query);
 
         curl.setOpt('URL', apiGSoft.url + query);
 
         curl.on('end', function(statusCode, body, headers) {
+            if (parameter.Function) {
+                var xml = body.replace(/&/g, "&amp;");
 
-            var xml = body.replace(/&/g, "&amp;");
+                parser.parseString(xml, function(err, result) {
+                    console.log(result);
+                    if (!result.DocumentElement.ErrorLog)
+                        return resolve({
+                            result: true,
+                            title: apiGSoft.title,
+                            data: adapterCurlResult(result.DocumentElement, parameter.method)
+                        });
+                    else
+                        return resolve({
+                            result: false,
+                            title: apiGSoft.title,
+                            error: result.DocumentElement.ErrorLog.error
+                        });
 
-            parser.parseString(xml, function(err, result) {
-                if (result.response.errcode == 0)
-                    return resolve({
-                        result: true,
-                        title: apiGSoft.title,
-                        data: adapterCurlResult(result.response.result, parameter.method)
-                    });
-                else
-                    return resolve({
-                        result: false,
-                        title: apiGSoft.title,
-                        error: result.response.errtext
-                    });
-
-            });
+                });
+            } else {
+                return resolve(body);
+            }
             this.close();
         });
 

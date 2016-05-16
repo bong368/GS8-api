@@ -147,6 +147,6 @@ module.exports = {
 
     // Get all game
     initializationGames: function() {
-        return [wftService];
+        return [wftService, gSoftService];
     }
 };

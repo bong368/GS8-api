@@ -56,7 +56,7 @@
                         </div>
                         <div class="col-md-6">
                             <input type="password" ng-model="user.password_confirmation" placeholder="Re-enter password" />
-                            <div class="ip-error" ng-bind-html="error.password_confirmation"></div>
+                            <div class="ip-error" ng-show="user.password_confirmation != user.password">Password not match</div>
                         </div>
                     </div>
                     

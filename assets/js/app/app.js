@@ -282,6 +282,20 @@
                     }]
                 }
             })
+
+            // Sportsbook WFT
+            .state('gameSlotPlaytech', {
+                url: '/slot/playtech',
+                templateUrl: '/templates/page/game/slot/playtech.html',
+                controller: 'PlaytechController',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            '/js/app/controller/game/playtechController.js',
+                        ])
+                    }]
+                }
+            })
         })
         .run(function($rootScope, $state, $socket, $http, SweetAlert) {
 
@@ -372,6 +386,12 @@
             // Hide loading
             $rootScope.$on('loading:hide', function() {
                 $("#loading").hide();
+            })
+
+            // Fire event transaction accept
+            $socket.on('credit.updated', function(data) {
+                $rootScope.$broadcast('creditUserInfo:update');
+                updatedCurrentUser();
             })
 
             // Fire event transaction deposit accept

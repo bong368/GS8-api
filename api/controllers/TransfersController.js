@@ -136,25 +136,18 @@ module.exports = {
                 .then(function(turnOvers) {
 
                     var bonusLog = {
+                        username: ticket.username,
+                        transaction_id: ticket.id,
                         bonus_id: ticket.bonus.id,
                         turnover: turnOvers.data,
                         bonus_amount: bonusAmount,
-                        rolling_amount: rollingAmount
+                        rolling_amount: rollingAmount,
+                        status: 'success',
+                        process_by: 'auto'
                     };
                     return UserBonus.create(bonusLog);
                 })
-                .then(function(log) {
-
-                    var dataUpdateUser = { user_bonus_id: log.id };
-
-                    if (ticket.bonus.title = 'welcome')
-                        dataUpdateUser.welcome_bonus_yet = 1;
-
-                    return Users.update({
-                        username: ticket.username
-                    }, dataUpdateUser);
-                })
-                .then(function(user) {
+                .then(function(bonus) {console.log(bonus)
                     return res.json({ result: true });
                 })
         } else
