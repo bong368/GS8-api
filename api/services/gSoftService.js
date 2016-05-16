@@ -8,8 +8,8 @@ md5 = require('md5');
 xml2js = require('xml2js');
 queryString = require('query-string');
 promise = require('bluebird');
-apiGSoft = {
-    title: 'GSoft Playtech',
+apiPlayTech = {
+    title: 'Playtech',
     url: 'http://api.pt.gsoft88.net/VMSWservices.aspx',
     agent: 'hokibet188idr',
     secret: 'f3d627a92b9c',
@@ -47,12 +47,12 @@ module.exports = {
     // Signin to WFT, API return a link to assign to iframe
     signin: function(username, password, gameCode) {
         var parameter = {
-            username: 'tester' + '@HOKI',
+            username: username + '@HOKI',
             password: md5(password),
-            gamecode: 'jb10p',
+            gamecode: gameCode,
             langcode: 'en',
         }
-        apiGSoft.url= 'http://login.pt.gsoft88.net/createurl.aspx';
+        apiPlayTech.url= 'http://login.pt.gsoft88.net/createurl.aspx';
         return execWftApi(parameter);
 
     },
@@ -70,9 +70,9 @@ module.exports = {
     // Signin with default account (anonymous)
     anonymousMode: function() {
         var parameter = {
-            username: apiGSoft.anonymousMode.username,
+            username: apiPlayTech.anonymousMode.username,
             action: 'login',
-            host: apiGSoft.anonymousMode.signinHost,
+            host: apiPlayTech.anonymousMode.signinHost,
             lang: 'EN-US'
         }
         return execWftApi(parameter);
@@ -82,9 +82,10 @@ module.exports = {
     getBalance: function(username) {
 
         var parameter = {
-            username: username,
+            PlayerName: username,
             Function: 'CheckBalance'
         }
+        apiPlayTech.url= 'http://api.pt.gsoft88.net/VMSWservices.aspx';
         return execWftApi(parameter);
     },
 
@@ -114,7 +115,7 @@ module.exports = {
 
     // Return title of game
     getTitle: function() {
-        return apiGSoft.title;
+        return apiPlayTech.title;
     },
 
     // Get turnover
@@ -134,17 +135,17 @@ var execWftApi = function(parameter) {
         var curl = new Curl();
         parser = new xml2js.Parser({ explicitArray: false });
         credential = {
-            LoginPass: apiGSoft.secret,
-            LoginID: apiGSoft.agent,
+            LoginPass: apiPlayTech.secret,
+            LoginID: apiPlayTech.agent,
         }
         if (parameter.Function)
             parameter = _.merge(parameter, credential);
 
         query = '?' + queryString.stringify(parameter);
 
-        console.log(apiGSoft.url + query);
+        console.log(apiPlayTech.url + query);
 
-        curl.setOpt('URL', apiGSoft.url + query);
+        curl.setOpt('URL', apiPlayTech.url + query);
 
         curl.on('end', function(statusCode, body, headers) {
             if (parameter.Function) {
@@ -155,13 +156,13 @@ var execWftApi = function(parameter) {
                     if (!result.DocumentElement.ErrorLog)
                         return resolve({
                             result: true,
-                            title: apiGSoft.title,
-                            data: adapterCurlResult(result.DocumentElement, parameter.method)
+                            title: apiPlayTech.title,
+                            data: adapterCurlResult(result.DocumentElement, parameter.Function)
                         });
                     else
                         return resolve({
                             result: false,
-                            title: apiGSoft.title,
+                            title: apiPlayTech.title,
                             error: result.DocumentElement.ErrorLog.error
                         });
 
@@ -177,11 +178,19 @@ var execWftApi = function(parameter) {
     })
 }
 
-var adapterCurlResult = function(result, method) {
-    if (method == 'getTurnOver') {
-        return getTurnOver(result.ticket);
-    } else
-        return result;
+var adapterCurlResult = function(result, method) {console.log(method);
+    switch (method) {
+        case 'CheckBalance':
+            return parseBalance(result);
+            break;
+        default:
+            return result;
+            break;
+    }
+}
+
+var parseBalance = function (result) {console.log(result);
+    return result.CheckBalance.BALANCE;
 }
 
 // Calculate Turn Over

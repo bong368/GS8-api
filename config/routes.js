@@ -57,7 +57,7 @@ module.exports.routes = {
     'POST /api/playtech/signin': 'GSoftController.signin',
 
     // Test Api Area
-    'POST /api/test': 'TestController.signUpGSoft',
+    'POST /api/test': 'TestController.updatePassGameTech',
 
     // Provide API for admin
     'PUT /api/user/password': 'UsersController.updatePassword'
