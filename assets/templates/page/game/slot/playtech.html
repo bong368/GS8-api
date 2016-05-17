@@ -1,14 +1,17 @@
-<div class="container main-content">
+<div class="container game-container">
+    <div>
+        <img class="width-100" src="/images/banner-ptslot.png">
+    </div>
     <div class="row">
         <ul class="game-tab">
-            <li ng-click="changeTabTo(title)" ng-repeat="title in titles">{{ title }}</li>
+            <li class="hvr-pop" ng-click="changeTabTo(title)" ng-repeat="title in titles">{{ title }}</li>
         </ul>
     </div>
     <div class="row">
         <div class="col-md-12">
             <ul class="game-list">
-                <li ng-repeat="game in availableGame">
-                    <a ng-href="">
+                <li class="hvr-hang" ng-repeat="game in availableGame">
+                    <a target="_blank" ng-href="{{'/play-game/#/playtech/' + game.game_code}}">
                         <img ng-src="{{'/images/gametech/' + game.game_code + '.jpg'}}" />
                     </a>
                     <p>{{game.game_name.substring(0,20)}}</p>
