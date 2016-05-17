@@ -24,7 +24,7 @@
                 .then(function(response) {
                     $scope.allGame = response.data;
                     $scope.titles = $scope.getTitle(response.data);
-                    $scope.renderGame($scope.titles[0]);
+                    $scope.renderGame('Slots');
                 }, function(error) {
                     SweetAlert.swal("Sorry!", error.data.error, "error");
                 });

@@ -343,7 +343,7 @@ select {
     padding: 0 15px;
     li {
         float: left;
-        box-shadow: 0 0 25px #7f745f;
+        box-shadow: 0 0 25px #8a6d3b;
         margin: 10px 11px;
         border: 1px solid #7f745f;
         padding: 5px;
@@ -364,4 +364,7 @@ select {
     border-radius: 2px;
     border-bottom: none;
     margin-bottom: 20px;
+}
+.game-frame{
+    width: 100%
 }
