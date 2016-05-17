@@ -56,6 +56,7 @@ module.exports = {
             gamecode: gameCode,
             langcode: 'en',
         }
+        console.log(parameter);
         apiPlayTech.url = 'http://login.pt.gsoft88.net/createurl.aspx';
 
         return execWftApi(parameter);

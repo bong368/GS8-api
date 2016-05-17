@@ -40,7 +40,7 @@ module.exports = {
             	return Users.findOne({username: user.username});
             })
             .then(function (user) {console.log(user);
-            	return gSoftService.signin(user.username, user.password, req.body.gameCode);
+            	return playTechService.signin(user.username, user.password, req.body.gameCode);
             })
 	        .then(function(result) {
 	            return res.json(200, {data : result});
