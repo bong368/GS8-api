@@ -15,7 +15,7 @@ module.exports = {
     create: function(req, res) {
 
         var ticket = req.body;
-        ticket.extra_bonus = true ? 1 : 0;
+        ticket.extra_bonus == true ? 1 : 0;
 
         tokenService.parse(req)
             .then(function(user) {

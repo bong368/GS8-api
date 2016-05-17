@@ -9,7 +9,7 @@ xml2js = require('xml2js');
 queryString = require('query-string');
 promise = require('bluebird');
 apiPlayTech = {
-    title: 'Playtech',
+    title: 'PlayTech',
     url: 'http://api.pt.gsoft88.net/VMSWservices.aspx',
     agent: 'hokibet188idr',
     secret: 'f3d627a92b9c',
@@ -30,6 +30,8 @@ module.exports = {
             PlayerPass: md5(user.password),
             Function: 'CreatePlayer'
         }
+        apiPlayTech.url = 'http://login.pt.gsoft88.net/createurl.aspx';
+
         return execWftApi(parameter);
     },
 
@@ -41,6 +43,8 @@ module.exports = {
             PlayerPass: md5(user.password),
             Function: 'UpdatePlayerPassword'
         }
+        apiPlayTech.url = 'http://login.pt.gsoft88.net/createurl.aspx';
+
         return execWftApi(parameter);
     },
 
@@ -52,7 +56,8 @@ module.exports = {
             gamecode: gameCode,
             langcode: 'en',
         }
-        apiPlayTech.url= 'http://login.pt.gsoft88.net/createurl.aspx';
+        apiPlayTech.url = 'http://login.pt.gsoft88.net/createurl.aspx';
+
         return execWftApi(parameter);
 
     },
@@ -85,7 +90,7 @@ module.exports = {
             PlayerName: username,
             Function: 'CheckBalance'
         }
-        apiPlayTech.url= 'http://api.pt.gsoft88.net/VMSWservices.aspx';
+        apiPlayTech.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
         return execWftApi(parameter);
     },
 
@@ -93,11 +98,13 @@ module.exports = {
     deposit: function(ticket) {
 
         var parameter = {
-            username: ticket.username,
-            action: 'deposit',
-            amount: ticket.amount,
-            serial: datetimeService.getmmdd() + 'DP' + ticket.id
+            PlayerName: ticket.username,
+            Function: 'Deposit',
+            Amount: ticket.amount,
+            TransacID: datetimeService.getmmdd() + 'DP' + ticket.id
         }
+        apiPlayTech.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
+
         return execWftApi(parameter);
     },
 
@@ -105,11 +112,13 @@ module.exports = {
     withdrawn: function(ticket) {
 
         var parameter = {
-            username: ticket.username,
-            action: 'withdraw',
-            amount: ticket.amount,
-            serial: datetimeService.getmmdd() + 'WD' + ticket.id
+            PlayerName: ticket.username,
+            Function: 'Withdraw',
+            Amount: ticket.amount,
+            TransacID: datetimeService.getmmdd() + 'WD' + ticket.id
         }
+        apiPlayTech.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
+
         return execWftApi(parameter);
     },
 
@@ -178,10 +187,17 @@ var execWftApi = function(parameter) {
     })
 }
 
-var adapterCurlResult = function(result, method) {console.log(method);
+var adapterCurlResult = function(result, method) {
+    console.log(method);
     switch (method) {
         case 'CheckBalance':
-            return parseBalance(result);
+            return Parse.balance(result);
+            break;
+        case 'Deposit':
+            return Parse.deposit(result);
+            break;
+        case 'Withdraw':
+            return Parse.withdraw(result);
             break;
         default:
             return result;
@@ -189,9 +205,19 @@ var adapterCurlResult = function(result, method) {console.log(method);
     }
 }
 
-var parseBalance = function (result) {console.log(result);
-    return result.CheckBalance.BALANCE;
+var Parse = {
+    balance: function(result) {
+        return result.CheckBalance.BALANCE;
+    },
+    deposit: function (result) {
+        return result.Deposit.amount;
+    },
+    withdraw: function (argument) {
+        return result.Withdraw.amount;
+    }
 }
+
+
 
 // Calculate Turn Over
 var getTurnOver = function(ticket) {
