@@ -7,19 +7,14 @@
     </head>
     <!--HEAD END-->
 
-    <body ng-cloak>
-        <div class="container-fluid">
+    <body ng-cloak style="background:none">
 
-            <div id="main" class="row">
-                <%- body %>
-            </div>
-
-            <footer class="row">
-                <!--FOOTER-->
-                <%- partial ('partials/footer.ejs') %>
-                <!--FOOTER END-->
-            </footer>
-
-        </div>
+        <%- body %>
+    
     </body>
+    <footer>
+        <!--FOOTER-->
+        <%- partial ('partials/footer.ejs') %>
+        <!--FOOTER END-->
+    </footer>
 </html>
