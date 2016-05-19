@@ -1,7 +1,7 @@
 /**
- * Sportsbook WFT Service
+ * Sportsbook playTech Service
  *
- * @description :: Server-side logic for managing WFT API
+ * @description :: Server-side logic for managing playTech API
  */
 var Curl = require('node-libcurl').Curl;
 md5 = require('md5');
@@ -13,16 +13,12 @@ apiPlayTech = {
     url: 'http://api.pt.gsoft88.net/VMSWservices.aspx',
     agent: 'hokibet188idr',
     secret: 'f3d627a92b9c',
-    signinHost: 'login.pt.gsoft88.net',
-    anonymousMode: {
-        username: 'anonymous',
-        signinHost: 'odds.sn.1sgames.com'
-    }
+    signinHost: 'login.pt.gsoft88.net'
 }
 
 module.exports = {
 
-    // Create new account WFT
+    // Create new account playTech
     signup: function(user) {
 
         var parameter = {
@@ -32,10 +28,10 @@ module.exports = {
         }
         apiPlayTech.url = 'http://login.pt.gsoft88.net/createurl.aspx';
 
-        return execWftApi(parameter);
+        return execplayTechApi(parameter);
     },
 
-    // Create new account WFT
+    // Create new account playTech
     updatePassword: function(user) {
 
         var parameter = {
@@ -45,10 +41,10 @@ module.exports = {
         }
         apiPlayTech.url = 'http://login.pt.gsoft88.net/createurl.aspx';
 
-        return execWftApi(parameter);
+        return execplayTechApi(parameter);
     },
 
-    // Signin to WFT, API return a link to assign to iframe
+    // Signin to Playtech, API return a link to assign to iframe
     signin: function(username, password, gameCode) {
         var parameter = {
             username: username + '@HOKI',
@@ -59,32 +55,21 @@ module.exports = {
         console.log(parameter);
         apiPlayTech.url = 'http://login.pt.gsoft88.net/createurl.aspx';
 
-        return execWftApi(parameter);
+        return execplayTechApi(parameter);
 
     },
 
-    // Signout to WFT
+    // Signout to playTech
     signout: function(username) {
 
         var parameter = {
             username: username,
             action: 'logout'
         }
-        return execWftApi(parameter);
+        return execplayTechApi(parameter);
     },
 
-    // Signin with default account (anonymous)
-    anonymousMode: function() {
-        var parameter = {
-            username: apiPlayTech.anonymousMode.username,
-            action: 'login',
-            host: apiPlayTech.anonymousMode.signinHost,
-            lang: 'EN-US'
-        }
-        return execWftApi(parameter);
-    },
-
-    // Get credit user from WFT
+    // Get credit user from playTech
     getBalance: function(username) {
 
         var parameter = {
@@ -92,35 +77,35 @@ module.exports = {
             Function: 'CheckBalance'
         }
         apiPlayTech.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
-        return execWftApi(parameter);
+        return execplayTechApi(parameter);
     },
 
-    // Deposit to WFT
+    // Deposit to playTech
     deposit: function(ticket) {
 
         var parameter = {
             PlayerName: ticket.username,
             Function: 'Deposit',
-            Amount: ticket.amount,
+            Amount: ticket.amount * 1000,
             TransacID: datetimeService.getmmdd() + 'DP' + ticket.id
         }
         apiPlayTech.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
 
-        return execWftApi(parameter);
+        return execplayTechApi(parameter);
     },
 
-    // Withdrawn to WFT
+    // Withdrawn to playTech
     withdrawn: function(ticket) {
 
         var parameter = {
             PlayerName: ticket.username,
             Function: 'Withdraw',
-            Amount: ticket.amount,
+            Amount: ticket.amount * 1000,
             TransacID: datetimeService.getmmdd() + 'WD' + ticket.id
         }
         apiPlayTech.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
 
-        return execWftApi(parameter);
+        return execplayTechApi(parameter);
     },
 
     // Return title of game
@@ -135,11 +120,11 @@ module.exports = {
             action: 'fetch',
             method: 'getTurnOver'
         }
-        return execWftApi(parameter);
+        return execplayTechApi(parameter);
     }
 };
 
-var execWftApi = function(parameter) {
+var execplayTechApi = function(parameter) {
     return new promise(function(resolve, reject) {
 
         var curl = new Curl();
@@ -208,12 +193,12 @@ var adapterCurlResult = function(result, method) {
 
 var Parse = {
     balance: function(result) {
-        return result.CheckBalance.BALANCE;
+        return (result.CheckBalance.BALANCE / 1000);
     },
     deposit: function (result) {
         return result.Deposit.amount;
     },
-    withdraw: function (argument) {
+    withdraw: function (result) {
         return result.Withdraw.amount;
     }
 }

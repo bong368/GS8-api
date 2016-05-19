@@ -1,0 +1,14 @@
+.casino {
+    >div {
+        border: 1px solid #7f745f;
+        width: 47%;
+        float: left;
+        margin: 1.5%;
+        -webkit-box-shadow: 0 0 25px #7f745f;
+        -moz-box-shadow: 0 0 25px #7f745f;
+        box-shadow: 0 0 25px #7f745f;
+    }
+    >div:nth-child(2n) {
+    	float: right;
+    }
+}

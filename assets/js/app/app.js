@@ -283,7 +283,7 @@
                 }
             })
 
-            // Sportsbook WFT
+            // Playtech Slot
             .state('gameSlotPlaytech', {
                 url: '/slot/playtech',
                 templateUrl: '/templates/page/game/slot/playtech.html',
@@ -295,6 +295,12 @@
                         ])
                     }]
                 }
+            })
+
+            // Live Casino
+            .state('gameCasino', {
+                url: '/casino',
+                templateUrl: '/templates/page/game/casino/index.html',
             })
         })
         .run(function($rootScope, $state, $socket, $http, SweetAlert) {
@@ -310,11 +316,8 @@
                 $http(req)
                     .then(function(response) {
 
-                        // Stringify the returned data to prepare it
-                        // to go into local storage
                         var user = JSON.stringify(response.data.user);
 
-                        // Set the stringified user data into local storage
                         localStorage.setItem('user', user);
 
                         $rootScope.currentUser = response.data.user;
