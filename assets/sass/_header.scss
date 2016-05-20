@@ -220,7 +220,7 @@ header {
             border: none;
             background: $black;
             .open>.dropdown-menu {
-                display: inherit;
+                display: none;
             }
         }
         .navbar-form {

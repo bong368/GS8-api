@@ -56,7 +56,7 @@ body {
 li {
     list-style: none;
     &.dropdown:hover ul {
-        display: block;
+        display: block !important;
         -webkit-animation: bounceInLeft 1s;
         animation: bounceInLeft 1s;
     }
