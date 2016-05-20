@@ -56,6 +56,10 @@ module.exports.policies = {
     'WftController': {
         'signin': true
     },
+
+    'PlayTechController': {
+        'getAllGame': true
+    },
     
     'EmailController': {
         '*': true
