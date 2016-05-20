@@ -1,6 +1,10 @@
 <div class="container game-container">
     <div>
-        <img class="width-100" src="/images/banner-ptslot.png">
+        <uib-carousel interval="myInterval">
+            <uib-slide ng-repeat="slide in slides" active="slide.active">
+                <img ng-src="{{slide.image}}">
+            </uib-slide>
+        </uib-carousel>
     </div>
     <div class="row">
         <ul class="game-tab">

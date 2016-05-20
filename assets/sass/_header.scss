@@ -205,15 +205,6 @@ header {
                         @extend %extend_6;
                     }
                 }
-                .open > a {
-                    background-color: $color_sundance_approx;
-                    &:focus {
-                        background-color: $color_sundance_approx;
-                    }
-                    &:hover {
-                        background-color: $color_sundance_approx;
-                    }
-                }
             }
             > li > a {
                 height: 30px;
@@ -228,6 +219,9 @@ header {
         .navbar-collapse {
             border: none;
             background: $black;
+            .open>.dropdown-menu {
+                display: inherit;
+            }
         }
         .navbar-form {
             border: none;

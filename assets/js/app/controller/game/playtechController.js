@@ -10,7 +10,7 @@
     function PlaytechController($state, $http, $rootScope, $scope, SweetAlert) {
         // Run this function at initial
         $scope.ini = function() {
-            
+
             $scope.getPlaytech();
         }
 
@@ -30,7 +30,7 @@
                 });
         }
 
-        $scope.renderGame = function (gameGroup) {
+        $scope.renderGame = function(gameGroup) {
             $scope.availableGame = [];
             angular.forEach($scope.allGame, function(value, key) {
                 if (value.game_group == gameGroup)
@@ -47,9 +47,20 @@
             return titles;
         }
 
-        $scope.changeTabTo = function (gameCode) {
+        $scope.changeTabTo = function(gameCode) {
             $scope.renderGame(gameCode);
         }
+
+        $scope.myInterval = 3000;
+        $scope.slides = [{
+            image: '/images/playtech/Slot_AG.png'
+        }, {
+            image: '/images/playtech/Slot_GP.png'
+        }, {
+            image: '/images/playtech/Slot_MG.png'
+        }, {
+            image: '/images/playtech/Slot_PT.png'
+        }];
 
         $scope.ini();
     }

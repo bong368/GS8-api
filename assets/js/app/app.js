@@ -292,6 +292,7 @@
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
                             '/js/app/controller/game/playtechController.js',
+                            '//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.0.js'
                         ])
                     }]
                 }
