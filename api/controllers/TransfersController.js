@@ -39,7 +39,7 @@ module.exports = {
 
                 // Resolved bonus before transfer exec
                 if (ticket.bonus) {
-                    bonusService.getTransferBonus(ticket.username)
+                    bonusService.getTransferBonus(ticket.username, transfer.id)
                         .then(function(bonus) {
                             ticket.bonus = bonus.bonus;
                             return self.asyncTransfer(originService, targetService, ticket, req, res);

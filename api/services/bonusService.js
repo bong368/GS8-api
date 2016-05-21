@@ -6,11 +6,11 @@
 var promise = require('bluebird');
 module.exports = {
 
-    getTransferBonus: function(username) {
+    getTransferBonus: function(username, exceptTransfer) {
         return new promise(function(resolve, reject) {
             Transfers.findOne({ username: username })
                 .then(function(transfer) {
-                    if (transfer) {
+                    if (transfer && transfer.id != exceptTransfer) {
                         return resolve({ bonus: false });
                     } else {
                         Deposits.findOne({ username: username, extra_bonus: 1 })
