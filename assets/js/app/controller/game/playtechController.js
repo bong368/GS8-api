@@ -53,13 +53,13 @@
 
         $scope.myInterval = 3000;
         $scope.slides = [{
+            image: '/images/playtech/Slot_PT.png'
+        }, {
             image: '/images/playtech/Slot_AG.png'
         }, {
             image: '/images/playtech/Slot_GP.png'
         }, {
             image: '/images/playtech/Slot_MG.png'
-        }, {
-            image: '/images/playtech/Slot_PT.png'
         }];
 
         $scope.ini();

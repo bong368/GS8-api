@@ -15,7 +15,7 @@
             $scope.deposit = {
                 amount: '',
                 password: '',
-                extra_bonus: false,
+                extra_bonus: true,
                 currency: $rootScope.currentUser.currency,
                 payment_method: 'Local Transfer',
                 from_bank: $rootScope.currentUser.bank_name,

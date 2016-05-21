@@ -57,7 +57,7 @@ module.exports.routes = {
     'POST /api/playtech/signin': 'PlayTechController.signin',
 
     // Test Api Area
-    'POST /api/test': 'TestController.updatePassGameTech',
+    'POST /api/test': 'TestController.getTurnOver',
 
     // Provide API for admin
     'PUT /api/user/password': 'UsersController.updatePassword'

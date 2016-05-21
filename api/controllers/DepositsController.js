@@ -15,7 +15,11 @@ module.exports = {
     create: function(req, res) {
 
         var ticket = req.body;
-        ticket.extra_bonus == true ? 1 : 0;
+        
+        if (ticket.extra_bonus == true)
+            ticket.extra_bonus = 1;
+        else         
+            ticket.extra_bonus = 0;
 
         tokenService.parse(req)
             .then(function(user) {
@@ -26,7 +30,7 @@ module.exports = {
                     return new promise(function(resolve, reject) {
                         Bonus.findOne({ title: 'extra' })
                             .then(function(bonus) {
-                                ticket.bonus_amount = ticket.amount * bonus.percentage;
+                                ticket.bonus_amount = ticket.amount * bonus.percentage;console.log(ticket);
                                 return resolve(Deposits.create(ticket));
                             })
                     })

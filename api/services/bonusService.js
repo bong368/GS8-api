@@ -8,26 +8,34 @@ module.exports = {
 
     getTransferBonus: function(username) {
         return new promise(function(resolve, reject) {
-            Deposits.findOne({ username: username, extra_bonus: 1 })
-                .then(function(deposit) {
-                    if (deposit) {
+            Transfers.findOne({ username: username })
+                .then(function(transfer) {
+                    if (transfer) {
                         return resolve({ bonus: false });
                     } else {
-
-                        UserBonus.findOne({ username: username })
-                            .then(function(bonus) {
-                                if (bonus) {
+                        Deposits.findOne({ username: username, extra_bonus: 1 })
+                            .then(function(deposit) {
+                                if (deposit) {
                                     return resolve({ bonus: false });
                                 } else {
 
-                                    Bonus.findOne({ title: 'welcome' })
+                                    UserBonus.findOne({ username: username })
                                         .then(function(bonus) {
-                                            return resolve({ bonus: bonus });
+                                            if (bonus) {
+                                                return resolve({ bonus: false });
+                                            } else {
+
+                                                Bonus.findOne({ title: 'welcome' })
+                                                    .then(function(bonus) {
+                                                        return resolve({ bonus: bonus });
+                                                    })
+                                            }
                                         })
                                 }
                             })
                     }
                 })
+
         })
     },
 

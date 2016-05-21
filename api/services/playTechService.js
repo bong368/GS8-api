@@ -115,12 +115,37 @@ module.exports = {
 
     // Get turnover
     getTurnOver: function(username) {
-        var parameter = {
-            username: username,
-            action: 'fetch',
-            method: 'getTurnOver'
-        }
-        return execplayTechApi(parameter);
+        return new promise(function(resolve, reject) {
+
+            var curl = new Curl(),
+                url = 'http://128.199.77.130:1337/api/betting/playtech/turnover',
+                data = {
+                    username: username
+                };
+
+            data = queryString.stringify(data);
+
+            curl.setOpt(Curl.option.URL, url);
+            curl.setOpt(Curl.option.POSTFIELDS, data);
+            curl.setOpt(Curl.option.HTTPHEADER, ['User-Agent: node-libcurl/1.0']);
+            curl.setOpt(Curl.option.VERBOSE, true);
+
+            curl.perform();
+
+            curl.on('end', function(statusCode, body) {
+                console.log(body);
+                var result = JSON.parse(body);
+                return resolve({
+                    result: true,
+                    title: apiPlayTech.title,
+                    data: result.turnover
+                });
+
+                this.close();
+            });
+
+            curl.on('error', curl.close.bind(curl));
+        })
     }
 };
 
@@ -195,10 +220,10 @@ var Parse = {
     balance: function(result) {
         return (result.CheckBalance.BALANCE / 1000);
     },
-    deposit: function (result) {
+    deposit: function(result) {
         return result.Deposit.amount;
     },
-    withdraw: function (result) {
+    withdraw: function(result) {
         return result.Withdraw.amount;
     }
 }
