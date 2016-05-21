@@ -227,16 +227,3 @@ var Parse = {
         return result.Withdraw.amount;
     }
 }
-
-
-
-// Calculate Turn Over
-var getTurnOver = function(ticket) {
-    var turnOver = 0;
-
-    _.forEach(ticket, function(value, key) {
-        turnOver += parseInt(value.a);
-    });
-
-    return turnOver;
-}

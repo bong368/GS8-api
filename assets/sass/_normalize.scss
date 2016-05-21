@@ -64,7 +64,7 @@ li {
 
 a {
     &:hover {
-        color: $color_gull_gray_approx !important;
+        color: $color_husk_approx !important;
         text-decoration: none;
     }
     &.light {
@@ -104,6 +104,10 @@ input[type="text"] {
     @extend %extend_1;
 }
 
+ul {
+    margin-bottom: 15px;
+}
+
 input[type="password"] {
     @extend %extend_1;
 }
@@ -122,6 +126,35 @@ input[type="submit"] {
 
 input[type="reset"] {
     @extend %extend_2;
+}
+
+.show-product-hover {
+    position: relative;
+    overflow: hidden;
+}
+
+.show-product-hover:hover .product-info {
+    top: 0%;
+}
+
+.product-info {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    padding-top: 100px;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.81);
+    color: white;
+    text-align: center;
+    transition: all 0.8s ease 0s;
+    >div:first-child {
+        margin-bottom: 15px;
+    }
+    div{
+        .btn{
+            width: 110px;
+        }
+    }
 }
 
 .white {
@@ -160,6 +193,9 @@ input[type="reset"] {
     cursor: pointer;
     font-weight: bold;
     padding: 3px 20px;
+    -webkit-box-shadow: 0 0 25px #7f745f;
+    -moz-box-shadow: 0 0 25px #7f745f;
+    box-shadow: 0 0 25px #7f745f;
     //Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
     transition: all 0.2s ease 0s;
     &:hover {
@@ -373,6 +409,11 @@ select {
     width: 100%;
     height: 100vh;
 }
-.carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img{
+
+.carousel-inner>.item>a>img,
+.carousel-inner>.item>img,
+.img-responsive,
+.thumbnail a>img,
+.thumbnail>img {
     width: 100%;
 }

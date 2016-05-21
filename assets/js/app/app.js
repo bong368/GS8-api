@@ -251,6 +251,26 @@
                 }
             })
 
+            // Transfer report route
+            .state('transferReport', {
+                url: '/report/transfer',
+                templateUrl: '/templates/page/report/transfer.html',
+                controller: 'TransferReportController',
+                authorization: true,
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            '/js/app/controller/report/transferReportController.js',
+                            '/bower_components/angularjs-datepicker/src/js/angular-datepicker.js',
+                            '/bower_components/angularjs-datepicker/src/css/angular-datepicker.css',
+                            '/js/app/service/DateTimeModule.js',
+                            '/js/app/service/ExcelModule.js',
+                            '/bower_components/angular-utils-pagination/dirPagination.js'
+                        ])
+                    }]
+                }
+            })
+
             // Term Condition route
             .state('termCondition', {
                 url: '/term-condition',

@@ -28,6 +28,12 @@ module.exports = {
         },
         target_result: {
             type: 'string'
+        },
+        created_at: {
+            type: 'datetime'
+        },
+        updated_at: {
+            type: 'datetime'
         }
     }
 };

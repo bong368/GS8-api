@@ -3,7 +3,7 @@
     background: $bg;
     @if lightness($bg) < 50% {
         &:hover {
-            background-color: lighten($bg, 7%) !important;
+            background-color: #AA842F !important;
         }
     }
     @else {

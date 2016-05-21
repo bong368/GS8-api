@@ -18,11 +18,21 @@
     <div class="row">
         <div class="col-md-12">
             <ul class="game-list">
-                <li class="hvr-hang" ng-repeat="game in availableGame">
-                    <a target="_blank" ng-href="{{'/play-game/#/playtech/' + game.game_code}}">
+                <li class="hvr-hang show-product-hover" ng-repeat="game in availableGame">
+                    <div>
                         <img ng-src="{{'/images/gametech/' + game.game_code + '.jpg'}}" />
-                    </a>
-                    <p>{{game.game_name.substring(0,19)}}</p>
+                        <p>{{game.game_name.substring(0,19)}}</p>
+                    </div>
+                    <div class="product-info">
+                        <div>
+                            <a class="btn" target="_blank" ng-href="{{'/play-game/#/playtech/' + game.game_code}}">
+                                Real play
+                            </a>
+                        </div>
+                        <div>
+                            <a class="btn" target="_blank" ng-href="{{'http://cache.download.banner.redcoral88.com/casinoclient.html?language=en&mode=offline&game=' + game.game_code}}">Fun Play</a>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>

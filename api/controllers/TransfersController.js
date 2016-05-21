@@ -152,5 +152,37 @@ module.exports = {
                 })
         } else
             return res.json({ result: true });
+    },
+
+    /**
+     * List all new deposit ticket
+     *
+     * @param  res
+     * @return req
+     */
+    index: function(req, res) {
+
+        var ticket = req.body;
+
+        tokenService.parse(req)
+            .then(function(user) {
+
+                return Transfers.find({
+                    where: {
+                        username: user.username,
+                        created_at: {
+                            '>=': new Date(ticket.date_from + ' 00:00:00.000'),
+                            '<=': new Date(ticket.date_to + ' 23:59:59.997')
+                        }
+                    },
+                    sort: 'created_at DESC'
+                });
+            })
+            .catch(function(err) {
+                return res.json(401, { error: 'Invalid token' });
+            })
+            .then(function(transfers) {
+                res.json(200, transfers);
+            })
     }
 };
