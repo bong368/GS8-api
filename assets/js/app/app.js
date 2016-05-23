@@ -323,6 +323,20 @@
                 url: '/casino',
                 templateUrl: '/templates/page/game/casino/index.html',
             })
+
+            // Mobile Download
+            .state('mobileDownload', {
+                url: '/mobile/download',
+                templateUrl: '/templates/page/mobile/download.html',
+                controller: 'MobileDownloadController',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            '/js/app/controller/game/mobileDownloadController.js'
+                        ])
+                    }]
+                }
+            })
         })
         .run(function($rootScope, $state, $socket, $http, SweetAlert) {
 

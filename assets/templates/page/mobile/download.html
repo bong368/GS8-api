@@ -1,0 +1,41 @@
+<div class="container main-content">
+        <h4 class="center upper">Mobile download</h4>
+        <div class="col-md-3">
+            <ul class="nav nav-tabs nav-stacked nav-pills" role="tablist">
+                <li ng-click="changeTab('playtech')" ng-class="{'active': view_tab == 'playtech'}">
+                    <span>Playtech Suite</span>
+                </li>
+                <li ng-click="changeTab('gameplay')" ng-class="{'active': view_tab == 'gameplay'}">
+                    <span>Gameplay Suite</span>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="tab-content border">
+                <div class="row" ng-show="view_tab == 'playtech'">
+                    <div class="col-md-4 center">
+                        <p class="margin-top bold">PC</p>
+                        <p>PC version</p>
+                        <div class="download" style="background: url(/images/mobile_pc.jpg) no-repeat"></div>
+                        <a href="">Click to download</a>
+                    </div>
+                    <div class="col-md-4 center">
+                        <p class="margin-top bold">LIVE CASINO</p>
+                        <p>Android version</p>
+                        <div class="download" style="background: url(/images/mobile_android.jpg) no-repeat"></div>
+                        <a href="">Click to download</a>
+                    </div>
+                    <div class="col-md-4 center">
+                        <p class="margin-top bold">SLOTS</p>
+                        <p>Android version</p>
+                        <div class="download" style="background: url(/images/mobile_android.jpg) no-repeat"></div>
+                        <a href="">Click to download</a>
+                    </div>
+                </div>
+                <div ng-show="view_tab == 'gameplay'">
+                    This is tab 2 content
+                </div>
+            </div>
+        </div>
+
+</div>

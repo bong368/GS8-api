@@ -37,12 +37,19 @@
 .bx-wrapper {
     margin: 0 !important;
     .bx-viewport {
+        -webkit-box-shadow: 0 0 10px #7f745f;
+        -moz-box-shadow: 0 0 10px #7f745f;
+        box-shadow: 0 0 10px #7f745f;
         border: 1px solid $border !important;
     }
     img {
         width: 100%;
         display: block;
     }
+}
+
+.big-slide {
+    margin-bottom: 15px;
 }
 
 .progressive {
@@ -53,7 +60,6 @@
     border: 1px solid $border;
     width: 100%;
     position: relative;
-    margin: 10px 0;
     &.progressive.m-top-10 {
         position: inherit;
     }
@@ -78,24 +84,31 @@
         }
     }
 }
+
 .mid-sport {
     background: url("/images/middle/home_btn_sport.png")no-repeat;
 }
+
 .mid-casino {
     background: url("/images/middle/home_btn_casino.png")no-repeat;
 }
+
 .mid-slot {
     background: url("/images/middle/home_btn_egames.png")no-repeat;
 }
+
 .mid-lottery {
     background: url("/images/middle/home_btn_lottery.png")no-repeat;
 }
+
 .mid-poker {
     background: url("/images/middle/home_btn_poker.png")no-repeat;
 }
+
 .mid-promo {
     background: url("/images/middle/home_btn_promo.png")no-repeat;
 }
+
 .middle > div {
     height: 186px;
     position: relative;
@@ -110,6 +123,7 @@
         font-weight: bold;
     }
 }
+
 .about-us {
     background: $black;
     color: $color_text;

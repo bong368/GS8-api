@@ -5,8 +5,10 @@
     color: $color_silver_rust_approx;
     //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
     border-radius: 2px;
-    border-bottom: none;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    -webkit-box-shadow: 0 0 25px #7f745f;
+    -moz-box-shadow: 0 0 25px #7f745f;
+    box-shadow: 0 0 25px #7f745f;
 }
 
 .main-content {
@@ -104,12 +106,13 @@
         font-size: 12px;
         padding: 6px;
     }
-    .credit-user-info{
+    .credit-user-info {
         width: 100%;
         border: 1px solid $border;
-        tr{
+        tr {
             line-height: 50px;
-            td, th{
+            td,
+            th {
                 padding: 0 15px;
             }
         }

@@ -22,15 +22,19 @@ header {
         padding: 2px 0 2px 20px;
     }
     .header-content {
-        padding-bottom: 10px;
+        margin-bottom: 15px;
         .navbar-nav > li > .dropdown-menu {
             background-color: $black_90;
             border: 2px solid $border;
             padding: 15px;
         }
         .lang-option {
+            top: 17px;
+            margin: 0;
+            border: 1px solid $border;
+            background: black;
             width: 10px !important;
-            height: 50px;
+            height: 45px;
             min-width: 80px;
             a {
                 padding: 0 !important;
@@ -54,22 +58,20 @@ header {
         }
         .input-notice {
             > span {
-                background: $color_sundance_approx;
-                border: 1px solid $color_watusi_approx;
+                background: $color_husk_approx;
                 float: left;
                 color: $white;
                 font-weight: bold;
-                height: 22px;
-                line-height: 22px;
+                line-height: 25px;
                 text-align: center;
                 width: 20%;
             }
             > em {
-                background: $color_lisbon_brown_approx;
+                border: 1px solid $border;
                 float: left;
                 font-style: normal;
-                height: 22px;
-                line-height: 22px;
+                height: 25px;
+                line-height: 25px;
                 overflow: hidden;
                 padding: 0 5px;
                 text-align: center;
@@ -89,6 +91,8 @@ header {
                 color: $color_iron_approx;
             }
             .ico-down {
+                float: right;
+                margin: 5px;
                 background: url("/images/drop-down-arrow.png") no-repeat;
                 background-position: center center;
                 padding: 4px;
@@ -108,10 +112,11 @@ header {
             }
             a {
                 color: $white;
+                text-transform: uppercase;
             }
             .sub-top-menu {
                 position: absolute;
-                top: 20px;
+                top: 18px;
                 left: 0;
                 z-index: 99;
                 background: $black;
@@ -132,6 +137,7 @@ header {
         border: 1px solid $border;
         font-weight: bold;
         min-height: 31px;
+        margin-bottom: 15px;
         //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
         border-radius: 2px;
         .navbar-header {
@@ -208,7 +214,7 @@ header {
             }
             > li > a {
                 height: 30px;
-                padding: 7px 15px;
+                padding: 7px 25px;
                 color: $white;
                 margin: 5px 0;
                 font-size: 14px;
@@ -218,6 +224,9 @@ header {
             }
         }
         .navbar-collapse {
+            webkit-box-shadow: 0 0 25px #7f745f;
+            -moz-box-shadow: 0 0 25px #7f745f;
+            box-shadow: 0 0 25px #7f745f;
             border: none;
             background: $black;
             .open>.dropdown-menu {

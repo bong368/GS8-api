@@ -18,11 +18,11 @@
                         <a target="_blank" href="help/contact">{{ 'CONTACT_US' | translate }}</a>
                     </li>
                     <li>
-                        <div class="btn-group ico-dropdown">
-                            <button  type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <div class="btn-group ico-dropdown show-dropdown">
+                            <div>
                                 <img ng-src="images/flag/hdr_lag_{{ lang }}.gif">
                                 <span class="ico-down"></span>
-                            </button>
+                            </div>
                             <ul class="dropdown-menu lang-option" role="menu">
                                 <li ng-click="changeLanguage('en')"><img src="images/flag/hdr_lag_en.gif" ></li>
                                 <li ng-click="changeLanguage('in')"><img src="images/flag/hdr_lag_in.gif" ></li>
@@ -77,9 +77,9 @@
                             <li>
                                 <a href="#profile">{{ 'PROFILE' | translate }}</a>
                             </li>
-                            <li class="relative">
-                                <a class="pointer" ng-init="showMenuReport = false" ng-click="showMenuReport = ! showMenuReport">Report <i class="fa fa-sort-desc"></i></a>
-                                <ul ng-show="showMenuReport" class="sub-top-menu">
+                            <li class="relative show-dropdown">
+                                <a class="pointer hvr-icon-hang" ng-init="showMenuReport = false">Report</a>
+                                <ul class="sub-top-menu">
                                     <li><a href="#report/deposit">{{ 'DEPOSIT' | translate }}</a></li>
                                     <li><a href="#report/withdrawn">{{ 'WITHDRAWN' | translate }}</a></li>
                                     <li><a href="#report/transfer">{{ 'TRANSFER' | translate }}</a></li>
@@ -107,7 +107,7 @@
                         </a>
                     </li>
                     <li class="dropdown ">
-                        <a class="ico-mobile hvr-push" href="#">
+                        <a class="ico-mobile hvr-push" ui-sref="mobileDownload">
                         </a>
                     </li>
                     <li class="dropdown ">
@@ -199,11 +199,11 @@
                         {{ 'PROMOTION' | translate }}
                         </a>
                     </li>
-                    <li class="dropdown alert-main ">
+                    <!-- <li class="dropdown alert-main ">
                         <a href="#">
                         {{ 'REFERRAL' | translate }}
                         </a>
-                    </li>
+                    </li> -->
                     <li ng-if="!currentUser" class="dropdown alert-main">
                         <a class="hvr-push" href="#register">
                         {{ 'JOIN_NOW' | translate }}

@@ -45,12 +45,28 @@ body {
     font-size: 12px;
 }
 
+.weight {
+    font-weight: bold;
+}
+
+.margin-top {
+    margin-top: 15px;
+}
+
+.margin-bottom {
+    margin-bottom: 15px;
+}
+
 .upper {
     text-transform: uppercase;
 }
 
 .cap {
     text-transform: capitalize;
+}
+
+.bx-wrapper .bx-viewport {
+    left: 0
 }
 
 li {
@@ -104,12 +120,40 @@ input[type="text"] {
     @extend %extend_1;
 }
 
-ul {
+.contact {
     margin-bottom: 15px;
+}
+
+ul {
+    margin-bottom: 0;
+    padding: 0;
 }
 
 input[type="password"] {
     @extend %extend_1;
+}
+
+.nav-stacked>li+li {
+    margin-top: 0;
+}
+
+.download {
+    height: 124px;
+    width: 100%;
+    background-position: center !important;
+}
+
+.border {
+    border: 1px solid $border;
+}
+
+.nav-stacked>li {
+    line-height: 35px;
+    border: 1px solid $border;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 .form-control {
@@ -150,8 +194,8 @@ input[type="reset"] {
     >div:first-child {
         margin-bottom: 15px;
     }
-    div{
-        .btn{
+    div {
+        .btn {
             width: 110px;
         }
     }
@@ -317,6 +361,16 @@ input[type="reset"] {
     &:before {
         content: " +";
     }
+}
+
+.show-dropdown:hover ul {
+    display: block !important;
+    -webkit-animation: swing 1s;
+    animation: swing 1s;
+}
+
+.sub-top-menu {
+    display: none;
 }
 
 .cursor {
