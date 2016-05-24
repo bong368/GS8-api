@@ -17,6 +17,21 @@
             $scope.view_tab = tab;
         }
 
+        $scope.changePTPassword = function () {
+            var req = {
+                method: 'PUT',
+                url: baseUrl + 'api/playtech/password',
+                data: {password: $scope.PT.password}
+            }
+
+            $http(req)
+                .then(function(response) {
+                    SweetAlert.swal("Thanks You!", "Updated Success ", "success");
+                }, function(error) {
+                    SweetAlert.swal("Sorry!", error.data.error, "error");
+                });
+        }
+
         $scope.ini();
     }
 

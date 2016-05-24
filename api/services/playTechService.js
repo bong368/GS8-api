@@ -26,7 +26,7 @@ module.exports = {
             PlayerPass: md5(user.password),
             Function: 'CreatePlayer'
         }
-        apiPlayTech.url = 'http://login.pt.gsoft88.net/createurl.aspx';
+        apiPlayTech.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
 
         return execplayTechApi(parameter);
     },
@@ -36,10 +36,10 @@ module.exports = {
 
         var parameter = {
             PlayerName: user.username,
-            PlayerPass: md5(user.password),
+            PlayerPass: user.password,
             Function: 'UpdatePlayerPassword'
         }
-        apiPlayTech.url = 'http://login.pt.gsoft88.net/createurl.aspx';
+        apiPlayTech.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
 
         return execplayTechApi(parameter);
     },
@@ -48,7 +48,7 @@ module.exports = {
     signin: function(username, password, gameCode) {
         var parameter = {
             username: username + '@HOKI',
-            password: md5(password),
+            password: password,
             gamecode: gameCode,
             langcode: 'en',
         }
@@ -56,7 +56,6 @@ module.exports = {
         apiPlayTech.url = 'http://login.pt.gsoft88.net/createurl.aspx';
 
         return execplayTechApi(parameter);
-
     },
 
     // Signout to playTech
@@ -145,6 +144,22 @@ module.exports = {
             });
 
             curl.on('error', curl.close.bind(curl));
+        })
+    },
+
+    getPassword: function(username) {
+        return new promise(function(resolve, reject) {
+            CredentialPlaytech.findOne({ username: username })
+                .then(function(playtech) {
+                    if (playtech) {
+                        return resolve(playtech.password);
+                    } else {
+                        Users.findOne({ username: username })
+                            .then(function(cred) {
+                                return resolve(md5(cred.password));
+                            })
+                    }
+                })
         })
     }
 };

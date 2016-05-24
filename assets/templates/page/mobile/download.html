@@ -1,41 +1,89 @@
 <div class="container main-content">
-        <h4 class="center upper">Mobile download</h4>
-        <div class="col-md-3">
-            <ul class="nav nav-tabs nav-stacked nav-pills" role="tablist">
-                <li ng-click="changeTab('playtech')" ng-class="{'active': view_tab == 'playtech'}">
-                    <span>Playtech Suite</span>
-                </li>
-                <li ng-click="changeTab('gameplay')" ng-class="{'active': view_tab == 'gameplay'}">
-                    <span>Gameplay Suite</span>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-9">
-            <div class="tab-content border">
-                <div class="row" ng-show="view_tab == 'playtech'">
+    <h4 class="center upper">Mobile download</h4>
+    <div class="col-md-3">
+        <ul class="nav nav-tabs nav-stacked nav-pills" role="tablist">
+            <li ng-click="changeTab('playtech')" ng-class="{'active': view_tab == 'playtech'}">
+                <span>Playtech Suite</span>
+            </li>
+            <li ng-click="changeTab('gameplay')" ng-class="{'active': view_tab == 'gameplay'}">
+                <span>Gameplay Suite</span>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-9">
+        <div class="tab-content border">
+            <div ng-show="view_tab == 'playtech'">
+                <div class="row">
                     <div class="col-md-4 center">
                         <p class="margin-top bold">PC</p>
                         <p>PC version</p>
-                        <div class="download" style="background: url(/images/mobile_pc.jpg) no-repeat"></div>
-                        <a href="">Click to download</a>
+                        <div class="download">
+                            <img src="/images/mobile_pc.png">
+                        </div>
+                        <a class="btn" href="">Download</a>
                     </div>
                     <div class="col-md-4 center">
                         <p class="margin-top bold">LIVE CASINO</p>
                         <p>Android version</p>
-                        <div class="download" style="background: url(/images/mobile_android.jpg) no-repeat"></div>
-                        <a href="">Click to download</a>
+                        <div class="download">
+                            <img src="/images/mobile_android.png">
+                        </div>
+                        <a class="btn" target="_blank" href="http://mlive.gsoft88.com">Download</a>
                     </div>
                     <div class="col-md-4 center">
                         <p class="margin-top bold">SLOTS</p>
                         <p>Android version</p>
-                        <div class="download" style="background: url(/images/mobile_android.jpg) no-repeat"></div>
-                        <a href="">Click to download</a>
+                        <div class="download">
+                            <img src="/images/mobile_android.png">
+                        </div>
+                        <a class="btn" target="_blank" href="http://mgames.gsoft88.com">Download</a>
                     </div>
                 </div>
-                <div ng-show="view_tab == 'gameplay'">
-                    This is tab 2 content
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="reset-pass-mobile">
+                            <div class="row">
+                                <div class="col-md-3 col-md-offset-2">
+                                    Username:
+                                </div>
+                                <div class="col-md-5">
+                                    <p class="bold">{{ currentUser.username + '@HOKI'}}</p class="bold">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-md-offset-2">
+                                    {{ 'PASS' | translate }}<sup class="required">*</sup>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="password" ng-model="PT.password" placeholder="Enter your password" />
+                                    <div class="ip-notice">
+                                        Pleasse choose password for PlayTech
+                                    </div>
+                                    <div class="ip-error" ng-bind-html="error.password"></div>
+                                </div>
+                            </div>
+                            <div class="row margin-bottom">
+                                <div class="col-md-3 col-md-offset-2">
+                                    {{ 'CONFIRM_PASS' | translate }}<sup class="required">*</sup>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="password" ng-model="PT.password_confirmation" placeholder="Re-enter password" />
+                                    <div class="ip-error" ng-show="PT.password_confirmation != PT.password">Password not match</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-md-offset-2"></div>
+                                <div class="col-md-5">
+                                    <button ng-click="changePTPassword()" class="btn">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+            <div ng-show="view_tab == 'gameplay'">
+                This is tab 2 content
+            </div>
         </div>
-
+    </div>
 </div>

@@ -56,6 +56,7 @@ module.exports.routes = {
     'GET /api/game/all/title': 'GameController.getTitle',
     'GET /api/slot/playtech': 'PlayTechController.getAllGame',
     'POST /api/playtech/signin': 'PlayTechController.signin',
+    'PUT /api/playtech/password': 'PlayTechController.updatePassword',
 
     // Test Api Area
     'POST /api/test': 'TestController.getTurnOver',
