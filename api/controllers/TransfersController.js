@@ -184,5 +184,34 @@ module.exports = {
             .then(function(transfers) {
                 res.json(200, transfers);
             })
+    },
+
+    updatePassword: function (req, res) {
+        var user = undefined;
+        tokenService.parse(req)
+            .then(function(cred) {
+                user = cred;
+                return CredentialPlaytech.findOne({username: user.username});
+            })
+            .then(function (playtech) {
+                if (playtech) {
+                    return CredentialPlaytech.update({username: user.username}, {password: req.body.password});
+                } else {
+                    return CredentialPlaytech.create({username: user.username, password: req.body.password})
+                }
+            })
+            .then(function (argument) {
+                var cred = {
+                    username: user.username,
+                    password: req.body.password
+                }
+                return playTechService.updatePassword(cred)
+            })
+            .then(function (result) {
+                if (result) {
+                    return res.json({result: result});
+                }
+            })
+            
     }
 };

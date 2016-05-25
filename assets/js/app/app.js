@@ -329,10 +329,25 @@
                 url: '/mobile/download',
                 templateUrl: '/templates/page/mobile/download.html',
                 controller: 'MobileDownloadController',
+                authorization: true,
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
                             '/js/app/controller/game/mobileDownloadController.js'
+                        ])
+                    }]
+                }
+            })
+
+            // Promotion Download
+            .state('promotion', {
+                url: '/promotion',
+                templateUrl: '/templates/page/promotion.html',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            //'/js/app/controller/game/playtechController.js',
+                            '//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.0.js'
                         ])
                     }]
                 }

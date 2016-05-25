@@ -49,16 +49,17 @@ module.exports.policies = {
         'create': ['isIntAmount', 'overApiAmount', 'meetTurnOverTransfer']
     },
 
+    'PlaytechController': {
+        'getAllGame': true,
+        'updatePassword': ['duplicatePassword']
+    },
+
     'TestController': {
         '*': true
     },
 
     'WftController': {
         'signin': true
-    },
-
-    'PlayTechController': {
-        'getAllGame': true
     },
     
     'EmailController': {

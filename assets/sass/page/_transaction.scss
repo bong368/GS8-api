@@ -1,8 +1,8 @@
 %extend_3 {
-    background-color: $color_kabul_64_approx;
+    background-color: $background;
     border: 1px solid $border;
     padding: 30px 0;
-    color: $color_silver_rust_approx;
+    color: $text;
     //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
     border-radius: 2px;
     margin-bottom: 15px;
@@ -92,7 +92,7 @@
             margin-left: 0;
         }
         li.active {
-            color: $color_silver_rust_approx;
+            color: $text;
         }
     }
     .transfer-form {
@@ -100,9 +100,9 @@
         padding: 15px;
     }
     .input-group-addon {
-        background-color: $color_kabul_approx;
+        background-color: $background_input;
         border-color: $border;
-        color: $color_silver_rust_approx;
+        color: $text;
         font-size: 12px;
         padding: 6px;
     }

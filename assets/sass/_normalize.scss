@@ -1,5 +1,5 @@
 %extend_1 {
-    background-color: $color_kabul_approx;
+    background-color: $background_input;
     border: 1px solid $border;
     color: $color_iron_approx;
     height: 30px !important;
@@ -21,7 +21,7 @@
 %extend_4 {
     line-height: 30px;
     height: 30px;
-    background-color: $color_kabul_approx;
+    background-color: $background_input;
     border: 1px solid $border;
     padding: 0 5px;
     //Instead of the line below you could use @include border-radius($radius, $vertical-radius)
@@ -138,14 +138,26 @@ input[type="password"] {
 }
 
 .download {
+    position: relative;
     margin-bottom: 15px;
     img {
         vertical-align: middle;
         border: 1px solid $border;
         box-shadow: 0 0 25px #7f745f;
     }
+    >div {
+        position: absolute;
+        width: 100px;
+        top: 12px;
+        right: 38px;
+        border: 1px solid $border;
+        img {
+            width: 100%;
+        }
+    }
 }
-.bold{
+
+.bold {
     font-weight: bold;
 }
 
@@ -269,15 +281,16 @@ input[type="reset"] {
 .relative {
     position: relative;
 }
-.reset-pass-mobile{
+
+.reset-pass-mobile {
     margin-top: 15px;
     border-top: 1px solid $border;
     padding: 15px;
     overflow: hidden;
-    input{
+    input {
         width: 100%;
     }
-    p{
+    p {
         margin-bottom: 15px;
     }
 }

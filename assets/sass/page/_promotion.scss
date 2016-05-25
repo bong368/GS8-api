@@ -1,0 +1,32 @@
+.promotion {
+    padding: 0;
+    border: 1px solid $border;
+    background: $background;
+    .panel {
+        background-color: transparent;
+        border: none;
+        padding: 10px;
+        .panel-heading {
+            padding: 0px;
+            img {
+                width: 100%;
+                border: 1px solid $border;
+            }
+        }
+        .panel-body {
+            border: 1px solid #7f745f;
+            border-top: none;
+            li {
+                list-style: none;
+                padding-left: 15px;
+                line-height: 30px;
+            }
+            ul {
+                margin-bottom: 0;
+                padding: 0;
+                padding: 15px;
+                margin-top: 15px;
+            }
+        }
+    }
+}

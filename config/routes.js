@@ -54,9 +54,9 @@ module.exports.routes = {
     // Gamesite Area (WFT Sporkbook)
     'GET /api/wft/signin': 'WftController.signin',
     'GET /api/game/all/title': 'GameController.getTitle',
-    'GET /api/slot/playtech': 'PlayTechController.getAllGame',
-    'POST /api/playtech/signin': 'PlayTechController.signin',
-    'PUT /api/playtech/password': 'PlayTechController.updatePassword',
+    'GET /api/slot/playtech': 'PlaytechController.getAllGame',
+    'POST /api/playtech/signin': 'PlaytechController.signin',
+    'PUT /api/playtech/password': 'PlaytechController.updatePassword',
 
     // Test Api Area
     'POST /api/test': 'TestController.getTurnOver',
