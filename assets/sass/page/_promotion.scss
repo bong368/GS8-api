@@ -28,5 +28,9 @@
                 margin-top: 15px;
             }
         }
+        .collapse.in {
+            -webkit-animation: slideInDown 1s;
+            animation: slideInDown 1s;
+        }
     }
 }
