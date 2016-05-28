@@ -113,7 +113,11 @@ module.exports = {
             operFlag: 1,
             credit: ticket.amount
         };
-        return encryptAPI(parameter)
+        return this.getPassword(ticket.username)
+            .then(function (password) {
+                parameter.password = password;
+                return encryptAPI(parameter);
+            })
             .then(function(result) {
                 var parameter = {
                     data: result.data.data,
@@ -133,7 +137,11 @@ module.exports = {
             operFlag: 0,
             credit: ticket.amount
         };
-        return encryptAPI(parameter)
+        return this.getPassword(ticket.username)
+            .then(function (password) {
+                parameter.password = password;
+                return encryptAPI(parameter);
+            })
             .then(function(result) {
                 var parameter = {
                     data: result.data.data,
