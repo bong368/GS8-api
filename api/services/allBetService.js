@@ -9,7 +9,7 @@ queryString = require('query-string');
 promise = require('bluebird');
 apiAllBet = {
     title: 'AllBet Casino',
-    url: 'https://api3.abgapi.net',
+    url: 'https://api3.abgapi.net/',
     agent: 'vm237a',
     propertyId: '8066995'
 }
@@ -30,7 +30,8 @@ module.exports = {
                 var parameter = {
                     data: result.data.data,
                     sign: result.data.sign,
-                    propertyId: apiAllBet.propertyId
+                    propertyId: apiAllBet.propertyId,
+                    method: 'query_handicap'
                 }
                 return execAllBetApi(parameter);
             })
@@ -127,7 +128,7 @@ var execAllBetApi = function(parameter) {
 
         query = '?' + queryString.stringify(parameter);
 
-        curl.setOpt('URL', apiAllBet.url + query);
+        curl.setOpt('URL', apiAllBet.url + parameter.method + query);
         console.log(apiAllBet.url + query);
         curl.on('end', function(statusCode, body, headers) {
             console.log(body);
