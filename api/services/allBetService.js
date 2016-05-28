@@ -83,10 +83,22 @@ module.exports = {
     getBalance: function(username) {
 
         var parameter = {
-            username: username,
-            action: 'balance'
-        }
-        return execWftApi(parameter);
+            client: user.username
+        };
+        return this.getPassword(username)
+            .then(function (password) {
+                parameter.password = md5(password).substring(0, 11);
+                return encryptAPI(parameter);
+            })
+        
+            .then(function(result) {
+                var parameter = {
+                    data: result.data.data,
+                    sign: result.data.sign,
+                    method: 'get_balance'
+                }
+                return execAllBetApi(parameter);
+            })
     },
 
     // Deposit to AllBet
@@ -111,6 +123,16 @@ module.exports = {
             serial: datetimeService.getmmdd() + 'WD' + ticket.id
         }
         return execWftApi(parameter);
+    },
+
+    getPassword: function(username) {
+        return new promise(function(resolve, reject) {
+            
+            Users.findOne({ username: username })
+                .then(function(cred) {
+                    return resolve(md5(cred.password));
+                })      
+        })
     },
 
     // Return title of game
