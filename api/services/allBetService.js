@@ -108,7 +108,7 @@ module.exports = {
     deposit: function(ticket) {
 
         var parameter = {
-            sn: (apiAllBet.propertyId.toString() + ticket.id.toString() + '00000000000000000000').substring(0, 19),
+            sn: (apiAllBet.propertyId.toString() + ticket.id.toString() + '00000000000000000000').substring(0, 20),
             client: ticket.username,
             operFlag: 1,
             credit: ticket.amount
@@ -132,7 +132,7 @@ module.exports = {
     withdrawn: function(ticket) {
 
         var parameter = {
-            sn: (apiAllBet.propertyId.toString() + ticket.id.toString() + '00000000000000000000').substring(0, 19),
+            sn: (apiAllBet.propertyId.toString() + ticket.id.toString() + '00000000000000000000').substring(0, 20),
             client: ticket.username,
             operFlag: 0,
             credit: ticket.amount
