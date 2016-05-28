@@ -60,6 +60,7 @@ module.exports.routes = {
 
     // Test Api Area
     'POST /api/test': 'TestController.test',
+    'GET /api/queryHandicap': 'TestController.queryHandicap',
     // Test Api Area
     'POST /api/curl': 'TestController.runCurl',
 

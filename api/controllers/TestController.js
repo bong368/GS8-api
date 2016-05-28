@@ -17,6 +17,13 @@ module.exports = {
             })
     },
 
+    queryHandicap: function(req, res) {
+        allBetService.queryHandicap()
+        	.then(function(data) {
+                return res.json({ data: data });
+            })
+    },
+
     wftSignout: function(req, res) {
         wftService.signout('tester')
             .then(function(bonus) {
