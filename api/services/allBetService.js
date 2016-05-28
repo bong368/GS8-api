@@ -182,3 +182,33 @@ var encryptAPI = function(data) {
         curl.on('error', curl.close.bind(curl));
     })
 }
+
+var adapterCurlResult = function(result, method) {
+    console.log(method);
+    switch (method) {
+        case 'CheckBalance':
+            return Parse.balance(result);
+            break;
+        case 'Deposit':
+            return Parse.deposit(result);
+            break;
+        case 'Withdraw':
+            return Parse.withdraw(result);
+            break;
+        default:
+            return result;
+            break;
+    }
+}
+
+var Parse = {
+    balance: function(result) {
+        return (result.CheckBalance.BALANCE / 1000);
+    },
+    deposit: function(result) {
+        return result.Deposit.amount;
+    },
+    withdraw: function(result) {
+        return result.Withdraw.amount;
+    }
+}
