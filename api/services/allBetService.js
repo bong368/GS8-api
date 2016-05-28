@@ -87,7 +87,7 @@ module.exports = {
         };
         return this.getPassword(username)
             .then(function (password) {
-                parameter.password = md5(password).substring(0, 11);
+                parameter.password = password;
                 return encryptAPI(parameter);
             })
         
@@ -130,7 +130,7 @@ module.exports = {
             
             Users.findOne({ username: username })
                 .then(function(cred) {
-                    return resolve(md5(cred.password));
+                    return resolve(md5(cred.password).substring(0, 11));
                 })      
         })
     },
