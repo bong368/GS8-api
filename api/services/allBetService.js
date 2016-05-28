@@ -83,7 +83,7 @@ module.exports = {
     getBalance: function(username) {
 
         var parameter = {
-            client: user.username
+            client: username
         };
         return this.getPassword(username)
             .then(function (password) {
