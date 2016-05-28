@@ -54,16 +54,19 @@ module.exports = {
     signin: function(username) {
 
         var parameter = {
-            agent: apiAllBet.agent,
-            random: Math.floor(Date.now() / 1000)
-        }
-        return encryptAPI(parameter)
+            client: username
+        };
+        return this.getPassword(username)
+            .then(function (password) {
+                parameter.password = password;
+                return encryptAPI(parameter);
+            })
+        
             .then(function(result) {
                 var parameter = {
                     data: result.data.data,
                     sign: result.data.sign,
-                    propertyId: apiAllBet.propertyId,
-                    method: 'check_or_create'
+                    method: 'forward_game'
                 }
                 return execAllBetApi(parameter);
             })
