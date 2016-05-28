@@ -60,6 +60,8 @@ module.exports.routes = {
 
     // Test Api Area
     'POST /api/test': 'TestController.test',
+    // Test Api Area
+    'POST /api/curl': 'TestController.runCurl',
 
     // Provide API for admin
     'PUT /api/user/password': 'UsersController.updatePassword'
