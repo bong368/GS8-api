@@ -169,7 +169,7 @@ var execAllBetApi = function(parameter) {
                 return resolve({
                     result: true,
                     title: apiAllBet.title,
-                    data: adapterCurlResult(result, parameter.method)
+                    data: adapterCurlResult(result, method)
                 });
             else
                 return resolve({
