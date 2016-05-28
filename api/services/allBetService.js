@@ -16,6 +16,10 @@ apiAllBet = {
 
 module.exports = {
 
+    test: function(argument) {
+        /* body... */
+    },
+
     queryHandicap: function() {
         var parameter = {
             agent: apiAllBet.agent,
@@ -157,17 +161,20 @@ var encryptAPI = function(data) {
 
         var curl = new Curl(),
             url = 'http://ag.hokibet188.com/api/public/index.php/callApi/encrypt',
-
-            data = queryString.stringify(data);
-
+            query = {
+                plain_text: queryString.stringify(data)
+            };
+        query = queryString.stringify(query);
+        console.log(query);
         curl.setOpt(Curl.option.URL, url);
-        curl.setOpt(Curl.option.POSTFIELDS, data);
+        curl.setOpt(Curl.option.POSTFIELDS, query);
         curl.setOpt(Curl.option.HTTPHEADER, ['User-Agent: node-libcurl/1.0']);
         curl.setOpt(Curl.option.VERBOSE, true);
 
         curl.perform();
 
-        curl.on('end', function(statusCode, body) {console.log(body);
+        curl.on('end', function(statusCode, body) {
+            console.log(body);
             var result = JSON.parse(body);
             return resolve({
                 result: true,
@@ -178,22 +185,4 @@ var encryptAPI = function(data) {
 
         curl.on('error', curl.close.bind(curl));
     })
-}
-
-var adapterCurlResult = function(result, method) {
-    if (method == 'getTurnOver') {
-        return getTurnOver(result.ticket);
-    } else
-        return result;
-}
-
-// Calculate Turn Over
-var getTurnOver = function(ticket) {
-    var turnOver = 0;
-
-    _.forEach(ticket, function(value, key) {
-        turnOver += parseInt(value.a);
-    });
-
-    return turnOver;
 }
