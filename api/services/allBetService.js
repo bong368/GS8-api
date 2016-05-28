@@ -25,7 +25,7 @@ module.exports = {
             agent: apiAllBet.agent,
             random: Math.floor(Date.now() / 1000)
         }
-        encryptAPI(parameter)
+        return encryptAPI(parameter)
             .then(function(result) {
                 var parameter = {
                     data: result.data.data,
@@ -129,7 +129,7 @@ var execAllBetApi = function(parameter) {
         query = '?' + queryString.stringify(parameter);
 
         curl.setOpt('URL', apiAllBet.url + parameter.method + query);
-        console.log(apiAllBet.url + query);
+        console.log(apiAllBet.url + parameter.method + query);
         curl.on('end', function(statusCode, body, headers) {
             console.log(body);
             var xml = body.replace(/&/g, "&amp;");
