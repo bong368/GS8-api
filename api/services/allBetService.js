@@ -234,6 +234,9 @@ var adapterCurlResult = function(result, method) {
         case 'Withdraw':
             return Parse.withdraw(result);
             break;
+        case 'forward_game':
+            return Parse.signin(result);
+            break;
         default:
             return result;
             break;
@@ -242,12 +245,12 @@ var adapterCurlResult = function(result, method) {
 
 var Parse = {
     balance: function(result) {
-        return (result.balance);
+        return result.balance;
     },
     deposit: function(result) {
         return result.Deposit.amount;
     },
-    withdraw: function(result) {
-        return result.Withdraw.amount;
+    signin: function(result) {
+        return result.gameLoginUrl;
     }
 }
