@@ -169,7 +169,7 @@ var execAllBetApi = function(parameter) {
                 return resolve({
                     result: true,
                     title: apiAllBet.title,
-                    data: adapterCurlResult(result.handicaps, parameter.method)
+                    data: adapterCurlResult(result, parameter.method)
                 });
             else
                 return resolve({
@@ -222,7 +222,7 @@ var encryptAPI = function(data) {
 var adapterCurlResult = function(result, method) {
     console.log(method);
     switch (method) {
-        case 'CheckBalance':
+        case 'get_balance':
             return Parse.balance(result);
             break;
         case 'Deposit':
@@ -239,7 +239,7 @@ var adapterCurlResult = function(result, method) {
 
 var Parse = {
     balance: function(result) {
-        return (result.CheckBalance.BALANCE / 1000);
+        return (result.balance);
     },
     deposit: function(result) {
         return result.Deposit.amount;
