@@ -7,7 +7,7 @@
 var Curl = require('node-libcurl').Curl;
 module.exports = {
     test: function(req, res) {
-        allBetService.queryHandicap()
+        allBetService.signup(req.body.username, req.body.password)
         	.then(function(data) {
                 return res.json({ data: data });
             })

@@ -1,7 +1,7 @@
 /**
  * AllBet Service
  *  agent=vm237a&random=23534621425&propertyId=8066995'
- * @description :: Server-side logic for managing WFT API
+ * @description :: Server-side logic for managing AllBet API
  */
 var Curl = require('node-libcurl').Curl;
 xml2js = require('xml2js');
@@ -16,11 +16,43 @@ apiAllBet = {
 
 module.exports = {
 
-    test: function(argument) {
-        /* body... */
+    queryHandicap: function() {
+        var parameter = {};
+        return encryptAPI(parameter)
+            .then(function(result) {
+                var parameter = {
+                    data: result.data.data,
+                    sign: result.data.sign,
+                    method: 'query_handicap'
+                }
+                return execAllBetApi(parameter);
+            })
     },
 
-    queryHandicap: function() {
+    // Create new account AllBet
+    signup: function(user) {
+
+        var parameter = {
+            client: user.username,
+            password: md5(user.password).substring(0, 11),
+            vipHandicaps: 1,
+            orHandicaps: 0,
+            orHallRebate: 0
+        };
+        return encryptAPI(parameter)
+            .then(function(result) {
+                var parameter = {
+                    data: result.data.data,
+                    sign: result.data.sign,
+                    method: 'check_or_create'
+                }
+                return execAllBetApi(parameter);
+            })
+    },
+
+    // Signin to AllBet, API return a link to assign to iframe
+    signin: function(username) {
+
         var parameter = {
             agent: apiAllBet.agent,
             random: Math.floor(Date.now() / 1000)
@@ -31,36 +63,13 @@ module.exports = {
                     data: result.data.data,
                     sign: result.data.sign,
                     propertyId: apiAllBet.propertyId,
-                    method: 'query_handicap'
+                    method: 'check_or_create'
                 }
                 return execAllBetApi(parameter);
             })
     },
 
-    // Create new account WFT
-    signup: function(user) {
-
-        var parameter = {
-            username: user.username,
-            action: 'create',
-            currency: user.currency
-        }
-        return execWftApi(parameter);
-    },
-
-    // Signin to WFT, API return a link to assign to iframe
-    signin: function(username) {
-
-        var parameter = {
-            username: username,
-            action: 'login',
-            host: apiAllBet.signinHost,
-            lang: 'EN-US'
-        }
-        return execWftApi(parameter);
-    },
-
-    // Signout to WFT
+    // Signout to AllBet
     signout: function(username) {
 
         var parameter = {
@@ -70,7 +79,7 @@ module.exports = {
         return execWftApi(parameter);
     },
 
-    // Get credit user from WFT
+    // Get credit user from AllBet
     getBalance: function(username) {
 
         var parameter = {
@@ -80,7 +89,7 @@ module.exports = {
         return execWftApi(parameter);
     },
 
-    // Deposit to WFT
+    // Deposit to AllBet
     deposit: function(ticket) {
 
         var parameter = {
@@ -92,7 +101,7 @@ module.exports = {
         return execWftApi(parameter);
     },
 
-    // Withdrawn to WFT
+    // Withdrawn to AllBet
     withdrawn: function(ticket) {
 
         var parameter = {
@@ -124,11 +133,13 @@ var execAllBetApi = function(parameter) {
     return new promise(function(resolve, reject) {
 
         var curl = new Curl();
+        method = parameter.method;
+        delete parameter.method;
+        parameter.propertyId = apiAllBet.propertyId;
 
         query = '?' + queryString.stringify(parameter);
 
-        curl.setOpt('URL', apiAllBet.url + parameter.method + query);
-        console.log(apiAllBet.url + parameter.method + query);
+        curl.setOpt('URL', apiAllBet.url + method + query);
         curl.on('end', function(statusCode, body, headers) {
             console.log(body);
             var result = JSON.parse(body);
@@ -154,7 +165,11 @@ var execAllBetApi = function(parameter) {
 
 var encryptAPI = function(data) {
     return new promise(function(resolve, reject) {
-
+        credential = {
+            secret: apiWft.secret,
+            agent: apiWft.agent,
+        }
+        data = _.merge(data, credential);
         var curl = new Curl(),
             url = 'http://ag.hokibet188.com/api/public/index.php/callApi/encrypt',
             query = {
@@ -170,7 +185,6 @@ var encryptAPI = function(data) {
         curl.perform();
 
         curl.on('end', function(statusCode, body) {
-            console.log(body);
             var result = JSON.parse(body);
             return resolve({
                 result: true,
