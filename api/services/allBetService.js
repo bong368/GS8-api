@@ -122,7 +122,7 @@ module.exports = {
                 var parameter = {
                     data: result.data.data,
                     sign: result.data.sign,
-                    method: 'get_balance'
+                    method: 'agent_client_transfer'
                 }
                 return execAllBetApi(parameter);
             })
@@ -146,7 +146,7 @@ module.exports = {
                 var parameter = {
                     data: result.data.data,
                     sign: result.data.sign,
-                    method: 'get_balance'
+                    method: 'agent_client_transfer'
                 }
                 return execAllBetApi(parameter);
             })
