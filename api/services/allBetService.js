@@ -166,8 +166,8 @@ var execAllBetApi = function(parameter) {
 var encryptAPI = function(data) {
     return new promise(function(resolve, reject) {
         credential = {
-            secret: apiWft.secret,
-            agent: apiWft.agent,
+            random: Math.floor(Date.now() / 1000),
+            agent: apiAllBet.agent,
         }
         data = _.merge(data, credential);
         var curl = new Curl(),
