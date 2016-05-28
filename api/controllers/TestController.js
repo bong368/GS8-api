@@ -6,11 +6,9 @@
  */
 
 module.exports = {
-	getTurnOver: function (req, res) {
-		grossApiGameService.getTurnOver(req.body.username, req.body.gamesite)
-			.then(function (bonus) {
-				return res.json({bonus: bonus});
-			})
+	test: function (req, res) {
+		allBetService.queryHandicap();
+			
 		
 	},
 
