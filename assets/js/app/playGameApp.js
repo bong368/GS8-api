@@ -60,13 +60,27 @@
             $stateProvider
 
             // Home routing
-                .state('playtech', {
+            .state('playtech', {
                 url: '/playtech/:id',
                 controller: 'PlaytechController',
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
                             '/js/app/controller/playgame/playtechController.js',
+                        ])
+                    }]
+                }
+
+                
+            })
+
+            .state('allbet', {
+                url: '/allbet',
+                controller: 'AllBetController',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            '/js/app/controller/playgame/allBetController.js',
                         ])
                     }]
                 }

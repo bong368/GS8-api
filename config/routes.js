@@ -51,12 +51,20 @@ module.exports.routes = {
     'POST /api/transaction/report/withdrawn': 'WithdrawnsController.index',
     'POST /api/transaction/report/transfer': 'TransfersController.index',
 
-    // Gamesite Area (WFT Sporkbook)
-    'GET /api/wft/signin': 'WftController.signin',
+    // Gamesite Area 
     'GET /api/game/all/title': 'GameController.getTitle',
+
+    //(WFT Sporkbook)
+    'GET /api/wft/signin': 'WftController.signin',
+
+    //(PlayTech)
+    
     'GET /api/slot/playtech': 'PlaytechController.getAllGame',
     'POST /api/playtech/signin': 'PlaytechController.signin',
     'PUT /api/playtech/password': 'PlaytechController.updatePassword',
+    
+    //(AllBet)
+    'POST /api/allbet/signin': 'AllBetController.signin',
 
     // Test Api Area
     'POST /api/test': 'TestController.test',
