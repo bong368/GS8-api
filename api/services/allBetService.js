@@ -108,24 +108,40 @@ module.exports = {
     deposit: function(ticket) {
 
         var parameter = {
-            username: ticket.username,
-            action: 'deposit',
-            amount: ticket.amount,
-            serial: datetimeService.getmmdd() + 'DP' + ticket.id
-        }
-        return execWftApi(parameter);
+            sn: apiAllBet.propertyId.toString() + ticket.id,
+            client: ticket.username,
+            operFlag: 1,
+            credit: ticket.amount
+        };
+        return encryptAPI(parameter)
+            .then(function(result) {
+                var parameter = {
+                    data: result.data.data,
+                    sign: result.data.sign,
+                    method: 'get_balance'
+                }
+                return execAllBetApi(parameter);
+            })
     },
 
     // Withdrawn to AllBet
     withdrawn: function(ticket) {
 
         var parameter = {
-            username: ticket.username,
-            action: 'withdraw',
-            amount: ticket.amount,
-            serial: datetimeService.getmmdd() + 'WD' + ticket.id
-        }
-        return execWftApi(parameter);
+            sn: apiAllBet.propertyId.toString() + ticket.id,
+            client: ticket.username,
+            operFlag: 0,
+            credit: ticket.amount
+        };
+        return encryptAPI(parameter)
+            .then(function(result) {
+                var parameter = {
+                    data: result.data.data,
+                    sign: result.data.sign,
+                    method: 'get_balance'
+                }
+                return execAllBetApi(parameter);
+            })
     },
 
     getPassword: function(username) {
