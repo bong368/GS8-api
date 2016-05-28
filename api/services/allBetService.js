@@ -124,7 +124,6 @@ var execAllBetApi = function(parameter) {
     return new promise(function(resolve, reject) {
 
         var curl = new Curl();
-        parser = new xml2js.Parser({ explicitArray: false });
 
         query = '?' + queryString.stringify(parameter);
 
@@ -132,23 +131,19 @@ var execAllBetApi = function(parameter) {
         console.log(apiAllBet.url + parameter.method + query);
         curl.on('end', function(statusCode, body, headers) {
             console.log(body);
-            var xml = body.replace(/&/g, "&amp;");
-
-            parser.parseString(xml, function(err, result) {
-                if (result.response.error_code === 'OK')
-                    return resolve({
-                        result: true,
-                        title: apiAllBet.title,
-                        data: adapterCurlResult(result.response.result, parameter.method)
-                    });
-                else
-                    return resolve({
-                        result: false,
-                        title: apiAllBet.title,
-                        error: result.response.errtext
-                    });
-
-            });
+            var result = JSON.parse(body);
+            if (result.error_code === 'OK')
+                return resolve({
+                    result: true,
+                    title: apiAllBet.title,
+                    data: adapterCurlResult(result.handicaps, parameter.method)
+                });
+            else
+                return resolve({
+                    result: false,
+                    title: apiAllBet.title,
+                    error: result.message
+                });
             this.close();
         });
 
