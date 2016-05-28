@@ -35,8 +35,8 @@ module.exports = {
         var parameter = {
             client: user.username,
             password: md5(user.password).substring(0, 11),
-            vipHandicaps: 1,
-            orHandicaps: 0,
+            vipHandicaps: 12,
+            orHandicaps: 11,
             orHallRebate: 0
         };
         return encryptAPI(parameter)
