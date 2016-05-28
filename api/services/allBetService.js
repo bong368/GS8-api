@@ -135,18 +135,18 @@ var execAllBetApi = function(parameter) {
             var xml = body.replace(/&/g, "&amp;");
 
             parser.parseString(xml, function(err, result) {
-                // if (result.response.errcode == 0)
-                //     return resolve({
-                //         result: true,
-                //         title: apiAllBet.title,
-                //         data: adapterCurlResult(result.response.result, parameter.method)
-                //     });
-                // else
-                //     return resolve({
-                //         result: false,
-                //         title: apiAllBet.title,
-                //         error: result.response.errtext
-                //     });
+                if (result.response.error_code === 'OK')
+                    return resolve({
+                        result: true,
+                        title: apiAllBet.title,
+                        data: adapterCurlResult(result.response.result, parameter.method)
+                    });
+                else
+                    return resolve({
+                        result: false,
+                        title: apiAllBet.title,
+                        error: result.response.errtext
+                    });
 
             });
             this.close();
