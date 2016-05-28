@@ -4,7 +4,7 @@
  * @description :: Server-side logic for managing AllBet API
  */
 var Curl = require('node-libcurl').Curl;
-xml2js = require('xml2js');
+md5 = require('md5');
 queryString = require('query-string');
 promise = require('bluebird');
 apiAllBet = {
