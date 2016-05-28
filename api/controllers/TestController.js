@@ -7,9 +7,10 @@
 var Curl = require('node-libcurl').Curl;
 module.exports = {
     test: function(req, res) {
-        allBetService.queryHandicap();
-
-
+        allBetService.queryHandicap()
+        	.then(function(data) {
+                return res.json({ data: data });
+            })
     },
 
     wftSignout: function(req, res) {
