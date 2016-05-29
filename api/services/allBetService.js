@@ -175,7 +175,7 @@ module.exports = {
             method: 'getTurnOver'
         }
         return execWftApi(parameter);
-    }
+    },
 
     // Create default account (anonymous)
     createAnonymous: function() {
