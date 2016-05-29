@@ -72,6 +72,24 @@ module.exports = {
             })
     },
 
+    // Signin to AllBet, API return a link to assign to iframe
+    anonymousMode: function() {
+
+        var parameter = {
+            client: 'anonymous',
+            password: '123456'
+        };
+        return encryptAPI(parameter)        
+            .then(function(result) {
+                var parameter = {
+                    data: result.data.data,
+                    sign: result.data.sign,
+                    method: 'forward_game'
+                }
+                return execAllBetApi(parameter);
+            })
+    },
+
     // Signout to AllBet
     signout: function(username) {
 
