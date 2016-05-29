@@ -5,7 +5,7 @@
             <li ng-click="changeTab('playtech')" ng-class="{'active': view_tab == 'playtech'}">
                 <span>Playtech Suite</span>
             </li>
-            <li ng-click="changeTab('gameplay')" ng-class="{'active': view_tab == 'gameplay'}">
+            <li ng-click="changeTab('allbet')" ng-class="{'active': view_tab == 'allbet'}">
                 <span>Gameplay Suite</span>
             </li>
         </ul>
@@ -87,8 +87,72 @@
                     </div>
                 </div>
             </div>
-            <div ng-show="view_tab == 'gameplay'">
-                This is tab 2 content
+            <div ng-show="view_tab == 'allbet'">
+                <div class="row">          
+                    <div class="col-md-6 center">
+                        <p class="margin-top bold">LIVE CASINO</p>
+                        <p>Android version</p>
+                        <div class="download">
+                            <img src="/images/mobile_android.png">
+                            <div class="allbet-qr">
+                                <img src="/images/qr_allbet.jpg">
+                            </div>
+                        </div>
+                        <a class="btn" target="_blank" href="https://www.abgapp.net/">Download</a>
+                    </div>
+                    <div class="col-md-6 center">
+                        <p class="margin-top bold">SLOTS</p>
+                        <p>Android version</p>
+                        <div class="download">
+                            <img src="/images/mobile_android.png">
+                            <div class="allbet-qr">
+                                <img src="/images/qr_allbet.jpg">
+                            </div>
+                        </div>
+                        <a class="btn" target="_blank" href="https://www.abgapp.net/">Download</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="reset-pass-mobile">
+                            <div class="row">
+                                <div class="col-md-3 col-md-offset-2">
+                                    Username:
+                                </div>
+                                <div class="col-md-5">
+                                    <p class="bold">{{ currentUser.username + '@HOKI'}}</p class="bold">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-md-offset-2">
+                                    {{ 'PASS' | translate }}<sup class="required">*</sup>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="password" ng-model="AB.password" placeholder="Enter your password" />
+                                    <div class="ip-notice">
+                                        Pleasse choose password for AllBet
+                                    </div>
+                                    <div class="ip-error" ng-bind-html="error.password"></div>
+                                </div>
+                            </div>
+                            <div class="row margin-bottom">
+                                <div class="col-md-3 col-md-offset-2">
+                                    {{ 'CONFIRM_PASS' | translate }}<sup class="required">*</sup>
+                                </div>
+                                <div class="col-md-5">
+                                    <input type="password" ng-model="AB.password_confirmation" placeholder="Re-enter password" />
+                                    <div class="ip-error" ng-show="AB.password_confirmation != AB.password">Password not match</div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 col-md-offset-2"></div>
+                                <div class="col-md-5">
+                                    <button ng-click="changeABPassword()" class="btn">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

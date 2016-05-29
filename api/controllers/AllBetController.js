@@ -21,5 +21,33 @@ module.exports = {
 	        .catch(function (error) {
 	        	return res.json(200, {error : error});
 	        })
+    },
+
+    updatePassword: function (req, res) {
+        var user = undefined;
+        tokenService.parse(req)
+            .then(function(cred) {
+                user = cred;
+                return CredentialAllBet.findOne({username: user.username});
+            })
+            .then(function (allBet) {
+                if (allBet) {
+                    return CredentialAllBet.update({username: user.username}, {password: req.body.password});
+                } else {
+                    return CredentialAllBet.create({username: user.username, password: req.body.password});
+                }
+            })
+            .then(function (argument) {
+                var cred = {
+                    username: user.username,
+                    password: req.body.password
+                };
+                return allBetService.updatePassword(cred);
+            })
+            .then(function (result) {
+                if (result) {
+                    return res.json({result: result});
+                }
+            })
     }
 };

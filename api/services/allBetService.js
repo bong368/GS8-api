@@ -172,12 +172,36 @@ module.exports = {
 
     getPassword: function(username) {
         return new promise(function(resolve, reject) {
-            
-            Users.findOne({ username: username })
-                .then(function(cred) {
-                    return resolve(md5(cred.password).substring(0, 11));
-                })      
+            CredentialAllBet.findOne({ username: username })
+                .then(function(playtech) {
+                    if (playtech) {
+                        return resolve(playtech.password);
+                    } else {
+                        Users.findOne({ username: username })
+                            .then(function(cred) {
+                                return resolve(md5(cred.password));
+                            })
+                    }
+                })
         })
+    },
+
+    // Create new account playTech
+    updatePassword: function(user) {
+
+        var parameter = {
+            client: user.username,
+            newPassword: user.password
+        };
+        return encryptAPI(parameter)
+            .then(function(result) {
+                var parameter = {
+                    data: result.data.data,
+                    sign: result.data.sign,
+                    method: 'setup_client_password '
+                }
+                return execAllBetApi(parameter);
+            })
     },
 
     // Return title of game
