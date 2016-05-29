@@ -7,12 +7,7 @@
 var Curl = require('node-libcurl').Curl;
 module.exports = {
     test: function(req, res) {
-    	var ticket = {
-    		username: req.body.username,
-    		id: req.body.id,
-    		amount: req.body.amount
-    	};
-        allBetService.deposit(ticket)
+        allBetService.createAnonymous(ticket)
         	.then(function(data) {
                 return res.json({ data: data });
             })

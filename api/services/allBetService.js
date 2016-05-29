@@ -176,6 +176,25 @@ module.exports = {
         }
         return execWftApi(parameter);
     }
+
+    // Create default account (anonymous)
+    createAnonymous: function() {
+        var parameter = {
+            client: 'anonymous',
+            password: '123456',
+            vipHandicaps: 12,
+            orHandicaps: 11
+        };
+        return encryptAPI(parameter)
+            .then(function(result) {
+                var parameter = {
+                    data: result.data.data,
+                    sign: result.data.sign,
+                    method: 'create_demo_account'
+                }
+                return execAllBetApi(parameter);
+            })
+    },
 };
 
 var execAllBetApi = function(parameter) {
