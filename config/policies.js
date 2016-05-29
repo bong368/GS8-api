@@ -61,6 +61,10 @@ module.exports.policies = {
     'WftController': {
         'signin': true
     },
+
+    'AllBetController': {
+        'signin': true
+    },
     
     'EmailController': {
         '*': true
