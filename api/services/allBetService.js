@@ -173,9 +173,9 @@ module.exports = {
     getPassword: function(username) {
         return new promise(function(resolve, reject) {
             CredentialAllBet.findOne({ username: username })
-                .then(function(playtech) {
-                    if (playtech) {
-                        return resolve(playtech.password);
+                .then(function(allbet) {console.log(allbet);
+                    if (allbet) {
+                        return resolve(allbet.password);
                     } else {
                         Users.findOne({ username: username })
                             .then(function(cred) {
