@@ -26,11 +26,11 @@ module.exports = {
     updatePassword: function (req, res) {
         var user = undefined;
         tokenService.parse(req)
-            .then(function(cred) {console.log(cred);
+            .then(function(cred) {
                 user = cred;
                 return CredentialAllBet.findOne({username: user.username});
             })
-            .then(function (allBet) {console.log(allBet);
+            .then(function (allBet) {
                 if (allBet) {
                     return CredentialAllBet.update({username: user.username}, {password: req.body.password});
                 } else {
