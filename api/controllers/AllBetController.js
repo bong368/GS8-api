@@ -26,7 +26,7 @@ module.exports = {
     updatePassword: function (req, res) {
         var user = undefined;
         tokenService.parse(req)
-            .then(function(cred) {
+            .then(function(cred) {console.log(cred);
                 user = cred;
                 return CredentialAllBet.findOne({username: user.username});
             })
