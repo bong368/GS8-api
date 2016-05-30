@@ -30,7 +30,7 @@ module.exports = {
                 user = cred;
                 return CredentialAllBet.findOne({username: user.username});
             })
-            .then(function (allBet) {
+            .then(function (allBet) {console.log(allBet);
                 if (allBet) {
                     return CredentialAllBet.update({username: user.username}, {password: req.body.password});
                 } else {
