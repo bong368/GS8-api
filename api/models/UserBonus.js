@@ -9,8 +9,14 @@ module.exports = {
 	tableName: 'user_bonus',
 
     attributes: {
+        created_at: {
+            type: 'datetime'
+        },
+        updated_at: {
+            type: 'datetime'
+        },
         bonus_id: {
-            type: 'integer'
+            model : "bonus"
         },
         turnover: {
         	type: 'float'

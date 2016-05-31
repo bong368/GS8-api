@@ -50,6 +50,7 @@ module.exports.routes = {
     'POST /api/transaction/report/deposit': 'DepositsController.index',
     'POST /api/transaction/report/withdrawn': 'WithdrawnsController.index',
     'POST /api/transaction/report/transfer': 'TransfersController.index',
+    'POST /api/bonus/report': 'BonusController.getUserBonus',
 
     // Gamesite Area 
     'GET /api/game/all/title': 'GameController.getTitle',

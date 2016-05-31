@@ -271,6 +271,26 @@
                 }
             })
 
+            // Transfer report route
+            .state('bonusReport', {
+                url: '/report/bonus',
+                templateUrl: '/templates/page/report/bonus.html',
+                controller: 'BonusReportController',
+                authorization: true,
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            '/js/app/controller/report/bonusReportController.js',
+                            '/bower_components/angularjs-datepicker/src/js/angular-datepicker.js',
+                            '/bower_components/angularjs-datepicker/src/css/angular-datepicker.css',
+                            '/js/app/service/DateTimeModule.js',
+                            '/js/app/service/ExcelModule.js',
+                            '/bower_components/angular-utils-pagination/dirPagination.js'
+                        ])
+                    }]
+                }
+            })
+
             // Term Condition route
             .state('termCondition', {
                 url: '/term-condition',
@@ -346,7 +366,6 @@
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
-                            //'/js/app/controller/game/playtechController.js',
                             '//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.0.js'
                         ])
                     }]

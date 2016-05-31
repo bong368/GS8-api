@@ -25,6 +25,16 @@ module.exports = {
 			.then(function (bonus) {
 				return res.json({data: bonus});
 			})
+	},
+
+	getUserBonus: function (req, res) {
+		tokenService.parse(req)
+			.then(function (user) {console.log(user);
+				return UserBonus.find({username: user.username}).populate('bonus_id')
+			})
+			.then(function (bonus) {console.log(bonus);
+				return res.json(bonus);
+			})
 	}
 };
 
