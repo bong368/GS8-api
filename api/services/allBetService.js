@@ -1,6 +1,6 @@
 /**
  * AllBet Service
- *  agent=vm237a&random=23534621425&propertyId=8066995'
+ *  
  * @description :: Server-side logic for managing AllBet API
  */
 var Curl = require('node-libcurl').Curl;
@@ -10,8 +10,8 @@ promise = require('bluebird');
 apiAllBet = {
     title: 'AllBet Casino',
     url: 'https://api3.abgapi.net/',
-    agent: 'vm237a',
-    propertyId: '8066995'
+    agent: 'hokibym',
+    propertyId: '4661607'
 }
 
 module.exports = {

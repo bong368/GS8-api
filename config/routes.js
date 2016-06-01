@@ -68,6 +68,9 @@ module.exports.routes = {
     'POST /api/allbet/signin': 'AllBetController.signin',
     'PUT /api/allbet/password': 'AllBetController.updatePassword',
 
+    // Sync All account
+    'PUT /api/authenticate/sync': 'AuthController.syncAll',
+
     // Test Api Area
     'POST /api/test': 'TestController.test',
     'GET /api/queryHandicap': 'TestController.queryHandicap',

@@ -57,6 +57,9 @@ module.exports = {
         welcome_bonus_yet: {
             type: 'integer'
         },
+        role_id: {
+            type: 'integer'
+        },
 
 
         // We don't wan't to send back encrypted password either

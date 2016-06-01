@@ -43,6 +43,17 @@ module.exports = {
         })
     },
 
+    syncAllAccount: function() {
+        var self = this;
+        Users.find()
+            .then(function(users) {
+                users.forEach(function(user) {
+                    if (user.role_id == 5)
+                        self.syncAccount(user);
+                })
+            })
+    },
+
     // Get title all game
     getTitle: function() {
         var games = this.initializationGames();
@@ -105,21 +116,21 @@ module.exports = {
         return apiService;
     },
 
-    getTurnOver: function (username, gameSite) {
+    getTurnOver: function(username, gameSite) {
         var game = this.getServiceFromName(gameSite);
-        
+
         return new promise(function(resolve, reject) {
             game.getTurnOver(username)
-                .then(function (result) {
+                .then(function(result) {
                     return resolve(result);
                 })
-                .catch(function (err) {
+                .catch(function(err) {
                     return resolve({
                         result: true,
                         data: err
                     });
                 })
-            
+
 
         })
     },

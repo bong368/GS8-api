@@ -82,6 +82,10 @@ module.exports = {
         });
     },
 
+    syncAll: function (req, res) {
+         grossApiGameService.syncAllAccount();
+    },
+
     /**
      * Validate token, if true return credentials, false if invalid token
      *
