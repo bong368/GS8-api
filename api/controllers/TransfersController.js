@@ -124,7 +124,7 @@ module.exports = {
                     status: status
                 })
                 .then(function(result) {
-                    console.log(result);
+                    console.log('status transfer: ' + result);
                 })
         }
     },
