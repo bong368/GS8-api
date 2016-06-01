@@ -76,7 +76,6 @@ module.exports = {
                         } else {
                             return res.json(401, {result: false});
                         }
-
                     })
             }
         });
