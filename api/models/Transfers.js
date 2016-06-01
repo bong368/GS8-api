@@ -17,6 +17,9 @@ module.exports = {
         currency: {
             type: 'string'
         },
+        status: {
+            type: 'string'
+        },
         origin: {
             type: 'string'
         },
