@@ -110,13 +110,18 @@ module.exports = {
 
     // Write log out all result form api
     logResultTransfer: function(err, results, ticket) {
-
+        if (results.origin_result.result && results.target_result.result) {
+            var status = 'success';
+        } else {
+            var status = 'fail';
+        }
         if (results) {
             Transfers.update({
                     id: ticket.id
                 }, {
                     origin_result: JSON.stringify(results.origin_result),
-                    target_result: JSON.stringify(results.target_result)
+                    target_result: JSON.stringify(results.target_result),
+                    status: status
                 })
                 .then(function(result) {
                     console.log(result);
