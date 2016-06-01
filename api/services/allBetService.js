@@ -179,7 +179,7 @@ module.exports = {
                     } else {
                         Users.findOne({ username: username })
                             .then(function(cred) {
-                                return resolve(md5(cred.password));
+                                return resolve(md5(cred.password).substring(0, 11));
                             })
                     }
                 })
