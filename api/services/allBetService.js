@@ -57,19 +57,19 @@ module.exports = {
             client: username
         };
         return this.getPassword(username)
-            .then(function (password) {
+            .then(function(password) {
                 parameter.password = password;
                 return encryptAPI(parameter);
             })
-        
-            .then(function(result) {
-                var parameter = {
-                    data: result.data.data,
-                    sign: result.data.sign,
-                    method: 'forward_game'
-                }
-                return execAllBetApi(parameter);
-            })
+
+        .then(function(result) {
+            var parameter = {
+                data: result.data.data,
+                sign: result.data.sign,
+                method: 'forward_game'
+            }
+            return execAllBetApi(parameter);
+        })
     },
 
     // Signin to AllBet, API return a link to assign to iframe
@@ -79,7 +79,7 @@ module.exports = {
             client: 'anonymous',
             password: '123456'
         };
-        return encryptAPI(parameter)        
+        return encryptAPI(parameter)
             .then(function(result) {
                 var parameter = {
                     data: result.data.data,
@@ -107,19 +107,19 @@ module.exports = {
             client: username
         };
         return this.getPassword(username)
-            .then(function (password) {
+            .then(function(password) {
                 parameter.password = password;
                 return encryptAPI(parameter);
             })
-        
-            .then(function(result) {
-                var parameter = {
-                    data: result.data.data,
-                    sign: result.data.sign,
-                    method: 'get_balance'
-                }
-                return execAllBetApi(parameter);
-            })
+
+        .then(function(result) {
+            var parameter = {
+                data: result.data.data,
+                sign: result.data.sign,
+                method: 'get_balance'
+            }
+            return execAllBetApi(parameter);
+        })
     },
 
     // Deposit to AllBet
@@ -130,9 +130,10 @@ module.exports = {
             client: ticket.username,
             operFlag: 1,
             credit: ticket.amount
-        };console.log(parameter);
+        };
+        console.log(parameter);
         return this.getPassword(ticket.username)
-            .then(function (password) {
+            .then(function(password) {
                 parameter.password = password;
                 return encryptAPI(parameter);
             })
@@ -156,7 +157,7 @@ module.exports = {
             credit: ticket.amount
         };
         return this.getPassword(ticket.username)
-            .then(function (password) {
+            .then(function(password) {
                 parameter.password = password;
                 return encryptAPI(parameter);
             })
@@ -173,7 +174,8 @@ module.exports = {
     getPassword: function(username) {
         return new promise(function(resolve, reject) {
             CredentialAllBet.findOne({ username: username })
-                .then(function(allbet) {console.log(allbet);
+                .then(function(allbet) {
+                    console.log(allbet);
                     if (allbet) {
                         return resolve(allbet.password);
                     } else {
@@ -250,8 +252,15 @@ var execAllBetApi = function(parameter) {
         query = '?' + queryString.stringify(parameter);
 
         curl.setOpt('URL', apiAllBet.url + method + query);
+
+        console.log(' *** Curl to: ')
+        console.log(apiAllBet.url + method + query);
+
         curl.on('end', function(statusCode, body, headers) {
+
+            console.log(' *** Result: ')
             console.log(body);
+
             var result = JSON.parse(body);
             if (result.error_code === 'OK')
                 return resolve({
@@ -286,7 +295,10 @@ var encryptAPI = function(data) {
                 plain_text: queryString.stringify(data)
             };
         query = queryString.stringify(query);
+
+        console.log(" *** Plain Text: ")
         console.log(query);
+
         curl.setOpt(Curl.option.URL, url);
         curl.setOpt(Curl.option.POSTFIELDS, query);
         curl.setOpt(Curl.option.HTTPHEADER, ['User-Agent: node-libcurl/1.0']);
