@@ -443,7 +443,7 @@
                         $state.go('home');
                     }
                 } else if (toState.authorization) {
-
+                    SweetAlert.swal("Sorry!", "You must login first!!!", "error");
                     // Go to home and do nothing
                     event.preventDefault();
                     $state.go('home');
