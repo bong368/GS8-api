@@ -40,7 +40,7 @@
                 .then(function(response) {
                     $scope.bonus = response.data.data.bonus;
                     if ($scope.bonus)
-                        $scope.deposit.extra_bonus = true,
+                        $scope.deposit.extra_bonus = true;
                 }, function(error) {
                     SweetAlert.swal("Sorry!", error.data.error, "error");
                 });
