@@ -15,7 +15,6 @@
             $scope.deposit = {
                 amount: '',
                 password: '',
-                extra_bonus: true,
                 currency: $rootScope.currentUser.currency,
                 payment_method: 'Local Transfer',
                 from_bank: $rootScope.currentUser.bank_name,
@@ -40,6 +39,8 @@
             $http(req)
                 .then(function(response) {
                     $scope.bonus = response.data.data.bonus;
+                    if ($scope.bonus)
+                        $scope.deposit.extra_bonus = true,
                 }, function(error) {
                     SweetAlert.swal("Sorry!", error.data.error, "error");
                 });
