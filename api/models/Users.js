@@ -60,7 +60,9 @@ module.exports = {
         role_id: {
             type: 'integer'
         },
-
+        parent_id: {
+            type: 'string'
+        },
 
         // We don't wan't to send back encrypted password either
         toJSON: function() {

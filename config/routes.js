@@ -57,6 +57,7 @@ module.exports.routes = {
 
     //(WFT Sporkbook)
     'GET /api/wft/signin': 'WftController.signin',
+    'GET /api/wft/turnOver': 'WftController.turnOver',
 
     //(PlayTech)
     
@@ -67,6 +68,7 @@ module.exports.routes = {
     //(AllBet)
     'POST /api/allbet/signin': 'AllBetController.signin',
     'PUT /api/allbet/password': 'AllBetController.updatePassword',
+    'POST /api/allbet/createAnonymous': 'AllBetController.createAnonymous',
 
     // Sync All account
     'PUT /api/authenticate/sync': 'AuthController.syncAll',

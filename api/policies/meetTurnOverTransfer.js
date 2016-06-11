@@ -3,12 +3,16 @@ module.exports = function(req, res, next) {
     var ticket = req.body;
 
     if (ticket.target == 'Main Wallet') {
+
         var rollingAmount = undefined;
-        oldTurnOver = undefined;
         user = undefined;
+        agent = undefined;
+
         tokenService.parse(req)
             .then(function(creds) {
+
                 user = creds;
+                agent = creds.parent_id;
                 return UserBonus.findOne({ username: creds.username })
             })
             .then(function(bonus) {
@@ -22,13 +26,12 @@ module.exports = function(req, res, next) {
                                     next()
                                 } else {
                                     rollingAmount = bonus.rolling_amount;
-                                    oldTurnOver = bonus.turnover;
-                                    grossApiGameService.getTurnOver(user.username, ticket.origin)
+                                    grossApiGameService.getTurnOver(user.username, agent, bonus.created_at, ticket.origin)
 
-                                    .then(function(turnOvers) {
-                                        if ((turnOvers.data - oldTurnOver) < rollingAmount) {
-                                            var errorTurnover = ' | Turnover now is: ' + (turnOvers.data - oldTurnOver) + ' ' + user.currency;
-                                            var errorRolling = ' | Rolling amount now is: ' + rollingAmount + ' ' + user.currency;
+                                    .then(function(turnOver) {
+                                        if (turnOver.data < rollingAmount) {
+                                            var errorTurnover = ' \n Turnover now is: ' + turnOver.data + ' ' + user.currency;
+                                            var errorRolling = ' \n Rolling amount now is: ' + rollingAmount + ' ' + user.currency;
                                             return res.json(401, { error: "Need meet Turnover to transfer back main wallet" + errorTurnover + errorRolling });
                                         } else
                                             next();

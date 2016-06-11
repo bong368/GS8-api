@@ -211,14 +211,46 @@ module.exports = {
         return apiAllBet.title;
     },
 
-    // Get turnover
-    getTurnOver: function(username) {
-        var parameter = {
-            username: username,
-            action: 'fetch',
-            method: 'getTurnOver'
-        }
-        return execWftApi(parameter);
+    getTurnOver: function(username, agent, dateFrom) {
+        console.log(dateFrom);
+        return new promise(function(resolve, reject) {
+
+            var curl = new Curl(),
+                url = 'http://128.199.77.130:1337/api/betting/allbet/turnover',
+                data = {
+                    username: username,
+                    agent: agent,
+                    dateFrom: sails.moment(dateFrom).utcOffset("+08:00").format('YYYY-MM-DD HH:mm:ss'),
+                    dateTo: sails.moment(new Date()).utcOffset("+08:00").format('YYYY-MM-DD HH:mm:ss')
+                };
+
+            console.log("\n *** TurnOver ticket: ".green + sails.moment(new Date()).format('YYYY-MM-DD HH:mm:ss').green);
+            console.log(data);
+
+            data = queryString.stringify(data);
+
+            curl.setOpt(Curl.option.URL, url);
+            curl.setOpt(Curl.option.POSTFIELDS, data);
+
+            curl.perform();
+
+            curl.on('end', function(statusCode, body) {
+
+                console.log("\n *** Get Playtech turnover: ".green + sails.moment(new Date()).format('YYYY-MM-DD HH:mm:ss').green);
+                console.log(body);
+
+                var result = JSON.parse(body);
+                return resolve({
+                    result: true,
+                    title: apiAllBet.title,
+                    data: result.turnOver
+                });
+
+                this.close();
+            });
+
+            curl.on('error', curl.close.bind(curl));
+        })
     },
 
     // Create default account (anonymous)

@@ -49,5 +49,12 @@ module.exports = {
                     return res.json({result: result});
                 }
             })
+    },
+
+    createAnonymous: function (req, res) {
+        allBetService.createAnonymous()
+            .then(function (result) {
+                return res.json(200, {data: result});
+            })
     }
 };

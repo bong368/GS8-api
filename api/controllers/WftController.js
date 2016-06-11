@@ -21,5 +21,15 @@ module.exports = {
 	        .catch(function (error) {
 	        	return res.json(200, {error : error});
 	        })
+    },
+
+    turnOver: function (req, res) {
+        tokenService.parse(req)
+            .then(function (user) {
+                return wftService.getTurnOver(user.username)
+            })
+            .then(function (turnOver) {
+                return res.json(200, {data : turnOver});
+            })
     }
 };

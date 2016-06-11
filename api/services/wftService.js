@@ -104,14 +104,46 @@ module.exports = {
         return apiWft.title;
     },
 
-    // Get turnover
-    getTurnOver: function(username) {
-        var parameter = {
-            username: username,
-            action: 'fetch',
-            method: 'getTurnOver'
-        }
-        return execWftApi(parameter);
+    getTurnOver: function(username, agent, dateFrom) {
+        console.log(dateFrom);
+        return new promise(function(resolve, reject) {
+
+            var curl = new Curl(),
+                url = 'ag.hokibet188.com/api/public/index.php/callApi/wft-turnover',
+                data = {
+                    username: username,
+                    agent: agent,
+                    dateFrom: sails.moment(dateFrom).utcOffset("+08:00").format('YYYY-MM-DD HH:mm:ss'),
+                    dateTo: sails.moment(new Date()).utcOffset("+08:00").format('YYYY-MM-DD HH:mm:ss')
+                };
+
+            console.log("\n *** TurnOver ticket: ".green + sails.moment(new Date()).format('YYYY-MM-DD HH:mm:ss').green);
+            console.log(data);
+
+            data = queryString.stringify(data);
+
+            curl.setOpt(Curl.option.URL, url);
+            curl.setOpt(Curl.option.POSTFIELDS, data);
+
+            curl.perform();
+
+            curl.on('end', function(statusCode, body) {
+
+                console.log("\n *** Get WFT turnover: ".green + sails.moment(new Date()).format('YYYY-MM-DD HH:mm:ss').green);
+                console.log(body);
+
+                var result = JSON.parse(body);
+                return resolve({
+                    result: true,
+                    title: apiWft.title,
+                    data: result.turnover
+                });
+
+                this.close();
+            });
+
+            curl.on('error', curl.close.bind(curl));
+        })
     }
 };
 
@@ -126,11 +158,11 @@ var execWftApi = function(parameter) {
         }
         parameter = _.merge(parameter, credential);
         query = '?' + queryString.stringify(parameter);
-
+        console.log(queryString.stringify(parameter));
         curl.setOpt('URL', apiWft.url + query);
 
         curl.on('end', function(statusCode, body, headers) {
-            //console.log(body);
+            console.log(body);
             var xml = body.replace(/&/g, "&amp;");
 
             parser.parseString(xml, function(err, result) {

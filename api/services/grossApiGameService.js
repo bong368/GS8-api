@@ -116,11 +116,11 @@ module.exports = {
         return apiService;
     },
 
-    getTurnOver: function(username, gameSite) {
+    getTurnOver: function(username, agent, dateFrom, gameSite) {
         var game = this.getServiceFromName(gameSite);
 
         return new promise(function(resolve, reject) {
-            game.getTurnOver(username)
+            game.getTurnOver(username, agent, dateFrom)
                 .then(function(result) {
                     return resolve(result);
                 })
