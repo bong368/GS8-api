@@ -8,9 +8,14 @@
         <div class="col-md-12">
             <table class="credit-user-info">
                 <tbody>
-                    <tr ng-repeat="wallet in wallets">
+                    <tr ng-if="wallets[0].title" ng-repeat="wallet in wallets">
                         <td>{{wallet.title}}</td>
-                        <td class="text-right">{{wallet.data | currency:' ' }}<sup> IDR</sup></td>
+                        <td class="text-right" ng-if="wallet.data >= 0">{{wallet.data | currency:' ' }}<sup> IDR</sup></td>
+                        <td class="text-right" ng-if="wallet.data < 0"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><sup> IDR</sup></td>
+                    </tr>
+                    <tr ng-if="!wallets[0].title" ng-repeat="wallet in wallets">
+                        <td>{{wallet}}</td>
+                        <td class="text-right"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><sup> IDR</sup></td>
                     </tr>
                 </tbody>
             </table>

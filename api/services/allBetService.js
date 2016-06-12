@@ -284,6 +284,7 @@ var execAllBetApi = function(parameter) {
         query = '?' + queryString.stringify(parameter);
 
         curl.setOpt('URL', apiAllBet.url + method + query);
+        curl.setOpt( Curl.option.CONNECTTIMEOUT, 9000 );
 
         console.log(' *** Curl to: ')
         console.log(apiAllBet.url + method + query);
@@ -309,7 +310,15 @@ var execAllBetApi = function(parameter) {
             this.close();
         });
 
-        curl.on('error', curl.close.bind(curl));
+        curl.on('error', function(error) {
+            
+            return resolve({
+                result: false,
+                title: apiAllBet.title,
+                data: "-1"
+            });
+            this.close();
+        });
         curl.perform();
     })
 }

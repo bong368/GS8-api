@@ -23,6 +23,14 @@
                 scope.$on('creditUserInfo:update', function() {
                     getCreditUser();
                 });
+                var getAllGames = function() {
+                    $http.get(baseUrl + 'api/user/game')
+
+                    .then(function(response) {
+                        scope.wallets = response.data;
+                    });
+                }
+                getAllGames();
             }
         };
     })

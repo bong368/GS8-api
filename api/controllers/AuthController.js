@@ -41,6 +41,12 @@ module.exports = {
         });
     },
 
+    games: function (req, res) {
+        games = grossApiGameService.getTitle();
+        games.unshift(mainWalletService.getTitle());
+        return res.json(games);
+    },
+
     /**
      * Handle a user request to create new user.
      *
