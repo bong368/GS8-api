@@ -79,7 +79,8 @@ module.exports = {
                     merch_id: apiGamePlay.agent,
                     merch_pwd: apiGamePlay.secret,
                     cust_id: user.id,
-                    currency: 'IDR'
+                    currency: 'IDR',
+                    method: "CheckBalance"
                 }
                 apiGamePlay.url = 'https://club8api.w88.com/op/getbalance';
                 return execGamePlayApi(parameter);
@@ -186,41 +187,33 @@ var execGamePlayApi = function(parameter) {
         var curl = new Curl();
         parser = new xml2js.Parser({ explicitArray: false });
         credential = {
-            LoginPass: apiGamePlay.secret,
-            LoginID: apiGamePlay.agent,
+            secret: apiGamePlay.secret,
+            agent: apiGamePlay.agent,
         }
-        if (parameter.Function)
-            parameter = _.merge(parameter, credential);
-
+        parameter = _.merge(parameter, credential);
         query = '?' + queryString.stringify(parameter);
-
-        console.log(apiGamePlay.url + query);
-
+        console.log(queryString.stringify(parameter));
         curl.setOpt('URL', apiGamePlay.url + query);
 
         curl.on('end', function(statusCode, body, headers) {
-            if (parameter.Function) {
-                var xml = body.replace(/&/g, "&amp;");
+            console.log(body);
+            var xml = body.replace(/&/g, "&amp;");
 
-                parser.parseString(xml, function(err, result) {
-                    console.log(result);
-                    if (!result.DocumentElement.ErrorLog)
-                        return resolve({
-                            result: true,
-                            title: apiGamePlay.title,
-                            data: adapterCurlResult(result.DocumentElement, parameter.Function)
-                        });
-                    else
-                        return resolve({
-                            result: false,
-                            title: apiGamePlay.title,
-                            error: result.DocumentElement.ErrorLog.error
-                        });
+            parser.parseString(xml, function(err, result) {
+                if (result.resp.error_code == 0)
+                    return resolve({
+                        result: true,
+                        title: apiGamePlay.title,
+                        data: adapterCurlResult(result.resp, parameter.method)
+                    });
+                else
+                    return resolve({
+                        result: false,
+                        title: apiGamePlay.title,
+                        error: result.resp.error_msg
+                    });
 
-                });
-            } else {
-                return resolve(body);
-            }
+            });
             this.close();
         });
 
@@ -249,7 +242,7 @@ var adapterCurlResult = function(result, method) {
 
 var Parse = {
     balance: function(result) {
-        return (result.CheckBalance.BALANCE / 1000);
+        return (result.balance);
     },
     deposit: function(result) {
         return result.Deposit.amount;
