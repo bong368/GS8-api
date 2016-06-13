@@ -61,7 +61,6 @@ module.exports.routes = {
     'GET /api/wft/turnOver': 'WftController.turnOver',
 
     //(PlayTech)
-    
     'GET /api/slot/playtech': 'PlaytechController.getAllGame',
     'POST /api/playtech/signin': 'PlaytechController.signin',
     'PUT /api/playtech/password': 'PlaytechController.updatePassword',
@@ -70,6 +69,9 @@ module.exports.routes = {
     'POST /api/allbet/signin': 'AllBetController.signin',
     'PUT /api/allbet/password': 'AllBetController.updatePassword',
     'POST /api/allbet/createAnonymous': 'AllBetController.createAnonymous',
+
+    //(GamePlay)
+    'POST /api/gameplay/anonymous': 'GamePlayController.createAnonymous',
 
     // Sync All account
     'PUT /api/authenticate/sync': 'AuthController.syncAll',
