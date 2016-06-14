@@ -81,7 +81,7 @@ module.exports = {
 
     // Deposit to GamePlay
     deposit: function(ticket) {
-        return Users.findOne({ username: username })
+        return Users.findOne({ username: ticket.username })
             .then(function(user) {
                 var parameter = {
                     cust_id: user.id,
@@ -97,7 +97,7 @@ module.exports = {
     // Withdrawn to GamePlay
     withdrawn: function(ticket) {
 
-        return Users.findOne({ username: username })
+        return Users.findOne({ username: ticket.username })
             .then(function(user) {
                 var parameter = {
                     cust_id: user.id,
