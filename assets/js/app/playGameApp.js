@@ -80,7 +80,7 @@
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
-                            '/js/app/controller/playgame/GamePlayController.js',
+                            '/js/app/controller/playgame/gamePlayController.js',
                         ])
                     }]
                 }
