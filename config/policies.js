@@ -55,7 +55,8 @@ module.exports.policies = {
     },
 
     'GamePlayController': {
-        'getAllGame': true
+        'getAllGame': true,
+        'authencation': true
     },
 
     'TestController': {
