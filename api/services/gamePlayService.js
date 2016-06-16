@@ -42,15 +42,16 @@ module.exports = {
     },
 
     // Signin to GamePlay, API return a link to assign to iframe
-    signin: function(username, password, gameCode) {
+    signin: function(gameCode, token) {
         var parameter = {
-            username: username + '@HOKI',
-            password: password,
-            gamecode: gameCode,
+            op: apiGamePlay.agent,
+            gameid: gameCode,
+            fun: 0,
             langcode: 'en',
+            token: token
         }
         console.log(parameter);
-        apiGamePlay.url = 'http://login.pt.gsoft88.net/createurl.aspx';
+        apiGamePlay.url = 'http://slots.globalintgames.com/';
 
         return execGamePlayApi(parameter);
     },
@@ -187,7 +188,7 @@ var execGamePlayApi = function(parameter) {
         }
         parameter = _.merge(parameter, credential);
         query = '?' + queryString.stringify(parameter);
-        console.log(queryString.stringify(parameter));
+        console.log(apiGamePlay.url + query);
         curl.setOpt('URL', apiGamePlay.url + query);
 
         curl.on('end', function(statusCode, body, headers) {

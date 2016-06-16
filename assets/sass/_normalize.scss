@@ -466,6 +466,7 @@ select {
 }
 
 .game-list {
+    margin-top:15px;
     padding: 0 15px;
     li {
         float: left;
@@ -479,6 +480,14 @@ select {
             text-transform: uppercase;
             text-align: center;
             margin: 5px 0;
+        }
+    }
+}
+
+.gameplay{
+    .game-list{
+        li{
+            margin: 10px 21px;
         }
     }
 }

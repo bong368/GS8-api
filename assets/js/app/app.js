@@ -338,6 +338,21 @@
                 }
             })
 
+            // Playtech Slot
+            .state('gameSlotGamePlay', {
+                url: '/slot/gameplay',
+                templateUrl: '/templates/page/game/slot/gameplay.html',
+                controller: 'GamePlayController',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            '/js/app/controller/game/gamePlayController.js',
+                            '//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.14.0.js'
+                        ])
+                    }]
+                }
+            })
+
             // Live Casino
             .state('gameCasino', {
                 url: '/casino',

@@ -1,0 +1,31 @@
+<div class="container game-container gameplay">
+    <div>
+        <uib-carousel interval="myInterval">
+            <uib-slide ng-repeat="slide in slides" active="slide.active">
+                <img ng-src="{{slide.image}}">
+            </uib-slide>
+        </uib-carousel>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="game-list">
+                <li class="hvr-hang show-product-hover" ng-repeat="game in availableGame">
+                    <div>
+                        <img ng-src="{{'/images/gameplay/' + game.Image}}" />
+                        <p>{{game.game_name.substring(0,19)}}</p>
+                    </div>
+                    <div class="product-info">
+                        <div>
+                            <a class="btn" target="_blank" ng-href="{{'/play-game/#/gameplay/' + game.GameCode}}">
+                                Real play
+                            </a>
+                        </div>
+                        <div>
+                            <a class="btn" target="_blank" ng-href="{{'http://cache.download.banner.redcoral88.com/casinoclient.html?language=en&mode=offline&game=' + game.game_code}}">Fun Play</a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

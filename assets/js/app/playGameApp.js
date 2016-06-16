@@ -74,6 +74,20 @@
                 
             })
 
+            .state('gameplay', {
+                url: '/gameplay/:id',
+                controller: 'GamePlayController',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            '/js/app/controller/playgame/GamePlayController.js',
+                        ])
+                    }]
+                }
+
+                
+            })
+
             .state('allbet', {
                 url: '/allbet',
                 controller: 'AllBetController',

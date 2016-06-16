@@ -54,6 +54,10 @@ module.exports.policies = {
         'updatePassword': ['duplicatePassword']
     },
 
+    'GamePlayController': {
+        'getAllGame': true
+    },
+
     'TestController': {
         '*': true
     },
