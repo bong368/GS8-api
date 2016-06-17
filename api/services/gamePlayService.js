@@ -47,12 +47,13 @@ module.exports = {
             op: apiGamePlay.agent,
             gameid: gameCode,
             fun: 0,
-            langcode: 'en',
-            token: token
+            lang: 'en-us',
+            token: token,
+            method: 'signin'
         }
         console.log(parameter);
         apiGamePlay.url = 'http://slots.globalintgames.com/';
-
+        //http://slots.globalintgames.com/?op=[MERCH_ID]&gameid=[GAMECODE]&lang=en-us&fun=0&token=[TOKEN]
         return execGamePlayApi(parameter);
     },
 
@@ -186,7 +187,8 @@ var execGamePlayApi = function(parameter) {
             merch_pwd: apiGamePlay.secret,
             currency: 'IDR'
         }
-        parameter = _.merge(parameter, credential);
+        if (parameter.method != 'signin')
+            parameter = _.merge(parameter, credential);
         query = '?' + queryString.stringify(parameter);
         console.log(apiGamePlay.url + query);
         curl.setOpt('URL', apiGamePlay.url + query);
