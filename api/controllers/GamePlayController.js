@@ -53,6 +53,7 @@ module.exports = {
 
     authencation: function (req, res) {
         var query = url.parse(req.url,true).query;
+        console.log(query);
         return res.json(query);
     }
 };
