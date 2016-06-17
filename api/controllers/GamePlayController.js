@@ -51,8 +51,7 @@ module.exports = {
     },
 
     authencation: function (req, res) {
-        console.log('this is res ..............');
-    	console.log(req)
+        return res.json(req.body);
     }
 };
 
