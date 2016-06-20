@@ -13,6 +13,7 @@ module.exports = {
                 var token = req;
 
             payload = jwt.decode(token, 'json');
+            console.log(payload);
             cred = false;
 
             if (payload) {
