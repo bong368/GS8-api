@@ -3,17 +3,11 @@ var Promise = require('bluebird');
 
 module.exports = {
 
-    parse: function(req, rawToken, callback) {
+    parse: function(req, callback) {
         var self = this;
         return new Promise(function(resolve, reject) {
-
-            if (!rawToken)
-                var token = self.getRaw(req);
-            else
-                var token = req;
-
+            var token = self.getRaw(req);
             payload = jwt.decode(token, 'json');
-            console.log(payload);
             cred = false;
 
             if (payload) {
@@ -54,6 +48,10 @@ module.exports = {
             } else {
                 return false;
             }
+        } else if (req.param('token')) {
+            token = req.param('token');
+            // We delete the token from param to not mess with blueprints
+            delete req.query.token;
         } else {
             return false;
         }

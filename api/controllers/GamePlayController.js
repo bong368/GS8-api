@@ -42,7 +42,25 @@ module.exports = {
     },
 
     signin: function(req, res) {
-        gamePlayService.signin(req.body.gameCode, req.headers.authorization)
+        var token;
+        
+        if (req.headers && req.headers.authorization) {
+            var parts = req.headers.authorization.split(' ');
+            if (parts.length == 2) {
+                var scheme = parts[0],
+                    credentials = parts[1];
+
+                if (/^Bearer$/i.test(scheme)) {
+                    token = credentials;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+
+        gamePlayService.signin(req.body.gameCode, token)
             .then(function(result) {
                 console.log(result);
                 return res.json(200, { data: result });
