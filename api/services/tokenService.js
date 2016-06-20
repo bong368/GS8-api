@@ -3,10 +3,15 @@ var Promise = require('bluebird');
 
 module.exports = {
 
-    parse: function(req, callback) {
+    parse: function(req, callback, rawToken) {
         var self = this;
         return new Promise(function(resolve, reject) {
-            var token = self.getRaw(req);
+            
+            if (!rawToken)
+                var token = self.getRaw(req);
+            else
+                var token = req;
+
             payload = jwt.decode(token, 'json');
             cred = false;
 

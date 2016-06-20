@@ -5,7 +5,7 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var Curl = require('node-libcurl').Curl;
-var url = require('url');
+
 module.exports = {
     createAnonymous: function(req, res) {
         gamePlayService.anonymous()
@@ -53,8 +53,9 @@ module.exports = {
     },
 
     authencation: function(req, res) {
-        var query = url.parse(req.url, true).query;
-        tokenService.parse(query.ticket)
+        var query = req.query.ticket;
+        console.log(query);
+        tokenService.parse(query)
             .then(function(user) {
                 var resp = {
                     error_code: 0,
