@@ -82,9 +82,9 @@ module.exports = {
                     currency_code: user.currency,
                     language: 'en-us',
                     test_cust: false,
-                    country: 'USA',
+                    country: 'ID',
                     date_of_birth: '29-09-1989',
-                    ip: '1.2.3.4'
+                    ip: '127.0.0.1'
                 };
                 var result = js2xmlparser("resp", resp);
                 res.setHeader("Content-type", "text/xml");
