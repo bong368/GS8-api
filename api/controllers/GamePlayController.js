@@ -55,7 +55,7 @@ module.exports = {
     authencation: function(req, res) {
         var query = req.query.ticket;
         console.log(query);
-        tokenService.parse(query)
+        tokenService.parse(query, true)
             .then(function(user) {
                 var resp = {
                     error_code: 0,
