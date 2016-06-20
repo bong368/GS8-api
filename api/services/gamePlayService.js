@@ -187,10 +187,11 @@ var execGamePlayApi = function(parameter) {
             merch_pwd: apiGamePlay.secret,
             currency: 'IDR'
         }
-        if (parameter.method != 'signin') {
+        if (parameter.method != 'signin') 
             parameter = _.merge(parameter, credential);
-            delete parameter.method;
-        }
+
+        delete parameter.method;
+        
         query = '?' + queryString.stringify(parameter);
         console.log(apiGamePlay.url + query);
         curl.setOpt('URL', apiGamePlay.url + query);
