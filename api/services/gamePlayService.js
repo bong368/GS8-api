@@ -189,9 +189,9 @@ var execGamePlayApi = function(parameter) {
         }
         if (parameter.method != 'signin') 
             parameter = _.merge(parameter, credential);
+        else
+            delete parameter.method;
 
-        delete parameter.method;
-        
         query = '?' + queryString.stringify(parameter);
         console.log(apiGamePlay.url + query);
         curl.setOpt('URL', apiGamePlay.url + query);
