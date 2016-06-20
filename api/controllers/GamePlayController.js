@@ -5,7 +5,7 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var Curl = require('node-libcurl').Curl;
-
+var js2xmlparser = require("js2xmlparser");
 module.exports = {
     createAnonymous: function(req, res) {
         gamePlayService.anonymous()
