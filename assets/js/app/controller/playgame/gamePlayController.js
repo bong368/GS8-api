@@ -18,7 +18,10 @@
             var gameCode = $state.params.id;
             var mode = $state.params.mode;
             var token = localStorage.getItem('satellizer_token');
-            $rootScope.srcIframe = 'http://slots.globalintgames.com/?fun=' + mode + '&gameid=' + gameCode + '&lang=en-us&op=HOKIBET188&token=' + token;
+            if (gameCode != 'casino')
+                $rootScope.srcIframe = 'http://slots.globalintgames.com/?fun=' + mode + '&gameid=' + gameCode + '&lang=en-us&op=HOKIBET188&token=' + token;
+            else
+                $rootScope.srcIframe = 'http://casino.gpiops.com/?m=normal&lang=en-us&op=HOKIBET188&token=' + token;
         }
 
         $scope.trustSrc = function(src) {
