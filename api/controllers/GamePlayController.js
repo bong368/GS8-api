@@ -41,35 +41,6 @@ module.exports = {
         curl.perform();
     },
 
-    signin: function(req, res) {
-        var token;
-        
-        if (req.headers && req.headers.authorization) {
-            var parts = req.headers.authorization.split(' ');
-            if (parts.length == 2) {
-                var scheme = parts[0],
-                    credentials = parts[1];
-
-                if (/^Bearer$/i.test(scheme)) {
-                    token = credentials;
-                }
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
-
-        gamePlayService.signin(req.body.gameCode, token)
-            .then(function(result) {
-                console.log(result);
-                return res.json(200, { data: result });
-            })
-            .catch(function(error) {
-                return res.json(200, { error: error });
-            })
-    },
-
     authencation: function(req, res) {
         var query = req.query.ticket;
         console.log(query);

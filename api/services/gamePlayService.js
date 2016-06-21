@@ -41,22 +41,6 @@ module.exports = {
         return execGamePlayApi(parameter);
     },
 
-    // Signin to GamePlay, API return a link to assign to iframe
-    signin: function(gameCode, token) {
-        var parameter = {
-            op: apiGamePlay.agent,
-            gameid: gameCode,
-            fun: 0,
-            lang: 'en-us',
-            token: token,
-            method: 'signin'
-        }
-        console.log(parameter);
-        apiGamePlay.url = 'http://slots.globalintgames.com/';
-        //http://slots.globalintgames.com/?op=[MERCH_ID]&gameid=[GAMECODE]&lang=en-us&fun=0&token=[TOKEN]
-        return execGamePlayApi(parameter);
-    },
-
     // Signout to GamePlay
     signout: function(username) {
 
@@ -158,22 +142,6 @@ module.exports = {
 
             curl.on('error', curl.close.bind(curl));
         })
-    },
-
-    getPassword: function(username) {
-        return new promise(function(resolve, reject) {
-            CredentialGamePlay.findOne({ username: username })
-                .then(function(GamePlay) {
-                    if (GamePlay) {
-                        return resolve(GamePlay.password);
-                    } else {
-                        Users.findOne({ username: username })
-                            .then(function(cred) {
-                                return resolve(md5(cred.password));
-                            })
-                    }
-                })
-        })
     }
 };
 
@@ -187,10 +155,8 @@ var execGamePlayApi = function(parameter) {
             merch_pwd: apiGamePlay.secret,
             currency: 'IDR'
         }
-        if (parameter.method != 'signin') 
-            parameter = _.merge(parameter, credential);
-        else
-            delete parameter.method;
+
+        parameter = _.merge(parameter, credential);
 
         query = '?' + queryString.stringify(parameter);
         console.log(apiGamePlay.url + query);

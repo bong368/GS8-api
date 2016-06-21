@@ -10,7 +10,7 @@
     function GamePlayController($state, $http, $rootScope, $scope, SweetAlert) {
         // Run this function at initial
         $scope.ini = function() {
-
+            $scope.token = localStorage.getItem('satellizer_token');
             $scope.getGamePlay();
         }
 
