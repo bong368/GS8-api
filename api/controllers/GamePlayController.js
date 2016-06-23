@@ -49,7 +49,7 @@ module.exports = {
                 var resp = {
                     error_code: 0,
                     cust_id: user.id,
-                    cust_name: user.id,
+                    cust_name: user.username,
                     currency_code: user.currency,
                     language: 'en-us',
                     test_cust: false,
