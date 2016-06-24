@@ -8,6 +8,14 @@
     </div>
     <div class="row">
         <div class="col-md-12">
+            <ul class="game-tab">
+                <li class="hvr-pop" ng-click="changeTabTo('3D slots')">3D slots</li>
+                <li class="hvr-pop" ng-click="changeTabTo('R-slots')">R-slots</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
             <ul class="game-list">
                 <li class="hvr-hang show-product-hover" ng-repeat="game in availableGame">
                     <div>
@@ -16,12 +24,12 @@
                     </div>
                     <div class="product-info">
                         <div>
-                            <a class="btn" target="_blank" ng-href="{{'/play-game/#/gameplay/' + game.GameCode + '/1'}}">
+                            <a class="btn" target="_blank" ng-href="{{'/play-game/#/gameplay/' + game.GameCode + '/0/' + currentGroup}}">
                                 Real play
                             </a>
                         </div>
                         <div>
-                            <a class="btn" target="_blank" ng-href="{{'/play-game/#/gameplay/' + game.GameCode + '/0'}}">Fun Play</a>
+                            <a class="btn" target="_blank" ng-href="{{'/play-game/#/gameplay/' + game.GameCode + '/1/' + currentGroup}}">Fun Play</a>
                         </div>
                     </div>
                 </li>

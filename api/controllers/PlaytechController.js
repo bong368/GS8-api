@@ -51,7 +51,7 @@ module.exports = {
 	            return res.json(200, {data : result});
 	        })
 	        .catch(function (error) {
-	        	return res.json(200, {error : error});
+	        	return res.json(200, {data : 'http://cache.download.banner.redcoral88.com/flash/54/launchcasino.html?language=en&mode=offline&game=7bal#7bal'});
 	        })
     },
 

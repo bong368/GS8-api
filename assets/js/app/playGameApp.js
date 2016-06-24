@@ -75,7 +75,7 @@
             })
 
             .state('gameplay', {
-                url: '/gameplay/:id/:mode',
+                url: '/gameplay/:id/:mode/:group',
                 controller: 'GamePlayController',
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {

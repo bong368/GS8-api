@@ -50,6 +50,7 @@ module.exports.policies = {
     },
 
     'PlaytechController': {
+        'signin': true,
         'getAllGame': true,
         'updatePassword': ['duplicatePassword']
     },

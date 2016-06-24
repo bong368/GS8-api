@@ -22,10 +22,19 @@
 
             $http(req)
                 .then(function(response) {
-                    $scope.availableGame = response.data;
+                    $scope.allGame = response.data;
+                    $scope.renderGame('3D slots');
                 }, function(error) {
                     SweetAlert.swal("Sorry!", error.data.error, "error");
                 });
+        }
+
+        $scope.renderGame = function(gameGroup) {
+            $scope.availableGame = $scope.allGame[gameGroup];
+        }
+        $scope.changeTabTo = function(gameCode) {
+            $scope.currentGroup = gameCode;
+            $scope.renderGame(gameCode);
         }
 
         $scope.myInterval = 3000;

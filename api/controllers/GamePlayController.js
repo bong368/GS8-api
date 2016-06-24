@@ -15,30 +15,36 @@ module.exports = {
     },
 
     getAllGame: function(req, res) {
-        var curl = new Curl();
-        parser = new xml2js.Parser({ explicitArray: false });
+        
+        var self = this;
 
-        curl.setOpt('URL', 'http://img.gsoft88.net/gamelist.aspx?provider=gameplay');
+        async.parallel({
 
-        curl.on('end', function(statusCode, body, headers) {
+                "3D slots": function(callback) {
 
-            var xml = body.replace(/&/g, "&amp;");
+                    self.execCurl('http://img.gsoft88.net/gamelist.aspx?provider=gameplay')
+                        .then(function(response) {
+                            callback(null, response);
+                        })
+                        .catch(function(error) {
+                            callback(null, error);
+                        })
+                },
 
-            parser.parseString(xml, function(err, result) {
-                _.forEach(result.gamelist.game, function(value, key) {
-                    result.gamelist.game[key] = {
-                        GameName: value.GameName,
-                        Image: value.Image,
-                        GameCode: value.GameCode,
-                    }
-                });
-                return res.json(result.gamelist.game);
-            });
-            this.close();
-        });
+                "R-slots": function(callback) {
 
-        curl.on('error', curl.close.bind(curl));
-        curl.perform();
+                    self.execCurl('http://img.gsoft88.net/gamelist.aspx?provider=gameplayr')
+                        .then(function(response) {
+                            callback(null, response);
+                        })
+                        .catch(function(error) {
+                            callback(null, error);
+                        })
+                }
+            },
+            function(err, results) {
+                return res.json(results);
+            })
     },
 
     authencation: function(req, res) {
@@ -62,5 +68,34 @@ module.exports = {
                 res.send(result);
                 console.log(result);
             })
+    },
+
+    execCurl: function(url) {
+        return new promise(function(resolve, reject) {
+            var curl = new Curl();
+            parser = new xml2js.Parser({ explicitArray: false });
+
+            curl.setOpt('URL', url);
+
+            curl.on('end', function(statusCode, body, headers) {
+
+                var xml = body.replace(/&/g, "&amp;");
+
+                parser.parseString(xml, function(err, result) {
+                    _.forEach(result.gamelist.game, function(value, key) {
+                        result.gamelist.game[key] = {
+                            GameName: value.GameName,
+                            Image: value.Image,
+                            GameCode: value.GameCode,
+                        }
+                    });
+                    return resolve(result.gamelist.game);
+                });
+                this.close();
+            });
+
+            curl.on('error', curl.close.bind(curl));
+            curl.perform();
+        })
     }
 };
