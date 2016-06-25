@@ -47,6 +47,21 @@
                 });
         }
 
+        $scope.changeGPPassword = function () {
+            var req = {
+                method: 'PUT',
+                url: baseUrl + 'api/allbet/password',
+                data: {password: $scope.GP.password}
+            }
+
+            $http(req)
+                .then(function(response) {
+                    SweetAlert.swal("Thanks You!", "Updated Success ", "success");
+                }, function(error) {
+                    SweetAlert.swal("Sorry!", error.data.error, "error");
+                });
+        }
+
         $scope.ini();
     }
 

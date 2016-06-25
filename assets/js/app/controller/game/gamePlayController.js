@@ -12,6 +12,7 @@
         $scope.ini = function() {
             $scope.token = localStorage.getItem('satellizer_token');
             $scope.getGamePlay();
+            $scope.currentGroup = "3D slots";
         }
 
         $scope.getGamePlay = function() {
