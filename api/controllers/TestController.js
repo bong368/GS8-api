@@ -7,10 +7,7 @@
 var Curl = require('node-libcurl').Curl;
 module.exports = {
     test: function(req, res) {
-        allBetService.createAnonymous()
-        	.then(function(data) {
-                return res.json({ data: data });
-            })
+        console.dir(sails.API_URL.BETTING);
     },
 
     queryHandicap: function(req, res) {

@@ -74,6 +74,7 @@ module.exports.routes = {
     'GET /api/slot/gameplay': 'GamePlayController.getAllGame',
     'POST /api/gameplay/anonymous': 'GamePlayController.createAnonymous',
     'GET /gameplay/authencation': 'GamePlayController.authencation',
+    'POST /api/gameplay/mobile/authencation': 'GamePlayController.createToken',
 
     // Sync All account
     'PUT /api/authenticate/sync': 'AuthController.syncAll',

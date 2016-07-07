@@ -107,7 +107,7 @@ module.exports = {
         return new promise(function(resolve, reject) {
 
             var curl = new Curl(),
-                url = 'http://128.199.77.130:1337/api/betting/GamePlay/turnover',
+                url = sails.API_URL.BETTING + 'api/betting/GamePlay/turnover',
                 data = {
                     username: username,
                     agent: agent,

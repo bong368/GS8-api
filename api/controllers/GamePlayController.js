@@ -97,5 +97,32 @@ module.exports = {
             curl.on('error', curl.close.bind(curl));
             curl.perform();
         })
+    },
+
+    createToken: function(req, res) {
+        var ticket = req.body;
+
+        if (!ticket.username || !ticket.password) {
+            return res.json(401, { error: 'username and password required' });
+        }
+
+        Users.findOne({
+            username: ticket.username
+        }).exec(function(err, user) {
+
+            if (!user) {
+                return res.json(401, { error: 'invalid username, cannot find ' + ticket.username });
+            }
+
+            Users.comparePassword(ticket.password, user, function(err, valid) {
+
+                if (!valid) {
+                    return res.json(401, { error: 'invalid username or password' });
+                } else {
+                    res.send(tokenService.generate({ sid: user.id }));
+                }
+
+            });
+        });
     }
 };
