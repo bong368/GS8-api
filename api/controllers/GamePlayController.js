@@ -102,19 +102,19 @@ module.exports = {
     createToken: function(req, res) {
         var ticket = req.body;
 
-        if (!ticket.username || !ticket.password) {
+        if (!ticket.Username || !ticket.Password) {
             return res.json(401, { error: 'username and password required' });
         }
 
         Users.findOne({
-            username: ticket.username
+            username: ticket.Username
         }).exec(function(err, user) {
 
             if (!user) {
                 return res.json(401, { error: 'invalid username, cannot find ' + ticket.username });
             }
 
-            Users.comparePassword(ticket.password, user, function(err, valid) {
+            Users.comparePassword(ticket.Password, user, function(err, valid) {
 
                 if (!valid) {
                     return res.json(401, { error: 'invalid username or password' });
