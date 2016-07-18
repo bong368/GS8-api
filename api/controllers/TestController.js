@@ -5,16 +5,47 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var Curl = require('node-libcurl').Curl;
+var winston = require('winston');
+var logger = new(winston.Logger)({
+    level: 'debug',
+    transports: [
+        new(winston.transports.Console)(),
+        new(winston.transports.File)({ filename: 'log/test.json' })
+    ]
+});
 module.exports = {
     test: function(req, res) {
-        console.dir(sails.API_URL.BETTING);
+        logger.info('Test Log Message', {
+            anything: 'This is metadata',
+            text: "test",
+            text: "OK"
+        });
+        logger.info('Hello again distributed logs');
+
+        return res.json({ result: 200 });
     },
 
     queryHandicap: function(req, res) {
-        allBetService.queryHandicap()
-        	.then(function(data) {
-                return res.json({ data: data });
-            })
+        var options = {
+            from: new Date - 24 * 60 * 60 * 1000,
+            until: new Date,
+            limit: 10,
+            start: 0,
+            order: 'desc',
+            fields: ['message'],
+            level: 'debug'
+        };
+
+        //
+        // Find items logged between today and yesterday.
+        //
+        logger.query(options, function(err, results) {
+            if (err) {
+                throw err;
+            }
+            console.log(results);
+            return res.json(results);
+        });
     },
 
     wftSignout: function(req, res) {
@@ -42,7 +73,7 @@ module.exports = {
     },
 
     runCurl: function(req, res) {
-    	var url = req.body.url;
+        var url = req.body.url;
         defer = new promise(function(resolve, reject) {
 
             var curl = new Curl();
@@ -62,8 +93,8 @@ module.exports = {
             curl.perform();
         });
 
-        defer.then(function (data) {
-        	return res.json({data: data});
+        defer.then(function(data) {
+            return res.json({ data: data });
         })
     }
 
