@@ -35,6 +35,7 @@ module.exports.routes = {
     'PUT /api/authenticate/password/reset': 'AuthController.changePassword',
     'GET /api/user/credit': 'UsersController.getCreditUserInfo',
     'GET /api/user/game': 'AuthController.games',
+    'GET /api/user': 'AuthController.getAllUser',
 
     // Banking Area
     'GET /api/banking/all': 'BankingController.index',

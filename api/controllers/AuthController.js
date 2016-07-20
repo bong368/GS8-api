@@ -4,6 +4,7 @@
  * @description :: Server-side logic for managing auths
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
+var _ = require('lodash')
 
 module.exports = {
 
@@ -41,7 +42,7 @@ module.exports = {
         });
     },
 
-    games: function (req, res) {
+    games: function(req, res) {
         games = grossApiGameService.getTitle();
         games.unshift(mainWalletService.getTitle());
         return res.json(games);
@@ -71,7 +72,7 @@ module.exports = {
             if (user) {
                 RoleUser.create({ user_id: user.id, role_id: 5 })
                     .then(function(role) {
-                        
+
                         if (role) {
 
                             self.syncAccount(user);
@@ -80,15 +81,15 @@ module.exports = {
                             });
 
                         } else {
-                            return res.json(401, {result: false});
+                            return res.json(401, { result: false });
                         }
                     })
             }
         });
     },
 
-    syncAll: function (req, res) {
-         grossApiGameService.syncAllAccount();
+    syncAll: function(req, res) {
+        grossApiGameService.syncAllAccount();
     },
 
     /**
@@ -171,5 +172,18 @@ module.exports = {
             function(err, results) {
                 console.log(JSON.stringify(results, null, 4));
             });
+    },
+
+    getAllUser: function(req, res) {
+        var response = {};
+        Users.find()
+            .then(function(users) {
+                _.forEach(users, function(value, key) {
+                    //var user = {};
+                    response[value.id] = value.username;
+                });
+                //response = _.map(response, 'user');
+                res.json(response);
+            })
     }
 };
