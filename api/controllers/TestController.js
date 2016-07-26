@@ -5,24 +5,18 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var Curl = require('node-libcurl').Curl;
-var winston = require('winston');
-var logger = new(winston.Logger)({
-    level: 'debug',
-    transports: [
-        new(winston.transports.Console)(),
-        new(winston.transports.File)({ filename: 'log/test.json' })
-    ]
-});
+var soap = require('soap');
+
 module.exports = {
     test: function(req, res) {
-        logger.info('Test Log Message', {
-            anything: 'This is metadata',
-            text: "test",
-            text: "OK"
+        var url = 'https://entservices.totalegame.net/?wsdl';
+        console.log(url);
+        soap.createClient(url, function(err, client) {
+            if (err) throw err;
+            client.describe();
         });
-        logger.info('Hello again distributed logs');
 
-        return res.json({ result: 200 });
+
     },
 
     queryHandicap: function(req, res) {

@@ -145,7 +145,7 @@ module.exports = {
                 return resolve({
                     result: true,
                     title: apiPlayTech.title,
-                    data: result.turnOver
+                    data: result.turnover
                 });
 
                 this.close();

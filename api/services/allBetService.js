@@ -243,7 +243,7 @@ module.exports = {
                 return resolve({
                     result: true,
                     title: apiAllBet.title,
-                    data: result.turnOver
+                    data: result.turnover
                 });
 
                 this.close();
