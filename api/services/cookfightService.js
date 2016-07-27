@@ -193,7 +193,7 @@ var execplayCookfightApi = function(parameter) {
         curl.setOpt(Curl.option.POSTFIELDS, parameter);
         curl.setOpt(Curl.option.HTTPHEADER, ['User-Agent: node-libcurl/1.0']);
         curl.setOpt(Curl.option.VERBOSE, true);
-        curl.setOpt(Curl.option.CURLOPT_SSL_VERIFYPEER, false);
+        curl.setOpt(Curl.option.SSL_VERIFYPEER, false);
 
         curl.on('end', function(statusCode, body, headers) {
             if (parameter.function) {
