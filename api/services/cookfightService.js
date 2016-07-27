@@ -183,13 +183,14 @@ var execplayCookfightApi = function(parameter) {
             api_key: apiCookfight.secret,
             agent_code: apiCookfight.agent,
         }
+        url = apiCookfight.url + parameter.function;
         if (parameter.function)
             parameter = _.merge(parameter, credential);
 
         parameter = queryString.stringify(parameter);
-        console.log(apiCookfight.url + parameter.function);
+        console.log(url);
 
-        curl.setOpt(Curl.option.URL, apiCookfight.url + parameter.function);
+        curl.setOpt(Curl.option.URL, url);
         curl.setOpt(Curl.option.POSTFIELDS, parameter);
         curl.setOpt(Curl.option.HTTPHEADER, ['User-Agent: node-libcurl/1.0']);
         curl.setOpt(Curl.option.VERBOSE, true);
