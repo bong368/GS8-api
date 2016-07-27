@@ -9,13 +9,10 @@ var soap = require('soap');
 
 module.exports = {
     test: function(req, res) {
-        var url = 'https://entservices.totalegame.net/?wsdl';
-        console.log(url);
-        soap.createClient(url, function(err, client) {
-            if (err) throw err;
-            client.describe();
-        });
-
+        cookfightService.signup(req.body)
+            .then(function(data) {
+                res.json(data);
+            })
 
     },
 
