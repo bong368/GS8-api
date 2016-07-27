@@ -188,9 +188,9 @@ var execplayCookfightApi = function(parameter) {
 
         query = '?' + queryString.stringify(parameter);
 
-        console.log(apiCookfight.url + parameter.function);
+        console.log(apiCookfight.url + parameter.function + query);
 
-        curl.setOpt('URL', apiCookfight.url + parameter.function);
+        curl.setOpt('URL', apiCookfight.url + parameter.function + query);
 
         curl.on('end', function(statusCode, body, headers) {
             if (parameter.function) {
