@@ -192,6 +192,8 @@ var execplayCookfightApi = function(parameter) {
 
         curl.setOpt('URL', url + query);
 
+        console.log(url + query);
+        
         curl.on('end', function(statusCode, body, headers) {
             var xml = body.replace(/&/g, "&amp;");
             parser.parseString(xml, function(err, result) {
