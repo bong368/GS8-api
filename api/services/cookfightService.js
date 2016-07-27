@@ -193,22 +193,17 @@ var execplayCookfightApi = function(parameter) {
 
         query = '?' + queryString.stringify(parameter);
 
-        console.log(url );
+        console.log(url + query);
 
-        curl.setOpt('URL', url );
+        curl.setOpt('URL', url + query);
 
         curl.on('end', function(statusCode, body, headers) {
-            if (parameter.function) {
-                var xml = body.replace(/&/g, "&amp;");
+            var xml = body.replace(/&/g, "&amp;");
+            parser.parseString(xml, function(err, result) {
+                console.log(result);
+                return resolve(result);
 
-                parser.parseString(xml, function(err, result) {
-                    console.log(result);
-                    return resolve(result);
-
-                });
-            } else {
-                return resolve(body);
-            }
+            });
             this.close();
         });
     })
