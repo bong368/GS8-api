@@ -39,7 +39,7 @@ module.exports = {
         var parameter = {
             PlayerName: user.username,
             PlayerPass: user.password,
-            Function: 'UpdatePlayerPassword'
+            function: 'UpdatePlayerPassword'
         }
         apiCookfight.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
 
@@ -75,7 +75,7 @@ module.exports = {
 
         var parameter = {
             PlayerName: username,
-            Function: 'CheckBalance'
+            function: 'CheckBalance'
         }
         apiCookfight.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
         return execplayCookfightApi(parameter);
@@ -86,7 +86,7 @@ module.exports = {
 
         var parameter = {
             PlayerName: ticket.username,
-            Function: 'Deposit',
+            function: 'Deposit',
             Amount: ticket.amount * 1000,
             TransacID: datetimeService.getmmdd() + 'DP' + ticket.id
         }
@@ -100,7 +100,7 @@ module.exports = {
 
         var parameter = {
             PlayerName: ticket.username,
-            Function: 'Withdraw',
+            function: 'Withdraw',
             Amount: ticket.amount * 1000,
             TransacID: datetimeService.getmmdd() + 'WD' + ticket.id
         }
@@ -180,22 +180,17 @@ var execplayCookfightApi = function(parameter) {
         var curl = new Curl();
         parser = new xml2js.Parser({ explicitArray: false });
         credential = {
-            api_key: apiCookfight.secret,
-            agent_code: apiCookfight.agent,
+            LoginPass: apiCookfight.secret,
+            LoginID: apiCookfight.agent,
         }
-        url = apiCookfight.url + parameter.function;
         if (parameter.function)
             parameter = _.merge(parameter, credential);
 
-        parameter = queryString.stringify(parameter);
-        console.log(url);
+        query = '?' + queryString.stringify(parameter);
 
-        curl.setOpt(Curl.option.URL, url);
-        curl.setOpt(Curl.option.POSTFIELDS, parameter);
-        curl.setOpt(Curl.option.HTTPHEADER, ['User-Agent: node-libcurl/1.0']);
-        curl.setOpt(Curl.option.VERBOSE, true);
-        curl.setOpt(Curl.option.SSL_VERIFYPEER, false);
-        curl.setOpt(Curl.option.SSL_VERIFYHOST, false);
+        console.log(apiCookfight.url + parameter.function);
+
+        curl.setOpt('URL', apiCookfight.url + parameter.function);
 
         curl.on('end', function(statusCode, body, headers) {
             if (parameter.function) {
@@ -203,7 +198,7 @@ var execplayCookfightApi = function(parameter) {
 
                 parser.parseString(xml, function(err, result) {
                     console.log(result);
-                    resolve(result);
+                    return resolve(result);
 
                 });
             } else {
@@ -211,9 +206,6 @@ var execplayCookfightApi = function(parameter) {
             }
             this.close();
         });
-
-        curl.on('error', curl.close.bind(curl));
-        curl.perform();
     })
 }
 
