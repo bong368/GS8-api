@@ -183,14 +183,17 @@ var execplayCookfightApi = function(parameter) {
             LoginPass: apiCookfight.secret,
             LoginID: apiCookfight.agent,
         }
-        if (parameter.function)
+        url = apiCookfight.url + parameter.function;
+        if (parameter.function) {
             parameter = _.merge(parameter, credential);
+            delete parameter.function;
+        }
 
         query = '?' + queryString.stringify(parameter);
 
-        console.log(apiCookfight.url + parameter.function + query);
+        console.log(url + query);
 
-        curl.setOpt('URL', apiCookfight.url + parameter.function + query);
+        curl.setOpt('URL', url + query);
 
         curl.on('end', function(statusCode, body, headers) {
             if (parameter.function) {
