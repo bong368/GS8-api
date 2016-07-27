@@ -189,6 +189,8 @@ var execplayCookfightApi = function(parameter) {
             delete parameter.function;
         }
 
+        console.log(parameter);
+
         query = '?' + queryString.stringify(parameter);
 
         console.log(url + query);
