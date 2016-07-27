@@ -180,8 +180,8 @@ var execplayCookfightApi = function(parameter) {
         var curl = new Curl();
         parser = new xml2js.Parser({ explicitArray: false });
         credential = {
-            LoginPass: apiCookfight.secret,
-            LoginID: apiCookfight.agent,
+            agent_code: apiCookfight.secret,
+            api_key: apiCookfight.agent,
         }
         url = apiCookfight.url + parameter.function;
         if (parameter.function) {
