@@ -74,10 +74,10 @@ module.exports = {
     getBalance: function(username) {
 
         var parameter = {
-            PlayerName: username,
-            function: 'CheckBalance'
+            login_id: ticket.username,
+            function: 'get_balance.aspx'
         }
-        apiCookfight.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
+
         return execplayCookfightApi(parameter);
     },
 
@@ -85,12 +85,13 @@ module.exports = {
     deposit: function(ticket) {
 
         var parameter = {
-            PlayerName: ticket.username,
-            function: 'Deposit',
-            Amount: ticket.amount * 1000,
-            TransacID: datetimeService.getmmdd() + 'DP' + ticket.id
+            login_id: ticket.username,
+            name: ticket.username,
+            function: 'deposit.aspx',
+            amount: ticket.amount,
+            ref_no: datetimeService.getmmdd() + 'DP' + ticket.id,
+            odds_type: 'ID'
         }
-        apiCookfight.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
 
         return execplayCookfightApi(parameter);
     },
@@ -99,12 +100,11 @@ module.exports = {
     withdrawn: function(ticket) {
 
         var parameter = {
-            PlayerName: ticket.username,
-            function: 'Withdraw',
-            Amount: ticket.amount * 1000,
-            TransacID: datetimeService.getmmdd() + 'WD' + ticket.id
+            login_id: ticket.username,
+            function: 'withdraw.aspx ',
+            amount: ticket.amount,
+            ref_no: datetimeService.getmmdd() + 'DP' + ticket.id
         }
-        apiCookfight.url = 'http://api.pt.gsoft88.net/VMSWservices.aspx';
 
         return execplayCookfightApi(parameter);
     },
