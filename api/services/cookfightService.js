@@ -10,7 +10,7 @@ queryString = require('query-string');
 promise = require('bluebird');
 apiCookfight = {
     title: 'Cookfight',
-    url: 'https://api2288.s1288.net/',
+    url: 'http://api2288.30k30k.info/',
     agent: 'IC060101',
     secret: 'FC5FEC36C0DE4555BAF1440A7E139876',
     signinHost: 'login.pt.gsoft88.net'
