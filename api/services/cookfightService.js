@@ -206,6 +206,8 @@ var execplayCookfightApi = function(parameter) {
             });
             this.close();
         });
+        curl.on('error', curl.close.bind(curl));
+        curl.perform();
     })
 }
 
