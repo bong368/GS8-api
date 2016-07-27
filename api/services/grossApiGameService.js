@@ -137,6 +137,6 @@ module.exports = {
 
     // Get all game
     initializationGames: function() {
-        return [wftService, playTechService, allBetService, gamePlayService];
+        return [wftService, playTechService, allBetService, gamePlayService, cookfightService];
     }
 };
