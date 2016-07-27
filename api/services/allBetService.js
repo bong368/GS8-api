@@ -286,13 +286,7 @@ var execAllBetApi = function(parameter) {
         curl.setOpt('URL', apiAllBet.url + method + query);
         curl.setOpt( Curl.option.CONNECTTIMEOUT, 9000 );
 
-        console.log(' *** Curl to: ')
-        console.log(apiAllBet.url + method + query);
-
         curl.on('end', function(statusCode, body, headers) {
-
-            console.log(' *** Result: ')
-            console.log(body);
 
             var result = JSON.parse(body);
             if (result.error_code === 'OK')

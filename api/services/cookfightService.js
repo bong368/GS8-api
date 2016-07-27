@@ -186,14 +186,9 @@ var execplayCookfightApi = function(parameter) {
         url = apiCookfight.url + parameter.function;
         if (parameter.function) {
             parameter = _.merge(parameter, credential);
-            delete parameter.function;
         }
 
-        console.log(parameter);
-
         query = '?' + queryString.stringify(parameter);
-
-        console.log(url + query);
 
         curl.setOpt('URL', url + query);
 
@@ -201,8 +196,7 @@ var execplayCookfightApi = function(parameter) {
             var xml = body.replace(/&/g, "&amp;");
             parser.parseString(xml, function(err, result) {
                 console.log(result);
-                return resolve(result);
-
+                return resolve(adapterCurlResult(result, parameter.function));
             });
             this.close();
         });
@@ -214,7 +208,7 @@ var execplayCookfightApi = function(parameter) {
 var adapterCurlResult = function(result, method) {
     console.log(method);
     switch (method) {
-        case 'CheckBalance':
+        case 'get_balance.aspx':
             return Parse.balance(result);
             break;
         case 'Deposit':
@@ -231,7 +225,18 @@ var adapterCurlResult = function(result, method) {
 
 var Parse = {
     balance: function(result) {
-        return (result.CheckBalance.BALANCE / 1000);
+        if (result.get_balance.status_code == "00")
+            return {
+                result: true,
+                title: apiCookfight.title,
+                data: result.get_balance.balance
+            }
+        else
+            return {
+                result: false,
+                title: apiCookfight.title,
+                error: result.get_balance.status_code
+            }
     },
     deposit: function(result) {
         return result.Deposit.amount;
