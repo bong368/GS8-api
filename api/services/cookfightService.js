@@ -218,7 +218,7 @@ var execplayCookfightApi = function(parameter) {
 }
 
 var adapterCurlResult = function(result, method) {
-    console.log("\n  +++ Result Cookfight:");
+    console.log("\n  +++ Result Cookfight " + method + ":");
     console.log(result);
     switch (method) {
         case 'get_balance.aspx':
