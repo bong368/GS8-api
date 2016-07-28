@@ -207,6 +207,7 @@ var execplayCookfightApi = function(parameter) {
         curl.on('end', function(statusCode, body, headers) {
             var xml = body.replace(/&/g, "&amp;");
             parser.parseString(xml, function(err, result) {
+                console.log("\n  +++ Result Cookfight:");
                 console.log(result);
                 return resolve(adapterCurlResult(result, parameter.function));
             });
@@ -237,6 +238,7 @@ var adapterCurlResult = function(result, method) {
 
 var Parse = {
     balance: function(result) {
+        console
         if (result.get_balance.status_code == "00")
             return {
                 result: true,
