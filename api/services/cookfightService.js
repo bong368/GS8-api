@@ -218,7 +218,7 @@ var execplayCookfightApi = function(parameter) {
 }
 
 var adapterCurlResult = function(result, method) {
-    console.log("\n  +++ Result Cookfight " + method + " at " + date);
+    console.log("\n  +++ Result Cookfight " + method + " at " + new Date);
     console.log(result);
     switch (method) {
         case 'get_balance.aspx':
