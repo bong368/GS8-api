@@ -223,10 +223,10 @@ var adapterCurlResult = function(result, method) {
         case 'get_balance.aspx':
             return Parse.balance(result);
             break;
-        case 'Deposit':
+        case 'deposit.aspx':
             return Parse.deposit(result);
             break;
-        case 'Withdraw':
+        case 'withdraw.aspx':
             return Parse.withdraw(result);
             break;
         default:
@@ -251,9 +251,31 @@ var Parse = {
             }
     },
     deposit: function(result) {
-        return result.Deposit.amount;
+        if (result.get_balance.status_code == "00")
+            return {
+                result: true,
+                title: apiCookfight.title,
+                data: result.deposit.amount
+            }
+        else
+            return {
+                result: false,
+                title: apiCookfight.title,
+                error: result.deposit.status_code
+            }
     },
     withdraw: function(result) {
-        return result.Withdraw.amount;
+        if (result.get_balance.status_code == "00")
+            return {
+                result: true,
+                title: apiCookfight.title,
+                data: result.withdraw.amount
+            }
+        else
+            return {
+                result: false,
+                title: apiCookfight.title,
+                error: result.withdraw.status_code
+            }
     }
 }
