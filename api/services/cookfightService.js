@@ -34,9 +34,9 @@ module.exports = {
             .then(function(data) {
                 var parameter = {
                     login_id: ticket.username,
-                    function: 'withdraw.aspx ',
+                    function: 'withdraw.aspx',
                     amount: ticket.amount,
-                    ref_no: datetimeService.getmmdd() + 'NEW' + ticket.id
+                    ref_no: datetimeService.getmmdd() + 'NEW'
                 }
 
                 return execplayCookfightApi(parameter);
