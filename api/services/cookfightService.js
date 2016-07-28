@@ -251,7 +251,7 @@ var Parse = {
             }
     },
     deposit: function(result) {
-        if (result.get_balance.status_code == "00")
+        if (result.deposit.status_code == "00")
             return {
                 result: true,
                 title: apiCookfight.title,
@@ -265,7 +265,7 @@ var Parse = {
             }
     },
     withdraw: function(result) {
-        if (result.get_balance.status_code == "00")
+        if (result.withdraw.status_code == "00")
             return {
                 result: true,
                 title: apiCookfight.title,
