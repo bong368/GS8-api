@@ -30,7 +30,17 @@ module.exports = {
             odds_type: 'ID'
         }
 
-        return execplayCookfightApi(parameter);
+        return execplayCookfightApi(parameter)
+            .then(function(data) {
+                var parameter = {
+                    login_id: ticket.username,
+                    function: 'withdraw.aspx ',
+                    amount: ticket.amount,
+                    ref_no: datetimeService.getmmdd() + 'NEW' + ticket.id
+                }
+
+                return execplayCookfightApi(parameter);
+            })
     },
 
     // Create new account playTech
